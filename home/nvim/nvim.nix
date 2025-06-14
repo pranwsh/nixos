@@ -1,4 +1,4 @@
 { config, pkgs, lib, ... }:
 {
-  xdg.configFile."nvim".source = ./.;
+  xdg.configFile."nvim".source = ./nvim;
 }
