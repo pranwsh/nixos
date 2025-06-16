@@ -16,8 +16,8 @@
     unzip
     ripgrep
     fzf
-    neovim
     git
+    gparted
 
   ];
 }

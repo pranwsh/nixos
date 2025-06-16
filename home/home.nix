@@ -12,6 +12,7 @@
     ./zen/zen.nix
     ./spotify/spotify.nix
     ./nvim/nvim.nix
+    ./yazi/yazi.nix
   ];
 
   home.username = "pranesh";
