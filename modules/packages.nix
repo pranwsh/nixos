@@ -3,8 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
 
-    nodejs_23
-
     wl-clipboard
     brightnessctl
     playerctl
