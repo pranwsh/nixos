@@ -17,14 +17,10 @@
 #
 #
 { config, pkgs, ... }:
-
 let
   profileName = "ro4rmu9s.Default Profile";
 in {
-  home.file.".zen/profiles/${profileName}/chrome" = {
-    source = ./chrome;
-    recursive = true;
-  };
+  home.file.".zen/${profileName}/chrome".source = ./config/chrome;
+  home.file.".zen/${profileName}/chrome".recursive = true;
+  home.file.".zen/${profileName}/user.js".source = ./config/user.js;
 }
-
-
