@@ -34,7 +34,9 @@
 { config, pkgs, lib, ... }:
 let
   # Read the profiles.ini file
-  profilesIni = builtins.readFile "${config.home.homeDirectory}/.zen/profiles.ini";
+  # profilesIni = builtins.readFile "${config.home.homeDirectory}/.zen/profiles.ini";
+
+  profilesIni = builtins.readFile "~/.zen/profiles.ini";
   
   # Parse the INI file to extract the default profile path
   # This looks for the Default=1 profile and extracts its Path
