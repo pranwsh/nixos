@@ -20,7 +20,11 @@
 let
   profileName = "ro4rmu9s.Default Profile";
 in {
-  home.file.".zen/${profileName}/chrome".source = ./config/chrome;
-  home.file.".zen/${profileName}/chrome".recursive = true;
-  home.file.".zen/${profileName}/user.js".source = ./config/user.js;
+  home.file.".zen/${profileName}/chrome" = {
+    source = ./config/chrome;
+    recursive = true;
+  };
+  home.file.".zen/${profileName}/user.js" = {
+    source = ./config/user.js;
+  };
 }
