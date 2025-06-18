@@ -1,125 +1,241 @@
-<h1 align="center">NvChad</h1>
+# kickstart.nvim
 
-<div align="center">
-	<a href="https://nvchad.com/">Home</a>
-  <span> • </span>
-    	<a href="https://nvchad.com/docs/quickstart/install">Install</a>
-  <span> • </span>
-       	<a href="https://nvchad.com/docs/contribute">Contribute</a>
-  <span> • </span>
-	<a href="https://github.com/NvChad/NvChad#gift_heart-support">Support</a>
-  <span> • </span>
-        <a href="https://nvchad.com/docs/features">Features</a>
-  <p></p>
-</div> 
+## Introduction
 
-<div align="center">
- 
-[![Neovim Minimum Version](https://img.shields.io/badge/Neovim-0.11-blueviolet.svg?style=flat-square&logo=Neovim&color=90E59A&logoColor=white)](https://github.com/neovim/neovim/releases/tag/stable)
-[![GitHub Issues](https://img.shields.io/github/issues/NvChad/NvChad.svg?style=flat-square&label=Issues&color=d77982)](https://github.com/NvChad/NvChad/issues)
-[![Discord](https://img.shields.io/discord/869557815780470834?color=738adb&label=Discord&logo=discord&logoColor=white&style=flat-square)](https://discord.gg/gADmkJb9Fb)
-[![Matrix](https://img.shields.io/badge/Matrix-40aa8b.svg?style=flat-square&logo=Matrix&logoColor=white)](https://matrix.to/#/#nvchad:matrix.org)
-[![Telegram](https://img.shields.io/badge/Telegram-blue.svg?style=flat-square&logo=Telegram&logoColor=white)](https://t.me/DE_WM)
+A starting point for Neovim that is:
 
-  </div>
+* Small
+* Single-file
+* Completely Documented
 
-## Showcase
+**NOT** a Neovim distribution, but instead a starting point for your configuration.
 
-![nvdash](https://github.com/user-attachments/assets/0c7e2c8f-8940-42ea-9c18-7456768d2d05)
-<img src="https://nvchad.com/banner.webp">
+## Installation
 
-<img src="https://nvchad.com/screenshots/onedark.webp">
-<img src="https://nvchad.com/screenshots/rxyhn1.webp">
+### Install Neovim
 
-## What is it?
+Kickstart.nvim targets *only* the latest
+['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
+['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
+If you are experiencing issues, please make sure you have the latest versions.
 
-- NvChad is a neovim config written in lua aiming to provide a base configuration with very beautiful UI and blazing fast startuptime (around 0.02 secs ~ 0.07 secs). We tweak UI plugins such as telescope, nvim-tree etc well to provide an aesthetic UI experience. 
+### Install External Dependencies
 
-- Lazy loading is done 93% of the time meaning that plugins will not be loaded by default, they will be loaded only when required also at specific commands, events etc. This lowers the startuptime and it was like 0.07~ secs tested on an old pentium machine 1.4ghz + 4gb ram & HDD.
+External Requirements:
+- Basic utils: `git`, `make`, `unzip`, C Compiler (`gcc`)
+- [ripgrep](https://github.com/BurntSushi/ripgrep#installation),
+  [fd-find](https://github.com/sharkdp/fd#installation)
+- Clipboard tool (xclip/xsel/win32yank or other depending on the platform)
+- A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
+  - if you have it set `vim.g.have_nerd_font` in `init.lua` to true
+- Emoji fonts (Ubuntu only, and only if you want emoji!) `sudo apt install fonts-noto-color-emoji`
+- Language Setup:
+  - If you want to write Typescript, you need `npm`
+  - If you want to write Golang, you will need `go`
+  - etc.
 
-- NvChad is supposed to be used with its [starter config](https://github.com/nvchad/starter), so nvchad main repo ( this repo ) can be imported as a plugin via lazy's import feature and then you can easily use this repo's modules like autocmds etc.
+> [!NOTE]
+> See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
+> and quick install snippets
 
-## Theme Showcase
+### Install Kickstart
 
-<details><summary> <b>Images (Click to expand!)</b></summary>
+> [!NOTE]
+> [Backup](#FAQ) your previous configuration (if any exists)
 
-![4 themes](https://nvchad.com/screenshots/four_Themes.webp)
-![radium 1](https://nvchad.com/screenshots/radium1.webp)
-![radium 2](https://nvchad.com/screenshots/radium2.webp)
-![radium 3](https://nvchad.com/screenshots/radium3.webp)
+Neovim's configurations are located under the following paths, depending on your OS:
 
+| OS | PATH |
+| :- | :--- |
+| Linux, MacOS | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
+| Windows (cmd)| `%localappdata%\nvim\` |
+| Windows (powershell)| `$env:LOCALAPPDATA\nvim\` |
 
-(Note: these are just 4-5 themes, NvChad has around 56 themes)
+#### Recommended Step
+
+[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo
+so that you have your own copy that you can modify, then install by cloning the
+fork to your machine using one of the commands below, depending on your OS.
+
+> [!NOTE]
+> Your fork's URL will be something like this:
+> `https://github.com/<your_github_username>/kickstart.nvim.git`
+
+You likely want to remove `lazy-lock.json` from your fork's `.gitignore` file
+too - it's ignored in the kickstart repo to make maintenance easier, but it's
+[recommended to track it in version control](https://lazy.folke.io/usage/lockfile).
+
+#### Clone kickstart.nvim
+
+> [!NOTE]
+> If following the recommended step above (i.e., forking the repo), replace
+> `nvim-lua` with `<your_github_username>` in the commands below
+
+<details><summary> Linux and Mac </summary>
+
+```sh
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
 </details>
 
-## UI related plugins used
+<details><summary> Windows </summary>
 
-<details><summary> <b>Images (Click to expand!)</b></summary>
+If you're using `cmd.exe`:
 
-<h3> Nvim-tree.lua </h3>
+```
+git clone https://github.com/nvim-lua/kickstart.nvim.git "%localappdata%\nvim"
+```
 
-Fast file tree:
+If you're using `powershell.exe`
 
-<kbd><img src="https://nvchad.com/features/nvimtree.webp"></kbd>
+```
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${env:LOCALAPPDATA}\nvim"
+```
 
-<h3> Telescope-nvim </h3>
-
-A fuzzy file finder, picker, sorter, previewer and much more:
-
-<kbd><img src="https://nvchad.com/features/telescope.webp"></kbd>
-
-<h3> Our own statusline written from scratch  </h3>
-
-[NvChad UI](https://github.com/NvChad/ui)
-
-<kbd><img src="https://nvchad.com/features/statuslines.webp"></kbd>
-
-<h3> Tabufline (our own pertab bufferline) </h3>
-
-<kbd><img src="https://nvchad.com/features/tabufline.webp"></kbd>
-- Here's a [video](https://www.youtube.com/watch?v=V_9iJ96U_k8&ab_channel=siduck) that showcases it.
-
-<h3> NvCheatsheet ( our UI Plugin ) </h3>
-<kbd> <img src="https://nvchad.com/features/nvcheatsheet.webp"/></kbd>
-
-<h3> Modern Theme Picker </h3>
-<kbd> <img src="https://github.com/user-attachments/assets/897e46f1-9ae2-4cc2-8fa2-64eff40a90dd" /> </kbd>
 </details>
 
-For detailed info list, check [features page](https://nvchad.com/docs/features)
+### Post Installation
 
-## Plugins list
+Start Neovim
 
-- Many beautiful themes, theme toggler by our [base46 plugin](https://github.com/NvChad/base46)
-- Lightweight & performant ui plugin with [NvChad UI](https://github.com/NvChad/ui) It provides statusline modules, tabufline ( tabs + buffer manager) , beautiful cheatsheets, NvChad updater, hide & unhide terminal buffers, theme switcher and much more!
-- File navigation with [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
-- Beautiful and configurable icons with [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
-- Git diffs and more with [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) 
-- NeoVim Lsp configuration with [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and [mason.nvim](https://github.com/williamboman/mason.nvim)
-- Autocompletion with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-- File searching, previewing text files and more with [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
-- Syntax highlighting with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- Autoclosing braces and html tags with [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-- Indentlines with [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
-- Useful snippets with [friendly snippets](https://github.com/rafamadriz/friendly-snippets) + [LuaSnip](https://github.com/L3MON4D3/LuaSnip).
-- Popup mappings keysheet [whichkey.nvim](https://github.com/folke/which-key.nvim)
+```sh
+nvim
+```
 
-## History
+That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
+the current plugin status. Hit `q` to close the window.
 
-- I (@siduck i.e creator of NvChad) in my initial days of learning to program wanted a lightweight IDE for writing code, I had a very low end system which was like 1.4ghz pentium + 4gb ram & HDD. I was into web dev stuff so many suggested me to use vscode but that thing was very heavy on my system, It took more ram than my browser! ( minimal ungoogled chromium ) so I never tried it again, sublime text was nice but the fear of using proprietary software XD for a linux user bugged me a lot. Then I tried doom-emacs which looked pretty but it was slow and I was lost within its docs, I tried lunarvim but too lazy to read the docs. Doom-emacs and lunarvim inspired me to make a config which is the prettiest + very fast and simple.
+#### Read The Friendly Documentation
 
-- I'm decent at ricing i.e customizing system and making it look pretty so I posted my neovim rice on [neovim subreddit](https://www.reddit.com/r/neovim/comments/m3xl4f/neovim_rice/), my neovim-dotfiles github repo blew up and then I had to come up with a name, I was amazed by the chad meme lol so I put NvChad as the name, the chad word in here doesn't literally mean the chad guy but in the sense such as chad linux vs windows i.e meaning superior, best etc. NvChad was made for my personal use but it gained some popularity which inspired me to make a public config i.e config usable by many and less hassle to update as everyone's going to use the same base config (NvChad) with their custom modifications (which are gitignored so that won't mess up), without the custom config stuff users would have to keep a track of every commit and copy paste git diffs to manually update nvchad.
- 
-## :gift_heart: Support
+Read through the `init.lua` file in your configuration folder for more
+information about extending and exploring Neovim. That also includes
+examples of adding popularly requested plugins.
 
-If you like NvChad and would like to support & appreciate it via donation then I'll gladly accept it. 
+> [!NOTE]
+> For more information about a particular plugin check its repository's documentation.
 
-[![kofi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/siduck)
-[![paypal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/siduck13)
-[![buymeacoffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/siduck)
-[![patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/siduck)
 
-## Credits
+### Getting Started
 
-- [Elianiva](https://github.com/elianiva) helped me with NeoVim Lua related issues many times, helped me in my initial neovim journey!
-- @lorvethe for making the beautiful NvChad logo.
+[The Only Video You Need to Get Started with Neovim](https://youtu.be/m8C0Cq9Uv9o)
+
+### FAQ
+
+* What should I do if I already have a pre-existing Neovim configuration?
+  * You should back it up and then delete all associated files.
+  * This includes your existing init.lua and the Neovim files in `~/.local`
+    which can be deleted with `rm -rf ~/.local/share/nvim/`
+* Can I keep my existing configuration in parallel to kickstart?
+  * Yes! You can use [NVIM_APPNAME](https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME)`=nvim-NAME`
+    to maintain multiple configurations. For example, you can install the kickstart
+    configuration in `~/.config/nvim-kickstart` and create an alias:
+    ```
+    alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+    ```
+    When you run Neovim using `nvim-kickstart` alias it will use the alternative
+    config directory and the matching local directory
+    `~/.local/share/nvim-kickstart`. You can apply this approach to any Neovim
+    distribution that you would like to try out.
+* What if I want to "uninstall" this configuration:
+  * See [lazy.nvim uninstall](https://lazy.folke.io/usage#-uninstalling) information
+* Why is the kickstart `init.lua` a single file? Wouldn't it make sense to split it into multiple files?
+  * The main purpose of kickstart is to serve as a teaching tool and a reference
+    configuration that someone can easily use to `git clone` as a basis for their own.
+    As you progress in learning Neovim and Lua, you might consider splitting `init.lua`
+    into smaller parts. A fork of kickstart that does this while maintaining the
+    same functionality is available here:
+    * [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim)
+  * Discussions on this topic can be found here:
+    * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
+    * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
+
+### Install Recipes
+
+Below you can find OS specific install instructions for Neovim and dependencies.
+
+After installing all the dependencies continue with the [Install Kickstart](#Install-Kickstart) step.
+
+#### Windows Installation
+
+<details><summary>Windows with Microsoft C++ Build Tools and CMake</summary>
+Installation may require installing build tools and updating the run command for `telescope-fzf-native`
+
+See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
+
+This requires:
+
+- Install CMake and the Microsoft C++ Build Tools on Windows
+
+```lua
+{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+```
+</details>
+<details><summary>Windows with gcc/make using chocolatey</summary>
+Alternatively, one can install gcc and make which don't require changing the config,
+the easiest way is to use choco:
+
+1. install [chocolatey](https://chocolatey.org/install)
+either follow the instructions on the page or use winget,
+run in cmd as **admin**:
+```
+winget install --accept-source-agreements chocolatey.chocolatey
+```
+
+2. install all requirements using choco, exit the previous cmd and
+open a new one so that choco path is set, and run in cmd as **admin**:
+```
+choco install -y neovim git ripgrep wget fd unzip gzip mingw make
+```
+</details>
+<details><summary>WSL (Windows Subsystem for Linux)</summary>
+
+```
+wsl --install
+wsl
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update
+sudo apt install make gcc ripgrep unzip git xclip neovim
+```
+</details>
+
+#### Linux Install
+<details><summary>Ubuntu Install Steps</summary>
+
+```
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update
+sudo apt install make gcc ripgrep unzip git xclip neovim
+```
+</details>
+<details><summary>Debian Install Steps</summary>
+
+```
+sudo apt update
+sudo apt install make gcc ripgrep unzip git xclip curl
+
+# Now we install nvim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim-linux-x86_64
+sudo mkdir -p /opt/nvim-linux-x86_64
+sudo chmod a+rX /opt/nvim-linux-x86_64
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+
+# make it available in /usr/local/bin, distro installs to /usr/bin
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/
+```
+</details>
+<details><summary>Fedora Install Steps</summary>
+
+```
+sudo dnf install -y gcc make git ripgrep fd-find unzip neovim
+```
+</details>
+
+<details><summary>Arch Install Steps</summary>
+
+```
+sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
+```
+</details>
+
