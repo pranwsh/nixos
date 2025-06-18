@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins/tokyonight.lua
 return {
   "folke/tokyonight.nvim",
   opts = {
@@ -6,15 +7,6 @@ return {
       sidebars = "transparent",
       floats = "transparent",
     },
-    on_colors = function(colors)
-      -- Make backgrounds fully transparent
-      colors.bg = "NONE"
-      colors.bg_dark = "NONE"
-      colors.bg_float = "NONE"
-      colors.bg_popup = "NONE"
-      colors.bg_sidebar = "NONE"
-      colors.bg_statusline = "NONE"
-    end,
     on_highlights = function(highlights, colors)
       -- Additional transparency overrides
       highlights.Normal = { bg = "NONE" }
