@@ -6,6 +6,7 @@
     lua-language-server
     fd
     ripgrep
+    gcc
   ];
 
   xdg.configFile."nvim".source = ./nvim;
