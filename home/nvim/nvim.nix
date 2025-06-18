@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.packages = [
-    pkgs.neovim
+  home.packages = with pkgs; [
+    neovim
+    lua-language-server
   ];
 
   xdg.configFile."nvim".source = ./nvim;
