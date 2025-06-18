@@ -6,8 +6,8 @@
 
   # Configure hyprpaper
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /home/pranesh/Pictures/Wallpapers/Fractal Maze/23.jpg
-    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Fractal Maze/23.jpg
+    preload = /home/pranesh/Pictures/Wallpapers/Mac/macred
+    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Mac/macred
   '';
 
   # Start hyprpaper with Hyprland 
