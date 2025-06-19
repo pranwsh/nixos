@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }: {
   imports = [
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
   ];
 
   stylix = {
@@ -32,6 +32,7 @@
     targets = {
       gtk.enable = true;
       kitty.enable = true;
+      hyprland.enable = false;
     };
 
     # Cursor theme
