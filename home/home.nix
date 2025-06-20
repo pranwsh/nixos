@@ -18,6 +18,7 @@
   home.homeDirectory = "/home/pranesh";
 
   home.packages = with pkgs; [
+    wineWowPackages.stable
   ];
 
   home.stateVersion = "24.11";
