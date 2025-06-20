@@ -140,11 +140,12 @@
 
 # Keybindings
       bind = [
-        "$mainMod, Q, exec, $terminal"
+          "$mainMod, Q, exec, $terminal"
           "$mainMod, W, exec, $browser"
+          "$mainMod, E, exec, Spotify"
           "$mainMod, C, killactive,"
           "$mainMod, M, exit,"
-          "$mainMod, E, exec, $fileManager"
+          # "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating,"
           "$mainMod, R, exec, $menu"
           "$mainMod, P, pseudo,"
@@ -219,13 +220,12 @@
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         # "opacity 0.42,class:^(org\.pwmt\.zathura)$"
-        "opacity 0.4 0.4, class:^(spotify)$"
+        "opacity 0.82,class:^(Spotify)$"
       ];
     };
   };
 
 # Make sure necessary packages are installed
   home.packages = with pkgs; [
-    btop
   ];
 }
