@@ -142,7 +142,7 @@
       bind = [
           "$mainMod, Q, exec, $terminal"
           "$mainMod, W, exec, $browser"
-          "$mainMod, E, exec, Spotify"
+          "$mainMod, E, exec, spotify"
           "$mainMod, C, killactive,"
           "$mainMod, M, exit,"
           # "$mainMod, E, exec, $fileManager"
