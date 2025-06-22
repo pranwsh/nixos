@@ -17,52 +17,28 @@
 
     extraConfig = ''
 
-    # foreground            #FF6F61
-    # selection_foreground  #D8BFD8
-    # selection_background  #FFA6C9
-    # url_color             #A98ABF
-    # cursor                #FFCCE7
-    # cursor_text_color     #CBAACB
-    # color0                #FF99CC
-    # color1                #BAA0D0
-    # color2                #F8D8A8
-    # color3                #DDA0DD
-    # color4                #FFE4B5
-    # color5                #E49EC2
-    # color6                #FFDAB9
-    # color7                #F8BBD0
-    # color8                #FFCBA4
-    # color9                #FFD1DC
-    # color10               #E0A3C2
-    # color11               #FFCCAA
-    # color12               #FF8C94
-    # color13               #D895C2
-    # color14               #FFF0D9
-    # color15               #FFB3C1
-    #
-
-    foreground            #F76DA6
-    selection_foreground  #FFC2D6
-    selection_background  #FF99BB
-    url_color             #FF99AD
-    cursor                #EA70A8
-    cursor_text_color     #D95CA4
-    color0                #E6B0E6
-    color1                #FFB8DE
-    color2                #A266CC
+    foreground            #FFB273
+    selection_foreground  #E090E0
+    selection_background  #FFCD8F
+    url_color             #FF4C4C
+    cursor                #FFC285
+    cursor_text_color     #FF5E6F
+    color0                #FFB86C
+    color1                #A266CC
+    color2                #FF78B4
     color3                #B07ADD
-    color4                #FFF1C2
-    color5                #FFD488
-    color6                #E090E0
-    color7                #FFB86C
-    color8                #FFC285
-    color9                #FFCD8F
-    color10               #FF78B4
-    color11               #FF66AA
-    color12               #FFB273
-    color13               #D291D2
-    color14               #FF5E6F
-    color15               #FF4C4C
+    color4                #EA70A8
+    color5                #FF99AD
+    color6                #FF66AA
+    color7                #E6B0E6
+    color8                #D291D2
+    color9                #FFD488
+    color10               #FF99BB
+    color11               #F76DA6
+    color12               #FFC2D6
+    color13               #FF4C4C
+    color14               #D95CA4
+    color15               #FFF1C2
     '';
   };
 }
