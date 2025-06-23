@@ -9,53 +9,35 @@ return {
       },
       on_colors = function(colors)
 
-        -- colors.blue      = "#F4A8C1"  -- pastel pinkish rose
-        -- colors.blue0     = "#E49EC2"  -- softer pink
-        -- colors.blue1     = "#FFD1DC"  -- baby pink
-        -- colors.blue2     = "#F8BBD0"  -- cotton candy pink
-        -- colors.blue5     = "#FFB3C1"  -- cherry blossom
-        -- colors.blue6     = "#E0A3C2"  -- mauve-ish pink
-        -- colors.blue7     = "#D895C2"  -- dusty pink
-        -- colors.comment   = "#D8BFD8"  -- thistle (soft purple)
-        -- colors.cyan      = "#FFCCE7"  -- pastel rose
-        -- colors.dark3     = "#A98ABF"  -- light indigo
-        -- colors.dark5     = "#BAA0D0"  -- soft purple
-        -- colors.fg        = "#FFF0D9"  -- pastel cream
-        -- colors.fg_dark   = "#F8D8A8"  -- butter yellow
-        -- colors.fg_gutter = "#DDA0DD"  -- plum
-        -- colors.green     = "#FFCCAA"  -- soft peach (used instead of green)
-        -- colors.green1    = "#FFDAB9"  -- peach puff
-        -- colors.green2    = "#FFE4B5"  -- moccasin
-        -- colors.magenta   = "#FFA6C9"  -- carnation pink
-        -- colors.magenta2  = "#FF99CC"  -- light pink
-        -- colors.orange    = "#FFCBA4"  -- apricot
-        -- colors.purple    = "#CBAACB"  -- light lavender
-        -- colors.red       = "#FF8C94"  -- pastel red
-        -- colors.red1      = "#FF6F61"  -- coral
-        -- colors.teal      = "#F7CACA"  -- pale pink (warm tone)
 
-        colors.blue      = "#FF80A5"
-        colors.blue0     = "#F76DA6"
-        colors.blue1     = "#FFC2D6"
-        colors.blue2     = "#FF99BB"
-        colors.blue5     = "#FF99AD"
-        colors.blue6     = "#EA70A8"
-        colors.blue7     = "#D95CA4"
-        colors.comment   = "#E6B0E6"
-        colors.cyan      = "#FFB8DE"
-        colors.dark3     = "#A266CC"
-        colors.dark5     = "#B07ADD"
-        colors.fg        = "#FFF1C2"
-        colors.fg_dark   = "#FFD488"
-        colors.fg_gutter = "#E090E0"
-        colors.green     = "#FFB86C"
-        colors.green1    = "#FFC285"
-        colors.green2    = "#FFCD8F"
-        colors.magenta   = "#FF78B4"
-        colors.magenta2  = "#FF66AA"
-        colors.orange    = "#FFB273"
-        colors.purple    = "#D291D2"
-        colors.red       = "#FF5E6F"
+
+        colors.blue      = "#ff8a6a"
+        colors.blue0     = "#c1246b"
+        colors.blue1     = "#ff8a6a"
+        colors.blue2     = "#fd4c55"
+        colors.blue5     = "#ff6f4b"
+        colors.blue6     = "#e13661"
+        colors.blue7     = "#ffbbbb"
+        colors.comment   = "#fd4c55"
+        colors.cyan      = "#f13c65"
+
+        colors.dark3     = "#ec7c94"
+        colors.dark5     = "#e66b8f"
+        colors.fg        = "#c1246b"
+        colors.fg_dark   = "#d98bb2"
+        colors.fg_gutter = "#cb7da6"
+
+        colors.green     = "#c47da6"
+        colors.green1    = "#be86b2"
+        colors.green2    = "#b890c2"
+
+        colors.magenta   = "#b397cc"
+        colors.magenta2  = "#aa9cd1"
+
+        colors.orange    = "#a8a1d6"
+        colors.purple    = "#a2a9da"
+        colors.red       = "#f6869f"
+
         colors.red1      = "#FF4C4C"
         colors.teal      = "#FFB6C6"
 
