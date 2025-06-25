@@ -6,8 +6,8 @@
 
   # Configure hyprpaper
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /home/pranesh/Pictures/Wallpapers/Mac/macdull
-    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Mac/macdull
+    preload = /home/pranesh/Pictures/Wallpapers/Mac/macblue
+    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Mac/macblue
   '';
 
   # Start hyprpaper with Hyprland 
