@@ -7,6 +7,7 @@
     fd
     ripgrep
     gcc
+    clang-tools
   ];
 
   home.file.".config/nvim/init.lua" = {

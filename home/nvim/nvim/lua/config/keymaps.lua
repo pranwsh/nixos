@@ -6,12 +6,12 @@ local map = vim.keymap.set
 
 -- Compile & run C from current buffer
 map("n", "<leader>rr",
-  ":w<Bar>:TermExec cmd='gcc -std=c18 \"%\" -o \"%:r\" && ./%:r'<CR>",
+  ":w<CR>:terminal gcc -std=c18 '%' -o '%:r' && ./'%:r'<CR>",
   { desc = "Build & Run C" }
 )
 
 -- Compile with debug symbols and launch gdb
 map("n", "<leader>rd",
-  ":w<Bar>:TermExec cmd='gcc -g -std=c18 \"%\" -o \"%:r\" && gdb ./%:r'<CR>",
+  ":!gcc -g -std=c18 \"%\" -o \"%:r\" && gdb ./%:r<CR>",
   { desc = "Build & Debug C" }
 )
