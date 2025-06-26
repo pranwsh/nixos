@@ -58,6 +58,14 @@ return {
         colors.teal      = "#8be9fd"
         end,
         on_highlights = function(highlights, colors)
+
+          highlights.DiagnosticVirtualTextError = { bg = "NONE" }
+          highlights.DiagnosticVirtualTextWarn = { bg = "NONE" }
+          highlights.DiagnosticVirtualTextInfo = { bg = "NONE" }
+          highlights.DiagnosticVirtualTextHint = { bg = "NONE" }
+          highlights.LspInlayHint = { bg = "NONE" }
+          highlights.LspInlayHintParameter = { bg = "NONE" }
+          highlights.LspInlayHintType = { bg = "NONE" }
           -- Keywords and statements
           highlights.Keyword = { fg = colors.purple }
           highlights.Statement = { fg = colors.purple }
