@@ -49,11 +49,11 @@ return {
         colors.green     = "#50fa7b"
         colors.green1    = "#69ff94"
         colors.green2    = "#ffb86c"
-        colors.magenta   = "#ff79c6"
+        colors.magenta   = "#ff5555"
         colors.magenta2  = "#ff92df"
         colors.orange    = "#ffb86c"
         colors.purple    = "#bd93f9"
-        colors.red       = "#ff5555"
+        colors.red       = "#ff79c6"
         colors.red1      = "#ff6e6e"
         colors.teal      = "#8be9fd"
         end,
