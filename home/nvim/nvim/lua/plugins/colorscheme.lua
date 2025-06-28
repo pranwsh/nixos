@@ -32,6 +32,7 @@ return {
         colors.red       = "#ff5555"
         colors.red1      = "#ff6e6e"
         colors.teal      = "#8be9fd"
+        colors.yellow    = "#daffa0"
       end,
       on_highlights = function(highlights, colors)
         highlights.DiagnosticVirtualTextError = { bg = "NONE" }
