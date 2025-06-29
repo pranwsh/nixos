@@ -19,6 +19,7 @@
 
   home.packages = with pkgs; [
     wineWowPackages.stable
+    gemini-cli
   ];
 
   home.stateVersion = "24.11";
