@@ -12,7 +12,6 @@
     ./zen/zen.nix
     ./spotify/spotify.nix
     ./nvim/nvim.nix
-    ./pollymc.nix
   ];
 
   home.username = "pranesh";
