@@ -11,6 +11,8 @@
     ../modules/pam.nix
     ../modules/packages.nix
     ../modules/bluetooth.nix
+    ../modules/tlp.nix
+    ../modules/flatpak.nix
     ../users/users.nix
   ];
 

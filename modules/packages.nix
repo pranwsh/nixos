@@ -17,5 +17,7 @@
     git
     gparted
 
+    gemini-cli
+
   ];
 }

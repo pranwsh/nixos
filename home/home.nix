@@ -21,6 +21,7 @@
   home.packages = with pkgs; [
     wineWowPackages.stable
     gemini-cli
+    discord
   ];
 
   home.stateVersion = "24.11";
