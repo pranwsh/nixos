@@ -13,6 +13,7 @@
     ./spotify/spotify.nix
     ./nvim/nvim.nix
     ./prismlauncher.nix
+    ./flatpak.nix
   ];
 
   home.username = "pranesh";
