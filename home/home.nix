@@ -25,6 +25,7 @@
     discord
     plasma5Packages.kdeconnect-kde
     pandoc
+    python3
   ];
 
   home.stateVersion = "24.11";
