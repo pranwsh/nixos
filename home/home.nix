@@ -23,6 +23,8 @@
     wineWowPackages.stable
     gemini-cli
     discord
+    plasma5Packages.kdeconnect-kde
+    pandoc
   ];
 
   home.stateVersion = "24.11";
