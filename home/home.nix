@@ -24,7 +24,7 @@
     gemini-cli
     discord
     plasma5Packages.kdeconnect-kde
-    pandoc
+    libreoffice
     python3
   ];
 
