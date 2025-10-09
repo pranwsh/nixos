@@ -14,7 +14,7 @@
     ../modules/tlp.nix
     ../modules/flatpak.nix
     ../modules/boot.nix
-    ../modules/virtualbox.nix
+    ../modules/kvm.nix
     ../users/users.nix
   ];
 
