@@ -13,6 +13,8 @@
     ../modules/bluetooth.nix
     ../modules/tlp.nix
     ../modules/flatpak.nix
+    ../modules/boot.nix
+    ../modules/virtualbox.nix
     ../users/users.nix
   ];
 
