@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     neovim
     lua-language-server
+    tree-sitter
     fd
     ripgrep
     gcc
