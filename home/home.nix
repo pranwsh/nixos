@@ -27,6 +27,7 @@
       plasma5Packages.kdeconnect-kde
       libreoffice
       python3
+      qemu
   ];
 
   home.stateVersion = "24.11";
