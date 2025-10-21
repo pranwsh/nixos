@@ -5,77 +5,77 @@
 }
 
 /* ---------------------- Tab Loading Animation ---------------------- */
-.browserSidebarContainer:not([zen-split="true"]) {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important,
-              filter 0.18s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-}
-
-#main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) {
-  filter: blur(10px) brightness(60%) !important;
-  transform: scale(0.975) !important;
-  transition-delay: 0.5s !important;
-  border-radius: 8px !important;
-}
-
-@media (-moz-pref("nebula-tab-loading-animation", 2)) {
-  .browserSidebarContainer:not([zen-split="true"]) {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important,
-                filter 0.3s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-  }
-  #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) {
-    filter: blur(20px) brightness(60%) !important;
-    transform: scale(0.95) !important;
-    transition-delay: 0.5s !important;
-  }
-}
-
-@media (-moz-pref("nebula-tab-loading-animation", 3)) {
-  .browserSidebarContainer:not([zen-split="true"]) {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.935) !important,
-                filter 0.2s cubic-bezier(0.2, 0.8, 0.4, 1.5) !important;
-  }
-  #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) {
-    filter: blur(10px) brightness(60%) !important;
-    transform: scale(0.977) !important;
-    transition-delay: 0.5s !important;
-  }
-}
-
-@media (-moz-pref("nebula-tab-loading-animation", 4)) {
-  .browserSidebarContainer:not([zen-split="true"]) {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important,
-                filter all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-  }
-  #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) {
-    filter: saturate(0%) brightness(60%) !important;
-    transform: scale(0.975) !important;
-    transition-delay: 0.5s !important;
-  }
-}
-
-@media (-moz-pref("nebula-tab-loading-animation", 5)) {
-  .browserSidebarContainer:not([zen-split="true"]) {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important,
-                filter all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-  }
-  #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) {
-    filter: saturate(0%) brightness(60%) blur(6px) !important;
-    transform: scale(0.99) !important;
-    transition-delay: 0.5s !important;
-  }
-}
-
-@media (-moz-pref("nebula-tab-loading-animation", 0)) {
-  .browserSidebarContainer:not([zen-split="true"]) {
-    transition: none !important;
-  }
-  #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]),
-  #main-window:has(.tabbrowser-tab[selected]:not([busy])) .browserSidebarContainer:not([zen-split="true"]) {
-    filter: none !important;
-    transform: none !important;
-    transition-delay: 0s !important;
-  }
-}
+/* .browserSidebarContainer:not([zen-split="true"]) { */
+/*   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important, */
+/*               filter 0.18s cubic-bezier(0.2, 0.8, 0.4, 1) !important; */
+/* } */
+/**/
+/* #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) { */
+/*   filter: blur(10px) brightness(60%) !important; */
+/*   transform: scale(0.975) !important; */
+/*   transition-delay: 0.5s !important; */
+/*   border-radius: 8px !important; */
+/* } */
+/**/
+/* @media (-moz-pref("nebula-tab-loading-animation", 2)) { */
+/*   .browserSidebarContainer:not([zen-split="true"]) { */
+/*     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important, */
+/*                 filter 0.3s cubic-bezier(0.2, 0.8, 0.4, 1) !important; */
+/*   } */
+/*   #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) { */
+/*     filter: blur(20px) brightness(60%) !important; */
+/*     transform: scale(0.95) !important; */
+/*     transition-delay: 0.5s !important; */
+/*   } */
+/* } */
+/**/
+/* @media (-moz-pref("nebula-tab-loading-animation", 3)) { */
+/*   .browserSidebarContainer:not([zen-split="true"]) { */
+/*     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.935) !important, */
+/*                 filter 0.2s cubic-bezier(0.2, 0.8, 0.4, 1.5) !important; */
+/*   } */
+/*   #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) { */
+/*     filter: blur(10px) brightness(60%) !important; */
+/*     transform: scale(0.977) !important; */
+/*     transition-delay: 0.5s !important; */
+/*   } */
+/* } */
+/**/
+/* @media (-moz-pref("nebula-tab-loading-animation", 4)) { */
+/*   .browserSidebarContainer:not([zen-split="true"]) { */
+/*     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important, */
+/*                 filter all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1) !important; */
+/*   } */
+/*   #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) { */
+/*     filter: saturate(0%) brightness(60%) !important; */
+/*     transform: scale(0.975) !important; */
+/*     transition-delay: 0.5s !important; */
+/*   } */
+/* } */
+/**/
+/* @media (-moz-pref("nebula-tab-loading-animation", 5)) { */
+/*   .browserSidebarContainer:not([zen-split="true"]) { */
+/*     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.35) !important, */
+/*                 filter all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1) !important; */
+/*   } */
+/*   #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]) { */
+/*     filter: saturate(0%) brightness(60%) blur(6px) !important; */
+/*     transform: scale(0.99) !important; */
+/*     transition-delay: 0.5s !important; */
+/*   } */
+/* } */
+/**/
+/* @media (-moz-pref("nebula-tab-loading-animation", 0)) { */
+/*   .browserSidebarContainer:not([zen-split="true"]) { */
+/*     transition: none !important; */
+/*   } */
+/*   #main-window:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer:not([zen-split="true"]), */
+/*   #main-window:has(.tabbrowser-tab[selected]:not([busy])) .browserSidebarContainer:not([zen-split="true"]) { */
+/*     filter: none !important; */
+/*     transform: none !important; */
+/*     transition-delay: 0s !important; */
+/*   } */
+/* } */
 
 /* --------------------- Tab Switch Animation --------------------- */
 #tabbrowser-tabpanels > hbox:not(:has(.zen-glance-background)):not([zen-split="true"]) {
