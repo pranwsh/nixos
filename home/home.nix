@@ -4,6 +4,7 @@
   imports = [
     ./hyprland.nix
       ./hyprpaper.nix
+      ./hyprshot.nix
       ./cursor.nix
       ./kitty.nix
       ./bash.nix
