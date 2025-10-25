@@ -29,6 +29,7 @@
       libreoffice
       python3
       qemu
+      google-chrome
   ];
 
   home.stateVersion = "24.11";
