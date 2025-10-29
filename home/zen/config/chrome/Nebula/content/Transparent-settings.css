@@ -1,64 +1,23 @@
-:root {
+@-moz-document domain(monkeytype.com) {
+    body {
+      background-color: rgba(0, 0, 0, 0) !important; /* Darker base color */
+    }
+  }
+
+  :root{
   --zen-colors-tertiary: transparent !important;
   --zen-settings-secondary-background: transparent !important;
 }
 
-groupbox:not(#sineInstallationGroup:popover-open) {
+groupbox:not(#sineInstallationGroup:popover-open){
 /*   background: var(--zen-colors-tertiary) !important; */
-  background: light-dark(rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.35)) !important;
-  border: none;
+  background: var(--zen-colors-border-contrast) !important;
+  border: none
 }
 
-#preferences-root{
-  background-color: transparent !important;
-}
-
-/* ---------------- Transparent backgrounds for all about: pages ---------------- */
-
-@-moz-document url-prefix("about:") {
-
-  /* General page background */
-  html, body, #toolbar, .App, .sticky-container, .main-search, .main-heading {
-    background-color: transparent !important;
-  }
-
-  /* Tables and action boxes */
-  table,
-  tr,
-  .action-box {
-    background-color: light-dark(rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.35)) !important;
-    border-radius: 13px !important;
-    border: none !important;
-  }
-
-  /* Table rows outline */
-  tr {
-    outline: solid 1px #88888822 !important;
-  }
-
-  /* Top sites / personalize buttons on home/newtab */
-  .top-sites-list,
-  .personalizeButtonWrapper {
-    opacity: 0 !important;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  .top-sites-list:hover,
-  .personalizeButtonWrapper:hover {
-    opacity: 1 !important;
-  }
-
-  /* Hide default background elements */
-  .App > div:nth-child(2),
-  .wallpaper {
-    display: none !important;
-  }
-}
-
-/*
 @-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
   body, .App{
-    background-color: transparent !important;
+    background-color: #00000070 !important;
   }
 
   .top-sites-list, .personalizeButtonWrapper{
@@ -69,16 +28,33 @@ groupbox:not(#sineInstallationGroup:popover-open) {
       opacity: 1 !important;
     }
   }
-  
+
   .App > div:nth-child(2), .wallpaper{
     display: none !important;
   }
 }
 
-@-moz-document url(about:config), url(about:support), url(about:profiles) {
-  html, #toolbar{
-    background-color: transparent !important;
-  }
+@-moz-document url(addons.mozilla.org) {
+  /* transparency */
+html, body, nav, header{
+  background-color: transparent !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* darkreader */
+:root{
+  --darkreader-background-ffffff: transparent !important;
+}
+
+/* no footer */
+footer{
+  display: none !important;
+}
+}
+
+@-moz-document url(about:config){
   tr, table{
     background-color: transparent !important;
     border: none !important;
@@ -87,10 +63,111 @@ groupbox:not(#sineInstallationGroup:popover-open) {
     outline: solid 1px #88888822 !important;
   }
 }
-*/
 
-/* Fixes the transparent dialogs. */
-.dialogFrame {
-  background: var(--zen-dialog-background);
-  border-radius: 8px;
+@-moz-document domain("youtube.com") {
+    /* Insert code here... */
+    ytd-page-manager > *.ytd-page-manager, ytd-watch, body {background-color: transparent !important;}
+    html{background: none}
+
+    html[dark], [dark]{
+        --yt-spec-text-primary-inverse: transparent !important;
+        --yt-spec-base-background: transparent !important;
+        --yt-spec-static-black: transparent !important;
+        --yt-spec-general-background-b: transparent !important;
+    }
+    html[dark]{
+            background-color: transparent !important;
+        }
+
+    #container, #chips-wrapper{
+        /*backdrop-filter: blur(64px);*/
+        background: rgba(0,0,0,0)
+    }
 }
+
+
+@-moz-document domain("chatgpt.com") {
+    /* General background cleanup */
+    body, main, .overflow-hidden, .flex-1 {
+        background-color: transparent !important;
+    }
+
+    /* Top bar fix */
+    header,
+    div[class*="top-0"][class*="z-50"],
+    div[class*="sticky"][class*="top-0"] {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+    }
+
+    html {
+        background: none !important;
+    }
+
+    html.dark, [class*="dark"] {
+        --tw-bg-opacity: 0 !important;
+        --tw-bg-dark: transparent !important;
+        --tw-shadow: none !important;
+        --tw-ring-color: transparent !important;
+        background-color: transparent !important;
+    }
+
+    /* Specific elements - chat windows, sidebars, etc. */
+    .flex.flex-col.items-center.text-sm,
+    .sticky.top-0.z-10,
+    .w-full.flex.flex-col {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Optional: Remove message bubbles background */
+    .group.w-full.text-token-text-primary {
+        background-color: rgba(0, 0, 0, 0) !important;
+    }
+}
+
+@-moz-document domain("canvas.ucdavis.edu") {
+    /* General background cleanup */
+    body, main, .overflow-hidden, .flex-1 {
+        background-color: transparent !important;
+    }
+
+    /* Top bar fix */
+    header,
+    div[class*="top-0"][class*="z-50"],
+    div[class*="sticky"][class*="top-0"] {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+    }
+
+    html {
+        background: none !important;
+    }
+
+    html.dark, [class*="dark"] {
+        --tw-bg-opacity: 0 !important;
+        --tw-bg-dark: transparent !important;
+        --tw-shadow: none !important;
+        --tw-ring-color: transparent !important;
+        background-color: transparent !important;
+    }
+
+    /* Specific elements - chat windows, sidebars, etc. */
+    .flex.flex-col.items-center.text-sm,
+    .sticky.top-0.z-10,
+    .w-full.flex.flex-col {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Optional: Remove message bubbles background */
+    .group.w-full.text-token-text-primary {
+        background-color: rgba(0, 0, 0, 0) !important;
+    }
+}
+
+

@@ -1,15 +1,15 @@
 /* -------------------------- ESSENTIALS -------------------------- */
-
+/* ESSENTIAL COLOR WITH SHADOW, SPACING & ROUNDED EDGES */
 .zen-essentials-container .tabbrowser-tab {
   .tab-background {
     background-color: var(--nebula-color) !important;
-    box-shadow: 0 0px 3px transparent !important;
+    box-shadow: 0 0px 3px light-dark(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0)) !important;
     border-radius: calc(var(--nebula-border-radius) + 1px) !important;
   }
 
   &:hover .tab-background {
     background-color: var(--nebula-color-hover) !important;
-    box-shadow: 0 0px 3px var(--nebula-color-shadow) !important;
+    box-shadow: 0 0px 3px light-dark(rgba(255, 255, 255, 0.35), rgba(0, 0, 0, 0.95)) !important;
   }
 
   @media (-moz-pref("zen.theme.essentials-favicon-bg")) {
@@ -35,7 +35,7 @@
     &[selected],
     &[visuallyselected] {
       .tab-icon-image {
-        filter: drop-shadow(0px 0px 4px var(--nebula-color-shadow));
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
       }
 
       > .tab-stack > .tab-background {
@@ -46,7 +46,7 @@
         }
 
         &::after {
-          filter: saturate(200%) blur(13.5px) contrast(110%) !important;
+          filter: saturate(180%) blur(13.5px) !important;
         }
       }
     }
@@ -60,14 +60,9 @@
       transition: scale 0.2s ease !important;
     }
 
-    .tabbrowser-tab:active:not(:has(
-        .tab-icon-overlay:hover,
-        .tab-icon-overlay:active,
-        .tab-close-button:hover,
-        .tab-close-button:active
-        )) {
-        scale: 0.96 !important;
-      }
+    .tabbrowser-tab:active {
+      scale: 0.96 !important;
+    }
 
     .tabbrowser-tab:has(.tab-close-button:hover) {
       scale: 1 !important;
@@ -93,8 +88,7 @@
 }
 
 /* -------------------------- ANIMATIONS FOR ESSENTIALS -------------------------- */
-
-#zen-main-app-wrapper {
+#zen-main-app-wrapper:not(:has(#zen-welcome)) {
   .tabbrowser-tab {
     scale: unset !important;
 
@@ -147,25 +141,9 @@
     }
 
     &:active {
-      .tab-stack:active:not(:has(
-        .tab-icon-overlay:hover,
-        .tab-icon-overlay:active,
-        .tab-close-button:hover,
-        .tab-close-button:active
-        )) {
-            transform: scale(0.95, 0.95) !important;
+      .tab-stack {
+        transform: scale(0.95, 0.95) !important;
       }
     }
-  }
-}
-
-@media (-moz-pref("nebula-essentials-gray-icons")) {
-  .zen-essentials-container .tab-icon-image {
-    filter: grayscale(100%) contrast(75%) !important;
-    transition: filter 0.5s ease !important;
-  }
-  .zen-essentials-container .tabbrowser-tab[selected="true"] .tab-icon-stack > .tab-icon-image,
-  .zen-essentials-container .tabbrowser-tab:hover .tab-icon-stack > .tab-icon-image {
-    filter: none !important;
   }
 }
