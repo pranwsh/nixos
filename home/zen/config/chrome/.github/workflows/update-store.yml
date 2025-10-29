@@ -1,0 +1,78 @@
+name: 🚀 Sync Nebula JS to SineOrg Store
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'JS/Nebula.uc.js'
+
+jobs:
+  sync-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your Zen-Nebula repo
+      - name: 📥 Checkout Zen-Nebula
+        uses: actions/checkout@v4
+
+      # Extract commit subject + full message
+      - name: 📝 Get commit message
+        id: commit
+        run: |
+          # Subject (escaped, one-line safe)
+          subject=$(git log -1 --pretty=%s | sed 's/%/%25/g; s/\r/%0D/g; s/\n/%0A/g')
+          echo "subject=$subject" >> "$GITHUB_OUTPUT"
+      
+          # Full message (multiline-safe with heredoc)
+          {
+            echo 'full<<EOF'
+            git log -1 --pretty=%B
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      # Configure git identity
+      - name: ⚙️ Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Clone fork and sync with upstream
+      - name: 🔄 Sync fork with upstream
+        run: |
+          git clone https://x-access-token:${{ secrets.FORK_PAT }}@github.com/JustAdumbPrsn/store.git store
+          cd store
+          git remote add upstream https://github.com/sineorg/store.git
+          git fetch upstream
+          git checkout main
+          git merge upstream/main --no-edit || true
+          git push origin main
+
+      # Copy Nebula.uc.js
+      - name: 📂 Copy updated Nebula.uc.js
+        run: cp JS/Nebula.uc.js store/mods/Nebula/Nebula.uc.js
+
+      # Commit and push branch
+      - name: 💾 Commit & Push changes
+        run: |
+          cd store
+          git checkout -B auto-update-nebula
+          git add mods/Nebula/Nebula.uc.js
+          git commit -m "Nebula.uc.js Sync => ${{ steps.commit.outputs.subject }}" || echo "No changes to commit"
+          git push origin auto-update-nebula --force
+
+      # Create PR with commit subject + body
+      - name: 📬 Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.FORK_PAT }}
+        run: |
+          cat > pr_body.txt <<'EOF'
+          ${{ steps.commit.outputs.full }}
+          EOF
+      
+          gh pr create \
+            --repo sineorg/store \
+            --head JustAdumbPrsn:auto-update-nebula \
+            --base main \
+            --title "Nebula.uc.js ${{ steps.commit.outputs.subject }}" \
+            --body-file pr_body.txt
