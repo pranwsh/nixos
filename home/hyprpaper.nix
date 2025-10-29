@@ -6,8 +6,8 @@
 
   # Configure hyprpaper
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /home/pranesh/Pictures/Wallpapers/Unsplash/flamingo
-    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Unsplash/flamingo
+    preload = /home/pranesh/Pictures/Wallpapers/Unsplash/waves
+    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Unsplash/waves
   '';
 
   # Start hyprpaper with Hyprland 
