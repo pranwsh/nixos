@@ -7,9 +7,7 @@ let
 in
 {
   imports = [
-    ./hyprland.nix
-    ./hyprpaper.nix
-    ./hyprshot.nix
+    ./hyprland
     ./cursor.nix
     ./kitty.nix
     ./bash.nix
