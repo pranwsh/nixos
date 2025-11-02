@@ -1,31 +1,34 @@
 {
   config,
-  lib,
-  pkgs,
-  inputs,
-  ...
+    lib,
+    pkgs,
+    inputs,
+    ...
 }: {
   imports = [
     ./settings.nix
-    ./keybindings.nix
-    ./windows.nix
-    ./monitors.nix
-    ./hyprpaper.nix
-    ./hyprshot.nix
-    ./hyprscrolling.nix
+      ./keybindings.nix
+      ./windows.nix
+      ./monitors.nix
+      ./hyprpaper.nix
+      ./hyprshot.nix
+      ./hyprscrolling.nix
   ];
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
-    
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
     ];
+
+    extraConfig = ''
+      plugin = hyprscrolling
+      '';
   };
-  
+
   home.packages = with pkgs; [
-  
+
   ];
 }
