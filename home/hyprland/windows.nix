@@ -1,16 +1,15 @@
 {...}: {
   wayland.windowManager.hyprland.settings = {
-    # Dwindle layout configuration
-    dwindle = {
-      pseudotile = true;
-      preserve_split = true;
+    # Use hyprscrolling's column layout instead of dwindle
+    general = {
+      layout = "column";  # This activates hyprscrolling
     };
-
-    # Master layout configuration
+    #
+    # Master layout configuration (backup/alternative)
     master = {
       new_status = "master";
     };
-
+    
     # Window rules
     windowrulev2 = [
       "suppressevent maximize, class:.*"

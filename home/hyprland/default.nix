@@ -21,7 +21,7 @@
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     
     plugins = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
     ];
   };
   
