@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -11,13 +12,20 @@
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
+    ./hyprscrolling.nix
   ];
-
+  
   wayland.windowManager.hyprland = {
     enable = true;
+    
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    
+    plugins = [
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+    ];
   };
-
+  
   home.packages = with pkgs; [
-    # Add any Hyprland-related packages here
+  
   ];
 }
