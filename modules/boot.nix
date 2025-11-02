@@ -12,17 +12,17 @@
     initrd.verbose = false;
     plymouth.enable = false;
   };
-
-  systemd.extraConfig = ''
-    DefaultStandardOutput=null
-    DefaultStandardError=null
-  '';
+  
+  systemd.settings.Manager = {
+    DefaultStandardOutput = "null";
+    DefaultStandardError = "null";
+  };
   
   systemd.user.extraConfig = ''
     DefaultStandardOutput=null
     DefaultStandardError=null
   '';
-
+  
   services.journald.extraConfig = ''
     Storage=none
     ForwardToConsole=no
