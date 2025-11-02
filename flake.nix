@@ -3,13 +3,25 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
     PrismLaucnher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
+
     nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
