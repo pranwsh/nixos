@@ -1,9 +1,6 @@
 {...}: {
   wayland.windowManager.hyprland.settings = {
     # Use hyprscrolling's column layout instead of dwindle
-    general = {
-      layout = "column";  # This activates hyprscrolling
-    };
     #
     # Master layout configuration (backup/alternative)
     master = {

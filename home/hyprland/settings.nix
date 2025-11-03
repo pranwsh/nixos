@@ -17,7 +17,7 @@
       "col.inactive_border" = "rgba(595959aa)";
       resize_on_border = true;
       allow_tearing = false;
-      layout = "column";
+      layout = "scrolling";
     };
 
     decoration = {
@@ -74,9 +74,9 @@
       };
     };
 
-    gestures = {
-      workspace_swipe = false;
-    };
+    # gestures = {
+    #   workspace_swipe = false;
+    # };
 
     device = {
       name = "epic-mouse-v1";

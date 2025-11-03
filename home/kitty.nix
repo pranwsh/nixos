@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  style = import ./style.nix;
+in 
 {
   home.packages = with pkgs; [
     kitty
@@ -11,7 +14,7 @@
 
     settings = {
       enable_audio_bell = "no";
-      background_opacity = lib.mkForce "0.40";
+      background_opacity = lib.mkForce "${style.opacity.bg}";
       confirm_os_window_close = "0";
     };
 

@@ -2,31 +2,35 @@
   wayland.windowManager.hyprland.settings = {
     plugin = {
       hyprscrolling = {
-        column_default_width = "onehalf";
-        column_widths = "onehalf onethird twothirds onefourth";
+        fullscreen_on_one_column = true;
+        focus_fit_method = 1;
       };
     };
     
-    # Keybindings for hyprscrolling features
+    # Corrected keybindings using layoutmsg
     bind = [
-      # Cycle through column widths
-      "SUPER, bracketright, hyprscrolling:columnsize, +1"
-      "SUPER, bracketleft, hyprscrolling:columnsize, -1"
+      # Move between columns
+      "SUPER, period, layoutmsg, move +col"
+      "SUPER, comma, layoutmsg, move -col"
       
-      # Fit columns on screen
-      "SUPER SHIFT, G, hyprscrolling:fitsize, active"
-      "SUPER SHIFT, F, hyprscrolling:fitsize, all"
+      # Move windows between columns
+      "SUPER SHIFT, period, layoutmsg, movewindowto r"
+      "SUPER SHIFT, comma, layoutmsg, movewindowto l"
+      "SUPER SHIFT, up, layoutmsg, movewindowto u"
+      "SUPER SHIFT, down, layoutmsg, movewindowto d"
       
-      # Align window in column
-      "SUPER SHIFT, C, hyprscrolling:alignwindow, center"
-      "SUPER SHIFT, L, hyprscrolling:alignwindow, right"
-      "SUPER SHIFT, H, hyprscrolling:alignwindow, left"
-    ];
-    
-    # Mouse bindings for workspace scrolling
-    bindm = [
-      "SUPER, mouse_down, hyprscrolling:workspace, e+1"
-      "SUPER, mouse_up, hyprscrolling:workspace, e-1"
+      # Cycle column widths
+      "SUPER, bracketright, layoutmsg, cyclewidth +1"
+      "SUPER, bracketleft, layoutmsg, cyclewidth -1"
+      
+      # Fit columns
+      "SUPER SHIFT, F, layoutmsg, fitsize all"
+      "SUPER SHIFT, G, layoutmsg, fitsize active"
+      
+      # Align windows
+      "SUPER SHIFT, C, layoutmsg, alignwindow center"
+      "SUPER SHIFT, L, layoutmsg, alignwindow right"
+      "SUPER SHIFT, H, layoutmsg, alignwindow left"
     ];
   };
 }

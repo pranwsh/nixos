@@ -29,7 +29,6 @@ in
     wineWowPackages.stable
     gemini-cli
     discord
-    plasma5Packages.kdeconnect-kde
     libreoffice
     qemu
     google-chrome
