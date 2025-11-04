@@ -1,116 +1,91 @@
 // ==UserScript==
-// @name           Text Lightener
-// @description    Converts dark text to light while preserving light colors
+// @name           TextLightener
+// @description    Makes dark text lighter on all web pages
 // @include        main
+// @compatibility  Firefox 120+ (Fission-safe)
 // ==/UserScript==
 
 (function() {
-    // Function to calculate luminosity of an RGB color
-    function getLuminosity(r, g, b) {
-        const [rs, gs, bs] = [r, g, b].map(c => {
-            c = c / 255;
-            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-        });
-        return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
-    }
+    if (!window.gBrowser) return;
 
-    // Function to parse color string to RGB values
-    function parseColor(colorString) {
-        const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (rgbMatch) {
-            return [parseInt(rgbMatch[1]), parseInt(rgbMatch[2]), parseInt(rgbMatch[3])];
-        }
-        
-        const hexMatch = colorString.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
-        if (hexMatch) {
-            return [
-                parseInt(hexMatch[1], 16),
-                parseInt(hexMatch[2], 16),
-                parseInt(hexMatch[3], 16)
-            ];
-        }
-        
-        const shortHexMatch = colorString.match(/#([0-9a-f])([0-9a-f])([0-9a-f])/i);
-        if (shortHexMatch) {
-            return [
-                parseInt(shortHexMatch[1] + shortHexMatch[1], 16),
-                parseInt(shortHexMatch[2] + shortHexMatch[2], 16),
-                parseInt(shortHexMatch[3] + shortHexMatch[3], 16)
-            ];
-        }
-        
-        return null;
-    }
-
-    // Function to invert dark colors to light
-    function invertDarkColor(r, g, b) {
-        return [255 - r, 255 - g, 255 - b];
-    }
-
-    // Inject script into all web pages
-    const contentScript = function() {
-        function adjustTextColor(element) {
-            const computedStyle = window.getComputedStyle(element);
-            const color = computedStyle.color;
-            
-            const rgb = parseColor(color);
-            if (!rgb) return;
-            
-            const [r, g, b] = rgb;
-            const luminosity = getLuminosity(r, g, b);
-            
-            if (luminosity < 0.5) {
-                const [newR, newG, newB] = invertDarkColor(r, g, b);
-                element.style.setProperty('color', `rgb(${newR}, ${newG}, ${newB})`, 'important');
-            }
-        }
-
-        function processAllTextElements() {
-            const textElements = document.querySelectorAll('p, span, div, h1, h2, h3, h4, h5, h6, a, li, td, th, label, button, input, textarea, select, option, strong, em, b, i, small, code, pre');
-            textElements.forEach(element => adjustTextColor(element));
-        }
-
-        processAllTextElements();
-
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === 1) {
-                        adjustTextColor(node);
-                        const children = node.querySelectorAll('p, span, div, h1, h2, h3, h4, h5, h6, a, li, td, th, label, button, input, textarea, select, option, strong, em, b, i, small, code, pre');
-                        children.forEach(child => adjustTextColor(child));
-                    }
+    const scriptToInject = `
+        (() => {
+            function getLuminosity(r,g,b){
+                const [rs,gs,bs]=[r,g,b].map(c=>{
+                    c=c/255;
+                    return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);
                 });
-            });
-        });
+                return 0.2126*rs+0.7152*gs+0.0722*bs;
+            }
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+            function parseColor(s){
+                const m=s.match(/rgba?\\((\\d+),(\\d+),(\\d+)/);
+                if(m) return m.slice(1,4).map(Number);
+                const h=s.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
+                if(h) return [parseInt(h[1],16),parseInt(h[2],16),parseInt(h[3],16)];
+                const sh=s.match(/#([0-9a-f])([0-9a-f])([0-9a-f])/i);
+                if(sh) return [parseInt(sh[1]+sh[1],16),parseInt(sh[2]+sh[2],16),parseInt(sh[3]+sh[3],16)];
+                return null;
+            }
 
-        setInterval(processAllTextElements, 1000);
-    };
+            function invertDarkColor(r,g,b){return [255-r,255-g,255-b];}
 
-    // Convert functions to strings for injection
-    const scriptContent = `
-        ${getLuminosity.toString()}
-        ${parseColor.toString()}
-        ${invertDarkColor.toString()}
-        (${contentScript.toString()})();
+            function adjustTextColor(el){
+                const cs=getComputedStyle(el);
+                const rgb=parseColor(cs.color);
+                if(!rgb) return;
+                const lum=getLuminosity(...rgb);
+                if(lum<0.5){
+                    const[nr,ng,nb]=invertDarkColor(...rgb);
+                    el.style.setProperty("color", \`rgb(\${nr},\${ng},\${nb})\`, "important");
+                }
+            }
+
+            function processAll(){
+                document.querySelectorAll("p,span,div,h1,h2,h3,h4,h5,h6,a,li,td,th,label,button,input,textarea,select,option,strong,em,b,i,small,code,pre")
+                    .forEach(adjustTextColor);
+            }
+
+            processAll();
+            new MutationObserver(processAll).observe(document.body,{childList:true,subtree:true});
+            setInterval(processAll,1000);
+        })();
     `;
 
-    // Listen for page loads and inject the script
+    // Inject the script safely into a tab
+    function injectIntoTab(browser) {
+        if (!browser?.browsingContext) return;
+        try {
+            browser.browsingContext.currentWindowGlobal
+                .getActor("WebNavigation")
+                .documentPrincipal; // ensure it’s live
+            browser.messageManager ?? browser.frameLoader?.messageManager;
+            browser.browsingContext.topChromeWindow?.setTimeout(() => {
+                browser.browsingContext.window?.eval(scriptToInject);
+            }, 1000);
+        } catch (e) {
+            // fallback: use evalInWindowGlobal if supported
+            try {
+                browser.browsingContext.currentWindowGlobal
+                    .evalInWindowGlobal(scriptToInject);
+            } catch (_) {}
+        }
+    }
+
+    // Inject when a tab loads
+    gBrowser.tabContainer.addEventListener("TabSelect", e => {
+        let browser = gBrowser.selectedBrowser;
+        injectIntoTab(browser);
+    });
+
     gBrowser.addTabsProgressListener({
-        onLocationChange: function(aBrowser, aWebProgress, aRequest, aLocation, aFlags) {
-            if (aWebProgress.isTopLevel) {
-                aBrowser.messageManager.loadFrameScript('data:,(' + scriptContent + ')()', false);
-            }
+        onLocationChange: (browser, wp, rq, loc) => {
+            if (wp.isTopLevel) injectIntoTab(browser);
         }
     });
 
-    // Also inject into existing tabs
+    // Also run for existing tabs at startup
     for (let tab of gBrowser.tabs) {
-        tab.linkedBrowser.messageManager.loadFrameScript('data:,(' + scriptContent + ')()', false);
+        injectIntoTab(tab.linkedBrowser);
     }
 })();
