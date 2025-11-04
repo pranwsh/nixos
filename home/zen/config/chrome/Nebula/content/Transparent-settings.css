@@ -1,96 +1,78 @@
-:root {
-  --zen-colors-tertiary: transparent !important;
-  --zen-settings-secondary-background: transparent !important;
-}
-
-groupbox:not(#sineInstallationGroup:popover-open) {
-/*   background: var(--zen-colors-tertiary) !important; */
-  background: light-dark(rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.35)) !important;
-  border: none;
-}
-
-#preferences-root{
-  background-color: transparent !important;
-}
-
-/* ---------------- Transparent backgrounds for all about: pages ---------------- */
-
-@-moz-document url-prefix("about:") {
-
-  /* General page background */
-  html, body, #toolbar, .App, .sticky-container, .main-search, .main-heading {
+/* --- Core Elements --- */
+* {
     background-color: transparent !important;
-  }
-
-  /* Tables and action boxes */
-  table,
-  tr,
-  .action-box {
-    background-color: light-dark(rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.35)) !important;
-    border-radius: 13px !important;
-    border: none !important;
-  }
-
-  /* Table rows outline */
-  tr {
-    outline: solid 1px #88888822 !important;
-  }
-
-  /* Top sites / personalize buttons on home/newtab */
-  .top-sites-list,
-  .personalizeButtonWrapper {
-    opacity: 0 !important;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  .top-sites-list:hover,
-  .personalizeButtonWrapper:hover {
-    opacity: 1 !important;
-  }
-
-  /* Hide default background elements */
-  .App > div:nth-child(2),
-  .wallpaper {
-    display: none !important;
-  }
+    background-image: none !important;
+    background: transparent !important;
 }
 
-/*
-@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
-  body, .App{
+html,
+body {
+    background: transparent !important;
     background-color: transparent !important;
-  }
-
-  .top-sites-list, .personalizeButtonWrapper{
-    opacity: 0 !important;
-    transition: opacity 0.3s ease-in-out;
-
-    &:hover{
-      opacity: 1 !important;
-    }
-  }
-  
-  .App > div:nth-child(2), .wallpaper{
-    display: none !important;
-  }
 }
 
-@-moz-document url(about:config), url(about:support), url(about:profiles) {
-  html, #toolbar{
+/* --- Force transparency on common patterns --- */
+div, span, section, article, aside, nav, header, footer, main,
+ul, ol, li, p, h1, h2, h3, h4, h5, h6,
+table, tr, td, th, tbody, thead, tfoot,
+form, input, button, select, textarea,
+[class], [id] {
     background-color: transparent !important;
-  }
-  tr, table{
-    background-color: transparent !important;
-    border: none !important;
-  }
-  tr{
-    outline: solid 1px #88888822 !important;
-  }
+    background-image: none !important;
+    background: transparent !important;
 }
-*/
 
-/* Fixes the transparent dialogs. */
-.dialogFrame {
-  background: var(--zen-dialog-background);
-  border-radius: 8px;
+/* --- Override inline styles --- */
+*[style*="background"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* --- Popup/Modal/Dialog Elements with Black Background --- */
+[role="dialog"],
+[role="alertdialog"],
+[class*="modal"],
+[class*="popup"],
+[class*="dialog"],
+[class*="dropdown"],
+[class*="menu"],
+[class*="popover"],
+[class*="tooltip"],
+[aria-modal="true"] {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* --- Remove All Other Backdrop Effects --- */
+*:not([role="dialog"]):not([role="alertdialog"]):not([class*="modal"]):not([class*="popup"]):not([class*="dialog"]):not([class*="dropdown"]):not([class*="menu"]):not([class*="popover"]):not([class*="tooltip"]):not([aria-modal="true"]) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* --- Remove Shadows & Borders --- */
+*, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* --- Dark Mode Variables --- */
+:root,
+html.dark,
+[class*="dark"],
+[data-theme="dark"] {
+    --tw-bg-opacity: 0 !important;
+    --background: transparent !important;
+    --bg-color: transparent !important;
+    --backgroundColor: transparent !important;
+    background-color: transparent !important;
+}
+
+/* --- Force CSS Variables --- */
+* {
+    --bg: transparent !important;
+    --background: transparent !important;
+    --background-color: transparent !important;
 }
