@@ -10,6 +10,7 @@ in
     ./hyprland
     ./cursor.nix
     ./kitty.nix
+    ./alacritty.nix
     ./bash.nix
     ./zathura.nix
     ./latex.nix

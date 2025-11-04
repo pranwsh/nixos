@@ -1265,7 +1265,6 @@
   Nebula.register(NebulaMediaCoverArtModule);
   Nebula.register(NebulaMenuModule);
   Nebula.register(NebulaCtrlTabDualBackgroundModule);
-  Nebula.register(TextLightenerModule)
 
   // Start the core
   Nebula.init();

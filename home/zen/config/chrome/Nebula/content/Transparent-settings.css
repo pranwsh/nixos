@@ -29,6 +29,20 @@ form, input, button, select, textarea,
     background: transparent !important;
 }
 
+/* --- Make Dark Text Light --- */
+*, *::before, *::after {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+strong, b {
+    color: rgb(255, 255, 255) !important;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
 /* --- Popup/Modal/Dialog Elements with Black Background --- */
 [role="dialog"],
 [role="alertdialog"],
@@ -42,8 +56,8 @@ form, input, button, select, textarea,
 [aria-modal="true"] {
     background-color: rgba(0, 0, 0, 0.4) !important;
     background: rgba(0, 0, 0, 0.4) !important;
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(13px) !important;
+    -webkit-backdrop-filter: blur(13px) !important;
 }
 
 /* --- Remove All Other Backdrop Effects --- */
