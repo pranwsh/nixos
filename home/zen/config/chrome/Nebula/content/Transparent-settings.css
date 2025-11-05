@@ -11,6 +11,19 @@ body {
     background-color: transparent !important;
 }
 
+/* --- Extension Popup Override (Vimium) --- */
+div > .vimiumHintMarker,
+div > .vimiumHintMarker * {
+    background: black !important;
+    background-color: black !important;
+}
+
+div > .vimiumHintMarker span {
+    color: yellow !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+}
+
 /* --- Force transparency on common patterns --- */
 div, span, section, article, aside, nav, header, footer, main,
 ul, ol, li, p, h1, h2, h3, h4, h5, h6,
@@ -90,3 +103,4 @@ html.dark,
     --background: transparent !important;
     --background-color: transparent !important;
 }
+

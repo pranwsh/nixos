@@ -12,9 +12,9 @@
     general = {
       gaps_in = 7;
       gaps_out = 14;
-      border_size = 0;
-      "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-      "col.inactive_border" = "rgba(595959aa)";
+      border_size = 3;
+      "col.active_border" = "rgba(ffffffee) rgba(ffffffee) 45deg";
+      "col.inactive_border" = "rgba(59595900)";
       resize_on_border = true;
       allow_tearing = false;
       layout = "scrolling";
