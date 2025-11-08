@@ -12,7 +12,7 @@ in {
     ./keybindings.nix
     ./windows.nix
     ./monitors.nix
-    ./mpvpaper.nix
+    ./hyprpaper.nix
     ./hyprshot.nix
     ./hyprscrolling.nix
   ];
