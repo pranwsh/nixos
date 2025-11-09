@@ -15,6 +15,7 @@ in {
     ./hyprpaper.nix
     ./hyprshot.nix
     ./hyprscrolling.nix
+    ./shader.nix
   ];
   
   wayland.windowManager.hyprland = {
