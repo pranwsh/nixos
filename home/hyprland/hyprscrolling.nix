@@ -10,9 +10,7 @@
     # Corrected keybindings using layoutmsg
     bind = [
       # Move between columns
-      "SUPER, period, layoutmsg, move +col"
-      "SUPER, comma, layoutmsg, move -col"
-      
+      "SUPER, comma, fullscreen, 1"   # Halfscreen (maximize, keeps gaps/bar)     
       # Move windows between columns
       "SUPER SHIFT, period, layoutmsg, movewindowto r"
       "SUPER SHIFT, comma, layoutmsg, movewindowto l"

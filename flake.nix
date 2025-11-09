@@ -37,7 +37,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.pranesh = import ./home/home.nix;
+            users.pranesh = import ./home/default.nix;
             sharedModules = [
               inputs.nix-flatpak.homeManagerModules.nix-flatpak
             ];
