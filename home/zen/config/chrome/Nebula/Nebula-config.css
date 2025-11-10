@@ -41,8 +41,8 @@ without searching through the code directly */
   --nebula-workspace-grayscale: 100%;
   
   /* 🎨 UI & Website Tint */
-  --nebula-ui-tint: light-dark(rgba(255,255,255,0.2), rgba(0,0,0,0.9));
-  --nebula-website-tint: light-dark(rgba(255,255,255,0), rgba(0,0,0,0.9));
+  --nebula-ui-tint: light-dark(rgba(255,255,255,0.2), rgba(0,0,0,0.2));
+  --nebula-website-tint: light-dark(rgba(255,255,255,0), rgba(0,0,0,0));
   
   /* 🔮 Colors */
   --nebula-color-min: light-dark(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));

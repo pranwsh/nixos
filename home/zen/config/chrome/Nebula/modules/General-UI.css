@@ -2,12 +2,12 @@
 
 /* Main UI tint */
 #zen-main-app-wrapper {
-  background: rgba(0,0,0,0.8) !important;
+  background: rgba(255, 0, 0) !important;
 }
 
 /* Website background tint */
 browser[transparent='true'] {
-  background: rgba(0,0,0,0) !important;
+  background: var(--nebula-website-tint) !important;
 }
 
 /* Hide identity label for Bonjourr */
