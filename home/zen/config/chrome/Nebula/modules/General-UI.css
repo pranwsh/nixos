@@ -2,7 +2,7 @@
 
 /* Main UI tint */
 #zen-main-app-wrapper {
-  background: rgba(255, 0, 0) !important;
+  background: var(--nebula-ui-tint) !important;
 }
 
 /* Website background tint */
