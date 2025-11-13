@@ -31,7 +31,7 @@ in
     discord
     libreoffice
     qemu
-    google-chrome
+    chromium
   ];
   
   home.stateVersion = "24.11";

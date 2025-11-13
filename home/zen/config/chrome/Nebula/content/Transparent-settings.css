@@ -1,79 +1,130 @@
-/* ================================================
-   Universal Transparency Theme
-   Aggressive background removal for all sites
-   + Force all text to white
-   ================================================ */
-
+/* Wrap ALL your styles in this @-moz-document rule */
+@-moz-document url(chrome://browser/content/browser.xhtml) {
 /* --- Core Elements --- */
 * {
     background-color: transparent !important;
     background-image: none !important;
-    color: white !important;
+    background: transparent !important;
 }
-
+/* ... rest of your existing browser chrome styles ... */
+} /* End of @-moz-document */
+/* --- Styles for ALL web pages --- */
+@-moz-document regexp("^https?://.*") {
+/* --- Core Elements --- */
+* {
+    background-color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+}
 html,
 body {
     background: transparent !important;
     background-color: transparent !important;
-    color: white !important;
 }
-
-/* --- Force White Text on All Elements --- */
+/* --- Force transparency on common patterns --- */
+div, span, section, article, aside, nav, header, footer, main,
+ul, ol, li, p, h1, h2, h3, h4, h5, h6,
+table, tr, td, th, tbody, thead, tfoot,
+form, input, button, select, textarea,
+[class], [id] {
+    background-color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+}
+/* --- Override inline styles --- */
+*[style*="background"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+}
+/* --- Make Dark Text Light --- */
+*, *::before, *::after {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
 h1, h2, h3, h4, h5, h6,
-p, span, a, li, td, th,
-div, section, article,
-label, button, input, textarea,
-select, option {
-    color: white !important;
+strong, b {
+    color: rgb(255, 255, 255) !important;
 }
-
-/* --- Links --- */
 a {
-    color: white !important;
+    color: rgba(255, 255, 255, 0.85) !important;
 }
-
-a:hover,
-a:visited,
-a:active {
-    color: white !important;
+/* --- Extension Popup Override (Vimium) --- */
+div > .vimiumHintMarker,
+div > .vimiumHintMarker * {
+    background: black !important;
+    background-color: rgba(0, 0, 0, 255) !important;
 }
-
-/* --- Remove All Backdrop Effects --- */
-*[class*="backdrop"],
-*[style*="backdrop"] {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+div > .vimiumHintMarker {
+    border: 1px solid #000000 !important;
 }
-
+div > .vimiumHintMarker span {
+    color: plum !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+}
 /* --- Remove Shadows & Borders --- */
-* {
+*, *::before, *::after {
     box-shadow: none !important;
     text-shadow: none !important;
 }
+} /* End of web pages @-moz-document */
 
-/* --- Dark Mode Variables --- */
-:root,
-html.dark,
-[class*="dark"],
-[data-theme="dark"] {
-    --tw-bg-opacity: 0 !important;
-    --background: transparent !important;
-    --bg-color: transparent !important;
-    --text-color: white !important;
-    --color: white !important;
-    background-color: transparent !important;
-    color: white !important;
-}
 
-/* --- Common Container Elements --- */
-div,
-section,
-article,
-aside,
-nav,
-header,
-footer,
-main {
-    background-color: transparent !important;
-    color: white !important;
+@-moz-document regexp("^https?://.*") {
+
+  /* --- Website Popups / Modals / Overlays --- */
+  /* High-certainty modal patterns */
+  .modal,
+  .modal-backdrop,
+  .modal-dialog,
+  .modal-content,
+  .modal-overlay,
+  .modal-container,
+  .popup,
+  .popup-content,
+  .dialog,
+  .dialog-container,
+  .dialog-backdrop,
+  .lightbox,
+  .lightbox-overlay,
+  .overlay,
+  .overlay-container,
+  .overlay-background,
+  .backdrop,
+  .toast,
+  .tooltip,
+  .dropdown-menu,
+  [role="dialog"],
+  [role="alertdialog"],
+  [data-modal],
+  [data-popup],
+  [data-dialog],
+  [class*="modal"],
+  [class*="popup"],
+  [class*="dialog"],
+  [class*="overlay"] {
+      background: rgba(0,0,0,0.4) !important;
+      backdrop-filter: blur(50px) !important;
+      -webkit-backdrop-filter: blur(50px) !important;
+      color: rgba(255,255,255,0.95) !important;
+      border-radius: 10px !important;
+  }
+
+  /* Make sure modal inner elements stay readable but transparent */
+  .modal *,
+  .popup *,
+  .dialog *,
+  .overlay * {
+      background: transparent !important;
+      color: rgba(255,255,255,0.95) !important;
+  }
+
+  /* Fix z-index issues on sites where blur causes stacking bugs */
+  .modal,
+  .popup,
+  .dialog,
+  .overlay {
+      position: relative !important;
+      z-index: 999999 !important;
+  }
 }

@@ -5,9 +5,9 @@
 
   # hyprpaper configuration file
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /home/pranesh/Pictures/Wallpapers/fish
+    preload = /home/pranesh/Pictures/Wallpapers/Fractal Maze/60.jpg
     
-    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/fish
+    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/Fractal Maze/60.jpg
     
     splash = false
     ipc = on

@@ -274,3 +274,4 @@ user_pref("zen.view.grey-out-inactive-windows", false);
 user_pref("zen.welcome-screen.seen", true);
 user_pref("zen.widget.linux.transparency", true);
 user_pref("zen.workspaces.active", "{859c5172-04b2-4432-827f-4cfb3e6cd6a0}");
+user_pref("widget.wayland.opaque-region.enabled", false);
