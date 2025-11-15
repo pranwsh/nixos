@@ -1,52 +1,127 @@
-/* Wrap ALL your styles in this @-moz-document rule */
-@-moz-document url(chrome://browser/content/browser.xhtml) {
-/* --- Core Elements --- */
-* {
-    background-color: transparent !important;
-    background-image: none !important;
-    background: transparent !important;
+/* Enhanced readability for popups and overlays */
+
+/* Common popup elements */
+[role="menu"],
+[role="listbox"],
+[role="combobox"],
+[role="dialog"],
+.popup,
+.popover,
+.dropdown,
+.dropdown-menu,
+.menu,
+.context-menu,
+.select-menu {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(4px);
 }
-/* ... rest of your existing browser chrome styles ... */
-} /* End of @-moz-document */
-/* --- Styles for ALL web pages --- */
-@-moz-document regexp("^https?://.*") {
-/* --- Core Elements --- */
-* {
-    background-color: transparent !important;
-    background-image: none !important;
-    background: transparent !important;
+
+/* Sidebar and drawer menus */
+[role="navigation"].sidebar,
+.sidebar-menu,
+.drawer,
+.side-panel,
+.nav-drawer,
+aside[class*="menu"],
+aside[class*="sidebar"] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
 }
-html,
-body {
-    background: transparent !important;
-    background-color: transparent !important;
+
+/* Tooltips */
+[role="tooltip"],
+.tooltip,
+.tooltip-content,
+[data-tooltip] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(4px);
 }
-/* --- Force transparency on common patterns --- */
-div, span, section, article, aside, nav, header, footer, main,
-ul, ol, li, p, h1, h2, h3, h4, h5, h6,
-table, tr, td, th, tbody, thead, tfoot,
-form, input, button, select, textarea,
-[class], [id] {
-    background-color: transparent !important;
-    background-image: none !important;
-    background: transparent !important;
+
+/* Autocomplete and suggestions */
+[role="listbox"],
+.autocomplete,
+.suggestions,
+.search-results,
+.typeahead {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
 }
-/* --- Override inline styles --- */
-*[style*="background"] {
-    background-color: transparent !important;
-    background-image: none !important;
-    background: transparent !important;
+
+/* Modal dialogs */
+[role="dialog"],
+.modal-content,
+.dialog,
+.lightbox-content {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
 }
-/* --- Make Dark Text Light --- */
-*, *::before, *::after {
-    color: rgba(255, 255, 255, 0.9) !important;
+
+/* Ensure text within popups is readable */
+[role="menu"] *,
+[role="listbox"] *,
+[role="dialog"] *,
+.popup *,
+.dropdown *,
+.sidebar-menu *,
+.tooltip * {
+  color: inherit !important;
 }
-h1, h2, h3, h4, h5, h6,
-strong, b {
-    color: rgb(255, 255, 255) !important;
+
+/* Links within popups */
+[role="menu"] a,
+[role="listbox"] a,
+.popup a,
+.dropdown a,
+.sidebar-menu a {
+  color: #66b3ff !important;
 }
-a {
-    color: rgba(255, 255, 255, 0.85) !important;
+
+[role="menu"] a:hover,
+[role="listbox"] a:hover,
+.popup a:hover,
+.dropdown a:hover,
+.sidebar-menu a:hover {
+  color: #99ccff !important;
+}
+
+/* Selected/active items in popups */
+[role="menuitem"][aria-selected="true"],
+[role="option"][aria-selected="true"],
+.selected,
+.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Hover states for menu items */
+[role="menuitem"]:hover,
+[role="option"]:hover,
+.menu-item:hover,
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Borders for better definition */
+[role="menu"],
+[role="listbox"],
+.popup,
+.dropdown,
+.sidebar-menu {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure proper z-index layering */
+[role="menu"],
+[role="listbox"],
+[role="dialog"],
+.popup,
+.dropdown,
+.sidebar-menu,
+.tooltip {
+  z-index: 9999 !important;
+  position: relative;
 }
 /* --- Extension Popup Override (Vimium) --- */
 div > .vimiumHintMarker,
@@ -61,70 +136,4 @@ div > .vimiumHintMarker span {
     color: plum !important;
     font-weight: bold !important;
     font-size: 12px !important;
-}
-/* --- Remove Shadows & Borders --- */
-*, *::before, *::after {
-    box-shadow: none !important;
-    text-shadow: none !important;
-}
-} /* End of web pages @-moz-document */
-
-
-@-moz-document regexp("^https?://.*") {
-
-  /* --- Website Popups / Modals / Overlays --- */
-  /* High-certainty modal patterns */
-  .modal,
-  .modal-backdrop,
-  .modal-dialog,
-  .modal-content,
-  .modal-overlay,
-  .modal-container,
-  .popup,
-  .popup-content,
-  .dialog,
-  .dialog-container,
-  .dialog-backdrop,
-  .lightbox,
-  .lightbox-overlay,
-  .overlay,
-  .overlay-container,
-  .overlay-background,
-  .backdrop,
-  .toast,
-  .tooltip,
-  .dropdown-menu,
-  [role="dialog"],
-  [role="alertdialog"],
-  [data-modal],
-  [data-popup],
-  [data-dialog],
-  [class*="modal"],
-  [class*="popup"],
-  [class*="dialog"],
-  [class*="overlay"] {
-      background: rgba(0,0,0,0.4) !important;
-      backdrop-filter: blur(50px) !important;
-      -webkit-backdrop-filter: blur(50px) !important;
-      color: rgba(255,255,255,0.95) !important;
-      border-radius: 10px !important;
-  }
-
-  /* Make sure modal inner elements stay readable but transparent */
-  .modal *,
-  .popup *,
-  .dialog *,
-  .overlay * {
-      background: transparent !important;
-      color: rgba(255,255,255,0.95) !important;
-  }
-
-  /* Fix z-index issues on sites where blur causes stacking bugs */
-  .modal,
-  .popup,
-  .dialog,
-  .overlay {
-      position: relative !important;
-      z-index: 999999 !important;
-  }
 }

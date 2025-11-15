@@ -11,7 +11,7 @@
       "$mainMod, Q, exec, $terminal"
       "$mainMod, W, exec, $browser"
       "$mainMod, E, exec, spotify"
-      "$mainMod, R, exec, $menu"
+      "$mainMod, R, exec, chromium"
       
       # Window management
       "$mainMod, C, killactive,"
