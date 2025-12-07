@@ -11,8 +11,6 @@ in
 
   programs.kitty = {
     enable = true;
-    shellIntegration.enableBashIntegration = true;
-
 
     settings = {
       enable_audio_bell = "no";

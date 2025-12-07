@@ -53,7 +53,7 @@ in
     ./hyprland
     ./cursor.nix
     ./kitty.nix
-    ./bash.nix
+    ./fish.nix
     ./zathura.nix
     ./latex.nix
     ./zen/zen.nix
