@@ -18,25 +18,25 @@
       enabledSnippets = with spicePkgs.snippets; [
       ];
 
-      colorScheme = "custom";
-      customColorScheme = {
-        text = "ffffff";
-        subtext = "b3b3b3";
-        sidebar-text = "ffffff";
-        main = "00000066";
-        sidebar = "00000066";
-        player = "00000066";
-        card = "00000066";
-        shadow = "00000066";
-        selected-row = "00000066";
-        button = "00000066";
-        button-active = "00000066";
-        button-disabled = "00000066";
-        tab-active = "00000066";
-        notification = "00000066";
-        notification-error = "00000066";
-        misc = "00000066";
-      };
+      # colorScheme = "custom";
+      # customColorScheme = {
+      #   text = "ffffff";
+      #   subtext = "b3b3b3";
+      #   sidebar-text = "ffffff";
+      #   main = "00000066";
+      #   sidebar = "00000066";
+      #   player = "00000066";
+      #   card = "00000066";
+      #   shadow = "00000066";
+      #   selected-row = "00000066";
+      #   button = "00000066";
+      #   button-active = "00000066";
+      #   button-disabled = "00000066";
+      #   tab-active = "00000066";
+      #   notification = "00000066";
+      #   notification-error = "00000066";
+      #   misc = "00000066";
+      # };
     };
 }
 

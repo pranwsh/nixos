@@ -17,7 +17,7 @@
       "col.inactive_border" = "rgba(59595900)";
       resize_on_border = true;
       allow_tearing = false;
-      layout = "scrolling";
+      layout = "dwindle";
     };
 
     decoration = {
@@ -56,9 +56,10 @@
         "windows,1,6,overshot,slide"
         "border,1,10,default"
         "fade,1,10,default"
-        "workspaces,1,7,overshot,slidevert"
+        "workspaces,1,7,overshot,slide"
       ];
     };
+
 
     input = {
       kb_layout = "us";

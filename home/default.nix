@@ -18,7 +18,6 @@ in
     ./nvim/nvim.nix
     ./prismlauncher.nix
     ./flatpak.nix
-    ./waybar/default.nix
   ];
   
   home.username = "pranesh";
@@ -33,7 +32,6 @@ in
     libreoffice
     qemu
     chromium
-    waybar
   ];
   
   home.stateVersion = "24.11";

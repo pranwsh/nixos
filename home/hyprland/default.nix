@@ -4,9 +4,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  hyprscrollingPlugin = inputs.hyprland-plugins.packages.x86_64-linux.hyprscrolling;
-in {
+}: {
   imports = [
     ./settings.nix
     ./keybindings.nix
@@ -14,7 +12,7 @@ in {
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
-    ./hyprscrolling.nix
+    ./hyprsnow.nix
   ];
   
   wayland.windowManager.hyprland = {
@@ -23,7 +21,6 @@ in {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     
     plugins = [
-      hyprscrollingPlugin
     ];
   };
   
