@@ -6,11 +6,13 @@ in
 {
   home.packages = with pkgs; [
     kitty
+    fish
   ];
 
   programs.kitty = {
     enable = true;
     shellIntegration.enableBashIntegration = true;
+
 
     settings = {
       enable_audio_bell = "no";

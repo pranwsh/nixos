@@ -16,6 +16,7 @@
     ../modules/docker.nix
     ../modules/boot.nix
     ../modules/kvm.nix
+    ../modules/fish.nix
     ../users/users.nix
   ];
 

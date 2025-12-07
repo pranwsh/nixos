@@ -4,7 +4,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: 
+
+{
   imports = [
     ./settings.nix
     ./keybindings.nix
@@ -12,7 +14,6 @@
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
-    ./hyprsnow.nix
   ];
   
   wayland.windowManager.hyprland = {
