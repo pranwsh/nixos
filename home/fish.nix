@@ -25,6 +25,11 @@
 
 
 functions.fish_mode_prompt = ''
+  echo ""
+'';
+
+functions.fish_prompt = ''
+
 set -l mode_char
 switch $fish_bind_mode
 case default
@@ -38,16 +43,14 @@ set mode_char "V"
 end
 
 set_color red
-printf ""
+printf '%s\n' ""
+printf " "
 set_color -b red black
 printf "$mode_char"
 set_color normal
 set_color red
 printf ''
 set_color normal
-'';
-
-    functions.fish_prompt = ''
       set_color red
       printf ' '
 

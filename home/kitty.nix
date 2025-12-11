@@ -28,9 +28,9 @@ in
     cursor                #f8f8f2
     cursor_text_color     #282a36
     color0                #282a36
-    color1                #af85f5
+    color1                #f1fa8c
     color2                #50fa7b
-    color3                #f1fa8c
+    color3                #af85f5
     color4                #bd93f9
     color5                #ff79c6
     color6                #8be9fd
