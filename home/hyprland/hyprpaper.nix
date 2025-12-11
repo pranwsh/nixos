@@ -5,9 +5,9 @@
 
   # hyprpaper configuration file
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /home/pranesh/Pictures/Wallpapers/winter/flake
+    preload = /home/pranesh/Pictures/Wallpapers/new/apple
     
-    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/winter/flake
+    wallpaper = eDP-1,/home/pranesh/Pictures/Wallpapers/new/apple
     
     splash = false
     ipc = on

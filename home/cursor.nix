@@ -12,7 +12,9 @@
 
   gtk = {
     enable = true;
-    cursorTheme.name = "Bibata-Modern-Classic";
-    cursorTheme.size = 18;
+    cursorTheme = {
+      name = "Bibata-Modern-Classic";
+      size = 18;
+    };
   };
 }

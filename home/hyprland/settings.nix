@@ -10,11 +10,11 @@
     ];
 
     general = {
-      gaps_in = 7;
-      gaps_out = 14;
+      gaps_in = 8;
+      gaps_out = 16;
       border_size = 0;
-      "col.active_border" = "rgba(00000028)";
-      "col.inactive_border" = "rgba(59595900)";
+      "col.active_border" = "rgba(ff800044)";
+      "col.inactive_border" = "rgba(ffcd9c22)";
       resize_on_border = true;
       allow_tearing = false;
       layout = "dwindle";

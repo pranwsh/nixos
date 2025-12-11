@@ -1,29 +1,68 @@
+{ config, pkgs, ... }:
+
 {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
   programs.fish = {
     enable = true;
 
-    interactiveShellInit = ''
-      # vi mode
-      fish_vi_key_bindings
-
-      # editor
-      set -x EDITOR nvim
-      set -x VISUAL nvim
-
-      # prompt (roughly mirrors your Bash PS1)
-      function fish_prompt
-        # newline + leading space
-        printf '\n '
-
-        # red segment with user (\u)
-        printf '\033[0;1;31m\033[30;41m%s\033[0;1;31m ' (whoami)
-
-        # blue segment with cwd (\W)
-        printf '\033[0;1;34m\033[30;44m%s\033[0;1;34m' (prompt_pwd)
-
-        # trailing magenta color
-        printf '\033[0;1;35m '
-      end
+    shellInit = ''
+      # Set cursor variables for Fish
+      set -gx XCURSOR_THEME "Bibata-Modern-Classic"
+      set -gx XCURSOR_SIZE "18"
     '';
+
+    interactiveShellInit = ''
+      set -g fish_greeting ""
+      fish_vi_key_bindings
+      # Force override in case system sets these
+      set -gx EDITOR nvim
+      set -gx VISUAL nvim
+    '';
+
+
+functions.fish_mode_prompt = ''
+set -l mode_char
+switch $fish_bind_mode
+case default
+set mode_char "N"
+case insert
+set mode_char "I"
+case replace_one
+set mode_char "R"
+case visual
+set mode_char "V"
+end
+
+set_color red
+printf ""
+set_color -b red black
+printf "$mode_char"
+set_color normal
+set_color red
+printf ''
+set_color normal
+'';
+
+    functions.fish_prompt = ''
+      set_color red
+      printf ' '
+
+      set_color -b red black
+      printf '%s' (prompt_pwd)
+
+      set_color normal
+      set_color red
+      printf ' '
+
+      set_color normal
+      printf '💛 \n'
+      '';
+
   };
 }
+
+
