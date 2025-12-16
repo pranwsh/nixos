@@ -72,21 +72,35 @@
 
       touchpad = {
         natural_scroll = false;
+        disable_while_typing=false;
       };
     };
 
-    # gestures = {
-    #   workspace_swipe = false;
-    # };
+    gestures = {
+      gesture = "3, horizontal, workspace";
+      workspace_swipe_min_speed_to_force = 5;
+      workspace_swipe_invert = true;
+    };
 
-    device = {
+    device = [
+    {
       name = "epic-mouse-v1";
       sensitivity = -0.5;
-    };
+    }
+    {
+      name = "kingston-hyperx-pulsefire-core";
+      sensitivity = -0.6;
+    }
+    ];
 
     misc = {
       force_default_wallpaper = -1;
       disable_hyprland_logo = true;
+    };
+
+    ecosystem = {
+      no_update_news = true;
+      no_donation_nag = true;
     };
   };
 }
