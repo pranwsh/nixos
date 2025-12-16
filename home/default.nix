@@ -19,6 +19,7 @@ in
     ./nvim/nvim.nix
     ./prismlauncher.nix
     ./flatpak.nix
+    ./wofi.nix
   ];
   
   home.username = "pranesh";
@@ -35,6 +36,7 @@ in
     pkgs.chromium
     pkgs.bluetui
     pkgs.impala
+    pkgs.lmms
   ];
   
   home.stateVersion = "24.11";
