@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  wallpaper = /home/pranesh/Pictures/Wallpapers/newer/a_planet_in_the_sky.jpg;
+  wallpaper = ./wallpapers/a_planet_in_the_sky.jpg;
 
   walJson = pkgs.runCommand "wal-colors-json" { buildInputs = [ pkgs.pywal ]; } ''
     export HOME="$TMPDIR"
