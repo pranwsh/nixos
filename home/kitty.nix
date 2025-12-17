@@ -1,7 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, walNix, ... }:
 
 let
   theme = import ./style.nix;
+  c = (import "${walNix}/colors.nix").colorscheme;
+
 in 
 {
   home.packages = with pkgs; [
@@ -20,29 +22,30 @@ in
     };
 
     extraConfig = ''
+      foreground ${c.foreground}
+      background #000000
+      cursor     ${c.cursor}
 
-    foreground            #f8f8f2
-    selection_foreground  #f8f8f2
-    selection_background  #44475a
-    url_color             #8be9fd
-    cursor                #f8f8f2
-    cursor_text_color     #282a36
-    color0                #282a36
-    color1                #f1fa8c
-    color2                #50fa7b
-    color3                #af85f5
-    color4                #bd93f9
-    color5                #ff79c6
-    color6                #8be9fd
-    color7                #f8f8f2
-    color8                #6272a4
-    color9                #ff5555
-    color10               #50fa7b
-    color11               #f1fa8c
-    color12               #bd93f9
-    color13               #ff79c6
-    color14               #8be9fd
-    color15               #ff79c6
+      selection_foreground ${c.foreground}
+      selection_background ${c.color8}
+      url_color ${c.color6}
+
+      color0  ${c.color0}
+      color1  ${c.color1}
+      color2  ${c.color2}
+      color3  ${c.color3}
+      color4  ${c.color4}
+      color5  ${c.color5}
+      color6  ${c.color6}
+      color7  ${c.color7}
+      color8  ${c.color8}
+      color9  ${c.color9}
+      color10 ${c.color10}
+      color11 ${c.color11}
+      color12 ${c.color12}
+      color13 ${c.color13}
+      color14 ${c.color14}
+      color15 ${c.color15}
     '';
   };
 }

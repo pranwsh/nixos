@@ -42,27 +42,27 @@ case visual
 set mode_char "V"
 end
 
-set_color red
+set_color blue
 printf '%s\n' ""
 printf " "
-set_color -b red black
+set_color -b blue white
 printf "$mode_char"
 set_color normal
-set_color red
+set_color blue
 printf ''
 set_color normal
-      set_color red
+      set_color blue
       printf ' '
 
-      set_color -b red black
+      set_color -b blue white
       printf '%s' (prompt_pwd)
 
       set_color normal
-      set_color red
+      set_color blue
       printf ' '
 
       set_color normal
-      printf '💛 \n'
+      printf '♥ \n'
       '';
 
   };
