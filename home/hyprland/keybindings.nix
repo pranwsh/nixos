@@ -35,7 +35,8 @@
       "$mainMod, Q, exec, $terminal"
       "$mainMod, W, exec, $browser"
       "$mainMod, E, exec, spotify"
-      "$mainMod, R, exec, chromium"
+      "$mainMod, R, exec, $menu"
+      "$mainMod, A, exec, chromium"
       
       # Window management
       "$mainMod, C, killactive,"
