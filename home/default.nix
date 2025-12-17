@@ -20,6 +20,7 @@ in
     ./prismlauncher.nix
     ./flatpak.nix
     ./wofi.nix
+    ./pywal.nix
   ];
   
   home.username = "pranesh";

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  style = import ./style.nix;
+  theme = import ./style.nix;
 in 
 {
   home.packages = with pkgs; [
@@ -14,7 +14,7 @@ in
 
     settings = {
       enable_audio_bell = "no";
-      background_opacity = lib.mkForce "${style.opacity.bg}";
+      background_opacity = lib.mkForce (toString theme.opacity.bg);
       confirm_os_window_close = "0";
       cursor_trail = "1";
     };
