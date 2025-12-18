@@ -1,7 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, walNix, ... }:
 
 let
   theme = import ./style.nix;
+  c = (import "${walNix}/colors.nix").colorscheme;
 in {
   programs.wofi = {
     enable = true;
@@ -39,7 +40,7 @@ in {
 
       #input {
         background-color: rgba(0,0,0,0);
-        color: ${theme.rgba.foreground};
+        color: ${c.color15};
         border-radius: 10px;
         padding: 6px 10px;
         margin-bottom: 8px;
@@ -61,7 +62,7 @@ in {
       }
 
       #text {
-        color: ${theme.rgba.foreground};
+        color: ${c.color15};
       }
     '';
   };

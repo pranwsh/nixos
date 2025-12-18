@@ -5,9 +5,9 @@
 
   # hyprpaper configuration file
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /etc/nixos/home/wallpapers/a_planet_in_space_with_clouds.jpg
+    preload = /etc/nixos/home/wallpapers/foot.png
     
-    wallpaper = eDP-1,/etc/nixos/home/wallpapers/a_planet_in_space_with_clouds.jpg
+    wallpaper = eDP-1,/etc/nixos/home/wallpapers/foot.png
     
     splash = false
     ipc = on
