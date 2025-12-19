@@ -11,6 +11,7 @@ in {
       show = "drun";
       prompt = "";
       no_actions = true;
+      single_instance = true;
 
       width = 420;
       height = 260;
