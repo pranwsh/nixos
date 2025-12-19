@@ -8,15 +8,15 @@ let
 in
 {
   imports = [
-    ./hyprland
+    ./hyprland/default.nix
     ./cursor.nix
     ./kitty.nix
     ./fish.nix
     ./zathura.nix
     ./latex.nix
-    ./zen/zen.nix
-    ./spotify/spotify.nix
-    ./nvim/nvim.nix
+    ./zen/default.nix
+    ./spotify/default.nix
+    ./nvim/default.nix
     ./prismlauncher.nix
     ./flatpak.nix
     ./wofi.nix
