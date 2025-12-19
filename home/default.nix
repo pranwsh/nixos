@@ -1,11 +1,5 @@
 { config, pkgs, inputs, ... }:
 
-let
-  pythonEnv = pkgs.python3.withPackages (ps: with ps; [
-    pynvim
-    pip
-  ]);
-in
 {
   imports = [
     ./hyprland/default.nix
@@ -21,13 +15,13 @@ in
     ./flatpak.nix
     ./wofi.nix
     ./pywal.nix
+    ./python.nix
   ];
-  
+
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
-  
+
   home.packages = [
-    pythonEnv
     pkgs.tree-sitter
     pkgs.wineWowPackages.stable
     pkgs.gemini-cli
@@ -39,7 +33,7 @@ in
     pkgs.impala
     pkgs.lmms
   ];
-  
+
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 }
