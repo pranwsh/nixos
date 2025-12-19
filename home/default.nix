@@ -7,7 +7,7 @@
     ./kitty.nix
     ./fish.nix
     ./zathura.nix
-    ./latex.nix
+    # ./latex.nix
     ./zen/default.nix
     ./spotify/default.nix
     ./nvim/default.nix
