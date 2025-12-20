@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, wallpaperPath, ... }:
 
 let
-  wallpaper = ./wallpapers/c/r;
+  wallpaper = wallpaperPath;
 
   walJson = pkgs.runCommand "wal-colors-json" { buildInputs = [ pkgs.pywal ]; } ''
     export HOME="$TMPDIR"
@@ -144,7 +144,7 @@ in
     pywal
   ];
 
-  home.file.".config/wal/colors.nix".source = "${walNix}/colors.nix";
+  # home.file.".config/wal/colors.nix".source = "${walNix}/colors.nix";
 
   _module.args.walNix = walNix;
 }

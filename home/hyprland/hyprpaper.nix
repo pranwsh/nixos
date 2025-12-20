@@ -1,21 +1,19 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    hyprpaper
-  ];
+{ config, pkgs, wallpaperPath, ... }:
 
-  # hyprpaper configuration file
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = /etc/nixos/home/wallpapers/c/r
-    
-    wallpaper = eDP-1,/etc/nixos/home/wallpapers/c/r
-    
-    splash = false
-    ipc = on
-  '';
+let
+  wallpaperFile = wallpaperPath;
 
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [ 
-      "${pkgs.hyprpaper}/bin/hyprpaper"
-    ];
+  wallpaper = builtins.path { path = wallpaperFile; name = "wallpaper"; };
+in
+{
+  services.hyprpaper = {
+    enable = true;
+
+    settings = {
+      preload = [ "${wallpaper}" ];
+      wallpaper = [ "eDP-1,${wallpaper}" ];
+      splash = false;
+      ipc = "on";
+    };
   };
 }

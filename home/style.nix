@@ -11,6 +11,8 @@ let
     accent = 0.4;
   };
 
+  wallpaperPath = "/etc/nixos/home/wallpapers/cartoon/ghost_rider_12.jpg";
+
 in
 {
   inherit base_colors opacity;
@@ -20,4 +22,6 @@ in
     foreground = "rgba(${toString base_colors.fg.r},${toString base_colors.fg.g},${toString base_colors.fg.b},${toString opacity.fg})";
     accent = "rgba(${toString base_colors.accent.r},${toString base_colors.accent.g},${toString base_colors.accent.b},${toString opacity.accent})";
   };
+
+  _module.args.WallpaperPath = wallpaperPath;
 }
