@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
-    ./theme.nix
+    ./style.nix
     ./hyprland/default.nix
     ./cursor.nix
     ./kitty.nix
