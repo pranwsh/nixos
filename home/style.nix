@@ -1,27 +1,30 @@
+{ config, lib, ... }:
+
 let
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };
     fg = { r = 205; g = 214; b = 244; };
     accent = { r = 0; g = 0; b = 0; };
   };
-
   opacity = {
     bg = 0.4;
     fg = 1.0;
     accent = 0.4;
   };
-
   wallpaperPath = "/etc/nixos/home/wallpapers/cartoon/ghost_rider_12.jpg";
-
 in
 {
-  inherit base_colors opacity;
-
-  rgba = {
-    background = "rgba(${toString base_colors.bg.r},${toString base_colors.bg.g},${toString base_colors.bg.b},${toString opacity.bg})";
-    foreground = "rgba(${toString base_colors.fg.r},${toString base_colors.fg.g},${toString base_colors.fg.b},${toString opacity.fg})";
-    accent = "rgba(${toString base_colors.accent.r},${toString base_colors.accent.g},${toString base_colors.accent.b},${toString opacity.accent})";
+  options.myTheme = lib.mkOption {
+    type = lib.types.attrs;
+    default = {};
   };
 
-  _module.args.WallpaperPath = wallpaperPath;
+  config.myTheme = {
+    inherit base_colors opacity wallpaperPath;
+    rgba = {
+      background = "rgba(${toString base_colors.bg.r},${toString base_colors.bg.g},${toString base_colors.bg.b},${toString opacity.bg})";
+      foreground = "rgba(${toString base_colors.fg.r},${toString base_colors.fg.g},${toString base_colors.fg.b},${toString opacity.fg})";
+      accent = "rgba(${toString base_colors.accent.r},${toString base_colors.accent.g},${toString base_colors.accent.b},${toString opacity.accent})";
+    };
+  };
 }

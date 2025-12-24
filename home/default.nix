@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
-
 {
   imports = [
+    ./theme.nix
     ./hyprland/default.nix
     ./cursor.nix
     ./kitty.nix
@@ -17,10 +17,8 @@
     ./pywal.nix
     ./python.nix
   ];
-
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
-
   home.packages = [
     pkgs.tree-sitter
     pkgs.wineWowPackages.stable
@@ -33,7 +31,6 @@
     pkgs.impala
     pkgs.lmms
   ];
-
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 }
