@@ -1,7 +1,7 @@
 { config, pkgs, lib, walNix, ... }:
 
 let
-  theme = import ./style.nix;
+  theme = config.myTheme;
   c = (import "${walNix}/colors.nix").colorscheme;
 
 in 

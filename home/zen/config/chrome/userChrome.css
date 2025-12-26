@@ -1,4 +1,56 @@
-/* Nebula */
-@import "Nebula/Nebula.css";
+/* ====== ABSOLUTE NUKE: kill ANY chrome tint/overlay ====== */
 
-/* Add additional CSS below */
+/* Make every chrome element transparent */
+#main-window, #main-window * {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Kill pseudo-element overlays everywhere */
+#main-window *::before,
+#main-window *::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  opacity: 0 !important;   /* important: many tints are just ::before at 0.4 */
+}
+
+/* Some themes apply dimming by opacity on a wrapper */
+#main-window, #main-window * {
+  opacity: 1 !important;
+}
+
+
+/* ===============================
+   SOLID BLACK UI: menus + sidebar + tab bar
+   =============================== */
+
+/* ---- Global variables that a lot of popups/menus respect ---- */
+:root {
+  --arrowpanel-background: #000 !important;
+  --arrowpanel-color: #fff !important;
+  --arrowpanel-border-color: #000 !important;
+
+  --panel-background: #000 !important;
+  --panel-color: #fff !important;
+  --panel-border-color: #000 !important;
+
+  --menu-background-color: #000 !important;
+  --menu-color: #fff !important;
+  --menu-border-color: #000 !important;
+
+  --toolbar-bgcolor: #000 !important;
+  --toolbar-color: #fff !important;
+}
+

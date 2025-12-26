@@ -1,6 +1,8 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+  wallpaperPath = ./wallpapers/space;
+  
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };
     fg = { r = 205; g = 214; b = 244; };
@@ -11,7 +13,6 @@ let
     fg = 1.0;
     accent = 0.4;
   };
-  wallpaperPath = "/etc/nixos/home/wallpapers/cartoon/ghost_rider_12.jpg";
 in
 {
   options.myTheme = lib.mkOption {
