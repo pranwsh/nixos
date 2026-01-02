@@ -10,7 +10,6 @@
     enable = true;
 
     shellInit = ''
-      # Set cursor variables for Fish
       set -gx XCURSOR_THEME "Bibata-Modern-Classic"
       set -gx XCURSOR_SIZE "18"
     '';
@@ -18,7 +17,6 @@
     interactiveShellInit = ''
       set -g fish_greeting ""
       fish_vi_key_bindings
-      # Force override in case system sets these
       set -gx EDITOR nvim
       set -gx VISUAL nvim
     '';

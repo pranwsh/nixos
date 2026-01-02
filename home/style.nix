@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  wallpaperPath = ./wallpapers/space;
+  wallpaperPath = ./wallpapers/Unsplash/blue;
   
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };
