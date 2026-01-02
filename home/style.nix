@@ -9,7 +9,7 @@ let
     accent = { r = 0; g = 0; b = 0; };
   };
   opacity = {
-    bg = 0.4;
+    bg = 0.6;
     fg = 1.0;
     accent = 0.4;
   };

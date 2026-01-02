@@ -1,7 +1,8 @@
-{ config, pkgs, inputs, walNix, ... }:
+{ config, pkgs, inputs, ... }:
 let
   profileName = "ro4rmu9s.Default Profile";
-  c = (import "${walNix}/colors.nix").colorscheme;
+  theme = config.myTheme;
+  
   zenProfilePath = "${config.home.homeDirectory}/.zen/${profileName}";
 in
 {
@@ -18,7 +19,11 @@ in
     source = ./config/user.js;
   };
   
-  home.file.".zen/${profileName}/chrome/nix-colors.json" = {
-    text = builtins.toJSON c;
+  home.file.".zen/${profileName}/chrome/nix-colors.css" = {
+    text = ''
+      :root {
+        --nix-background: ${theme.rgba.background};
+      }
+    '';
   };
 }

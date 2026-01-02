@@ -1,4 +1,5 @@
 /* Nebula */
+@import url("nix-colors.css");
 @import "Nebula/Nebula.css";
 
 
@@ -24,5 +25,5 @@
 }
 
 #zen-main-app-wrapper {
-  background: rgba(0, 0, 0, .4) !important;
+  background: var(--nix-background) !important;
 }
