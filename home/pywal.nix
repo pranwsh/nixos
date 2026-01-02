@@ -51,7 +51,7 @@ def clamp01(x): return max(0.0, min(1.0, x))
 
 # thresholds: tune these if you want
 S_MIN = 0.28   # below this is "too grey"
-V_MIN = 0.34   # below this is "too dark"
+V_MIN = 0.64   # below this is "too dark"
 # how aggressively we fix
 SAT_BOOST = 0.35
 VAL_BOOST = 0.22
