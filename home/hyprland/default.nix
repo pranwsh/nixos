@@ -14,6 +14,7 @@
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
+    ./hypridle.nix
   ];
   
   wayland.windowManager.hyprland = {
