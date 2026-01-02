@@ -1,14 +1,14 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, walNix, ... }:
 let
   profileName = "ro4rmu9s.Default Profile";
+  c = (import "${walNix}/colors.nix").colorscheme;
+  zenProfilePath = "${config.home.homeDirectory}/.zen/${profileName}";
 in
 {
-  # Install Zen browser package
   home.packages = [
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
-
-  # Configure Zen browser profile with custom chrome and user.js
+  
   home.file.".zen/${profileName}/chrome" = {
     source = ./config/chrome;
     recursive = true;
@@ -17,6 +17,8 @@ in
   home.file.".zen/${profileName}/user.js" = {
     source = ./config/user.js;
   };
+  
+  home.file.".zen/${profileName}/chrome/nix-colors.json" = {
+    text = builtins.toJSON c;
+  };
 }
-
-

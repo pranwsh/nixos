@@ -1,4 +1,28 @@
 /* Nebula */
 @import "Nebula/Nebula.css";
 
-/* Add additional CSS below */
+
+
+/* Target everything EXCEPT sidebar, tabs, and menus */
+#main-window :not(#tabbrowser-tabs):not(#tabbrowser-tabs *):not(#sidebar-box):not(#sidebar-box *):not(menupopup):not(menupopup *):not(.panel-arrowcontent):not(.panel-arrowcontent *) {
+  backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Kill pseudo-element overlays everywhere EXCEPT sidebar, tabs, and menus */
+#main-window :not(#tabbrowser-tabs):not(#tabbrowser-tabs *):not(#sidebar-box):not(#sidebar-box *):not(menupopup):not(menupopup *)::before,
+#main-window :not(#tabbrowser-tabs):not(#tabbrowser-tabs *):not(#sidebar-box):not(#sidebar-box *):not(menupopup):not(menupopup *)::after {
+  backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  opacity: 0 !important;
+}
+
+/* Opacity rule with exclusions */
+#main-window :not(#tabbrowser-tabs):not(#tabbrowser-tabs *):not(#sidebar-box):not(#sidebar-box *):not(menupopup):not(menupopup *):not(.panel-arrowcontent):not(.panel-arrowcontent *) {
+  opacity: 1 !important;
+}
+
+#zen-main-app-wrapper {
+  background: rgba(0, 0, 0, .4) !important;
+}
