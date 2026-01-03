@@ -15,12 +15,12 @@ let
   };
 in
 {
-  options.myTheme = lib.mkOption {
+  options.style = lib.mkOption {
     type = lib.types.attrs;
     default = {};
   };
 
-  config.myTheme = {
+  config.style = {
     inherit base_colors opacity wallpaperPath;
     rgba = {
       background = "rgba(${toString base_colors.bg.r},${toString base_colors.bg.g},${toString base_colors.bg.b},${toString opacity.bg})";

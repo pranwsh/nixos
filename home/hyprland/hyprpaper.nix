@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  wallpaperFile = config.myTheme.wallpaperPath;
+  wallpaperFile = config.style.wallpaperPath;
 
   wallpaper = builtins.path { path = wallpaperFile; name = "wallpaper"; };
 in

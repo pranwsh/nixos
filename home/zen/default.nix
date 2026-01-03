@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 let
   profileName = "ro4rmu9s.Default Profile";
-  theme = config.myTheme;
+  theme = config.style;
   
   zenProfilePath = "${config.home.homeDirectory}/.zen/${profileName}";
 in

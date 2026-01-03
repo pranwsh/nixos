@@ -39,24 +39,24 @@
   xdg.configFile."hypr/hypridle.conf".text = ''
     general {
       lock_cmd = ${pkgs.hyprlock}/bin/hyprlock
-      before_sleep_cmd = ${pkgs.hyprlock}/bin/hyprlock
-      after_sleep_cmd = ${pkgs.hyprland}/bin/hyprctl dispatch dpms on
+        before_sleep_cmd = ${pkgs.hyprlock}/bin/hyprlock
+        after_sleep_cmd = ${pkgs.hyprland}/bin/hyprctl dispatch dpms on
+    }
+
+    listener {
+      timeout = 120
+        on-timeout = ${pkgs.hyprlock}/bin/hyprlock
     }
 
     listener {
       timeout = 300
-      on-timeout = ${pkgs.hyprlock}/bin/hyprlock
+        on-timeout = ${pkgs.hyprland}/bin/hyprctl dispatch dpms off
+        on-resume = ${pkgs.hyprland}/bin/hyprctl dispatch dpms on
     }
 
     listener {
-      timeout = 120
-      on-timeout = ${pkgs.hyprland}/bin/hyprctl dispatch dpms off
-      on-resume = ${pkgs.hyprland}/bin/hyprctl dispatch dpms on
-    }
-
-    listener {
-      timeout = 120
-      on-timeout = ${pkgs.systemd}/bin/systemctl suspend
+      timeout = 600
+        on-timeout = ${pkgs.systemd}/bin/systemctl suspend
     }
   '';
 

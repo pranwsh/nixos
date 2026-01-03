@@ -1,6 +1,6 @@
 { config, pkgs, lib, walNix, ... }:
 let
-  theme = config.myTheme;
+  theme = config.style;
   c = (import "${walNix}/colors.nix").colorscheme;
 in {
   programs.wofi = {
