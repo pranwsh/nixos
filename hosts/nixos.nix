@@ -17,6 +17,7 @@
     ../modules/boot.nix
     ../modules/kvm.nix
     ../modules/fish.nix
+    ../modules/swap.nix
     ../users/users.nix
   ];
 
