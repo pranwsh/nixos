@@ -16,6 +16,7 @@
     ./wofi.nix
     ./pywal.nix
     ./python.nix
+    ./java.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
