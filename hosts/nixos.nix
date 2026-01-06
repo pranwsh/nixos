@@ -5,7 +5,6 @@
   programs.hyprland.enable = true;
 
   imports = [
-    # ../modules/greeter.nix
     ../modules/networking.nix
     ../modules/sound.nix
     ../modules/pam.nix
@@ -17,7 +16,6 @@
     ../modules/boot.nix
     ../modules/kvm.nix
     ../modules/fish.nix
-    ../modules/swap.nix
     ../users/users.nix
   ];
 
