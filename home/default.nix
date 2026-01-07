@@ -17,7 +17,7 @@
     ./pywal.nix
     ./python.nix
     ./java.nix
-    ./aerc.nix
+    ./himalaya.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
