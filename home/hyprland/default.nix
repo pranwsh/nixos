@@ -14,15 +14,13 @@
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
+    ./hyprscrolling.nix
+    ./binds/
   ];
   
   wayland.windowManager.hyprland = {
     enable = true;
-    
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    
-    plugins = [
-    ];
   };
   
   home.packages = with pkgs; [

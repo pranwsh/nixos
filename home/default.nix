@@ -7,7 +7,7 @@
     ./kitty.nix
     ./fish.nix
     ./zathura.nix
-    # ./latex.nix
+    ./latex.nix
     ./zen/default.nix
     ./spotify/default.nix
     ./nvim/default.nix
@@ -17,7 +17,6 @@
     ./pywal.nix
     ./python.nix
     ./java.nix
-    ./neomutt.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
