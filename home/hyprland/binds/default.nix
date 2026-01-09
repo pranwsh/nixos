@@ -2,7 +2,8 @@
 { ... }:
 {
   imports = [
-    ./dwindle-binds.nix
-    ./main-binds.nix
+    ./dwindle.nix
+    ./keybindings.nix
+    ./scrolling.nix
   ];
 }

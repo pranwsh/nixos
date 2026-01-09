@@ -9,13 +9,12 @@
 {
   imports = [
     ./settings.nix
-    ./keybindings.nix
     ./windows.nix
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
     ./hyprscrolling.nix
-    ./binds/
+    ./binds/default.nix
   ];
   
   wayland.windowManager.hyprland = {
