@@ -1,8 +1,8 @@
-# binds/default.nix
 { ... }:
 {
   imports = [
-    ./dwindle.nix
+    ./variables.nix
+    # ./dwindle.nix
     ./keybindings.nix
     ./scrolling.nix
   ];
