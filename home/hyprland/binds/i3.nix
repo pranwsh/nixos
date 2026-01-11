@@ -72,4 +72,16 @@
       # ---------------------------------------------------------
       # Reload config fast
       "$mainMod SHIFT, r, exec, hyprctl reload"
-      # Show loaded plugins in a terminal (change $terminal if need
+      # Show loaded plugins in a terminal (change $terminal if needed)
+      "$mainMod SHIFT, p, exec, $terminal -e hyprctl plugin list"
+    ];
+
+    # =========================================================
+    # OPTIONAL: bindm (mouse) for moving/resizing floating windows
+    # =========================================================
+    bindm = [
+      "$mainMod, mouse:272, movewindow"
+      "$mainMod, mouse:273, resizewindow"
+    ];
+  };
+}
