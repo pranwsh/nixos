@@ -1,34 +1,34 @@
-# main-binds.nix
+# binds/general-binds.nix
 { ... }:
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      # Application launchers
+      # =========================
+      # App launchers
+      # =========================
       "$mainMod, Q, exec, $terminal"
       "$mainMod, W, exec, $browser"
       "$mainMod, E, exec, spotify"
       "$mainMod, R, exec, $menu"
       "$mainMod, A, exec, chromium"
 
-      # Window management
+      # =========================
+      # Window management (general)
+      # =========================
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
       "$mainMod, V, togglefloating,"
       "$mainMod, P, pseudo,"
 
-      # Move focus with arrow keys
-      "$mainMod, left, movefocus, l"
-      "$mainMod, right, movefocus, r"
-      "$mainMod, up, movefocus, u"
-      "$mainMod, down, movefocus, d"
+      # =========================
+      # Workspace navigation
+      # =========================
+      "$mainMod, Page_Up, workspace, e-1"
+      "$mainMod, Page_Down, workspace, e+1"
 
-      # Move focus with vim keys
-      "$mainMod, h, movefocus, l"
-      "$mainMod, l, movefocus, r"
-      "$mainMod, j, movefocus, d"
-      "$mainMod, k, movefocus, u"
-
-      # Switch workspaces
+      # =========================
+      # Workspace number binds
+      # =========================
       "$mainMod, 1, workspace, 1"
       "$mainMod, 2, workspace, 2"
       "$mainMod, 3, workspace, 3"
