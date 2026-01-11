@@ -2,8 +2,7 @@
 {
   imports = [
     ./variables.nix
-    # ./dwindle.nix
+    ./dwindle.nix
     ./keybindings.nix
-    ./scrolling.nix
   ];
 }
