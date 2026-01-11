@@ -17,7 +17,7 @@
       "col.inactive_border" = "rgba(ffcd9c22)";
       resize_on_border = true;
       allow_tearing = false;
-      layout = "scrolling";
+      layout = "hy3";
     };
 
     decoration = {
@@ -40,25 +40,43 @@
       };
     };
 
-    animations = {
-      enabled = true;
-
-      bezier = [
-        "easeOutQuint,0.23,1,0.32,1"
-        "easeInOutCubic,0.65,0.05,0.36,1"
-        "linear,0,0,1,1"
-        "almostLinear,0.5,0.5,0.75,1.0"
-        "quick,0.15,0,0.1,1"
-        "overshot,0.13,0.99,0.29,1"
-      ];
-
-      animation = [
-        "windows,1,6,overshot,slide"
-        "border,1,10,default"
-        "fade,1,10,default"
-        "workspaces,1,7,overshot,slide"
-      ];
-    };
+    # animations = {
+    #   enabled = true;
+    #
+    #   bezier = [
+    #     "easeOutQuint,0.23,1,0.32,1"
+    #     "easeInOutCubic,0.65,0.05,0.36,1"
+    #     "linear,0,0,1,1"
+    #     "almostLinear,0.5,0.5,0.75,1.0"
+    #     "quick,0.15,0,0.1,1"
+    #     "overshot,0.13,0.99,0.29,1"
+    #   ];
+    #
+    #   animation = [
+    #     "windows,1,6,overshot,slide"
+    #     "border,1,10,default"
+    #     "fade,1,10,default"
+    #     "workspaces,1,7,overshot,slide"
+    #   ];
+    # };
+    #
+animations = {
+  enabled = true;
+  bezier = [
+    "easeOutQuint,0.23,1,0.32,1"
+    "easeInOutCubic,0.65,0.05,0.36,1"
+    "linear,0,0,1,1"
+    "almostLinear,0.5,0.5,0.75,1.0"
+    "quick,0.15,0,0.1,1"
+    "overshot,0.13,0.99,0.29,1"
+  ];
+  animation = [
+    "windows,1,6,overshot,fade"
+    "border,1,10,default"
+    "fade,1,10,default"
+    "workspaces,1,7,overshot,slide"
+  ];
+};
 
 
     input = {
