@@ -18,7 +18,6 @@
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
       "$mainMod, V, togglefloating,"
-      "$mainMod, P, pseudo,"
 
       # =========================
       # Workspace navigation

@@ -22,9 +22,12 @@
       # =========================
       "$mainMod, t, togglegroup"
       "$mainMod, tab, changegroupactive, f"
-      "$mainMod SHIFT, tab, changegroupactive, b"
-      "$mainMod, g, moveintogroup"
-      "$mainMod SHIFT, g, moveoutofgroup"
+      "$mainMod CTRL, tab, changegroupactive, b"
+      "$mainMod CTRL, H, moveintogroup, l"
+      "$mainMod CTRL, L, moveintogroup, r"
+      "$mainMod CTRL, K, moveintogroup, u"
+      "$mainMod CTRL, J, moveintogroup, d"
+      "$mainMod CTRL, P, moveoutofgroup"
 
       # =========================
       # Split ratio (keep only)
