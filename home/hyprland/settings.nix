@@ -17,7 +17,7 @@
       "col.inactive_border" = "rgba(ffcd9c22)";
       resize_on_border = true;
       allow_tearing = false;
-      layout = "hy3";
+      layout = "scrolling";
     };
 
     decoration = {

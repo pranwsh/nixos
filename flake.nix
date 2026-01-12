@@ -11,8 +11,8 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    hy3 = {
-      url = "github:outfoxxed/hy3";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
 

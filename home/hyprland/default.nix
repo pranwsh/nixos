@@ -14,7 +14,7 @@
     ./hyprpaper.nix
     ./hyprshot.nix
     ./binds/default.nix
-    ./hy3.nix
+    ./hyprscrolling.nix
   ];
   
   wayland.windowManager.hyprland = {
