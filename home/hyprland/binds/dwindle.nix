@@ -27,7 +27,8 @@
       "$mainMod CTRL, L, moveintogroup, r"
       "$mainMod CTRL, K, moveintogroup, u"
       "$mainMod CTRL, J, moveintogroup, d"
-      "$mainMod CTRL, P, moveoutofgroup"
+      "$mainMod P, moveoutofgroup"
+      "$mainMod L, lockactivegroup"
 
       # =========================
       # Split ratio (keep only)
