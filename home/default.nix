@@ -17,7 +17,7 @@
     ./pywal.nix
     ./python.nix
     ./java.nix
-    ./scripts/nixify.nix
+    ./scripts/nixify/nixify.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
