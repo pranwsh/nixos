@@ -1,13 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  wp = toString config.style.wallpaperPath; # file OR directory
+  wp = toString config.style.wallpaperPath; 
 in
 {
   services.hyprpaper = {
     enable = true;
 
-    # Keep this minimal so we don't feed old-style values like ipc="on"
     settings = {
       source = "~/.config/hypr/hyprpaper.conf";
     };
