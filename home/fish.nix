@@ -41,23 +41,23 @@ set mode_char "V"
 end
 
 
-set_color blue
+set_color red
 printf '%s\n' ""
 printf " "
-set_color -b blue brwhite
+set_color -b red brwhite
 printf "$mode_char"
 set_color normal
-set_color blue
+set_color red
 printf ''
 set_color normal
-      set_color blue
+      set_color red
       printf ' '
 
-      set_color -b blue brwhite
+      set_color -b red brwhite
       printf '%s' (prompt_pwd)
 
       set_color normal
-      set_color blue
+      set_color red
       printf ' '
 
       set_color normal
