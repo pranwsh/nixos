@@ -44,7 +44,7 @@ end
 set_color blue
 printf '%s\n' ""
 printf " "
-set_color -b blue white
+set_color -b blue brwhite
 printf "$mode_char"
 set_color normal
 set_color blue
@@ -53,7 +53,7 @@ set_color normal
       set_color blue
       printf ' '
 
-      set_color -b blue white
+      set_color -b blue brwhite
       printf '%s' (prompt_pwd)
 
       set_color normal
