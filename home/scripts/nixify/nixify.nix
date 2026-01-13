@@ -4,6 +4,7 @@ let
   mask = ./mask.png;
 in {
   home.packages = [
+    pkgs.imagemagick
     (pkgs.writeShellScriptBin "nixify" ''
       set -e
 
@@ -25,3 +26,5 @@ in {
     '')
   ];
 }
+
+
