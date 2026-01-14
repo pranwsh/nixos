@@ -30,4 +30,5 @@ vim.opt.updatetime = 250
 -- clipboard
 vim.opt.clipboard = "unnamedplus"
 
-
+-- remove statusline
+vim.opt.laststatus = 0
