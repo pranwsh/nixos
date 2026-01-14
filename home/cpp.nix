@@ -1,31 +1,16 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, lib, walNix, ... }:
 
-with lib;
-
-let
-  cfg = config.cpp.dev;
-in
 {
-  options.cpp.dev = {
-    enable = mkEnableOption "C++ development environment";
-
-    extraPackages = mkOption {
-      type = types.listOf types.package;
-      default = [];
-    };
-  };
-
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+  home.packages = with pkgs; [
+      kitty
+      fish
       gcc
-      clang
       cmake
       ninja
       gdb
       valgrind
-      googletest
-      clang-tools
       cppcheck
-    ] ++ cfg.extraPackages;
-  };
+  ];
 }
+
+

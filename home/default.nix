@@ -1,12 +1,14 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
+    ./cpp.nix
     ./style.nix
     ./hyprland/default.nix
     ./cursor.nix
     ./kitty.nix
     ./fish.nix
-    ./zathura.nix
+    ./zathura/zathura.nix
+    ./zathura/persist.nix
     ./latex.nix
     ./zen/default.nix
     ./spotify/default.nix
@@ -18,11 +20,11 @@
     ./python.nix
     ./java.nix
     ./scripts/nixify/nixify.nix
-    ./cpp.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
   home.packages = [
+    pkgs.clang-tools
     pkgs.tree-sitter
     pkgs.wineWowPackages.stable
     pkgs.gemini-cli
@@ -33,7 +35,7 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.lmms
-    pkgs.yazi
+    pkgs.ranger
   ];
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
