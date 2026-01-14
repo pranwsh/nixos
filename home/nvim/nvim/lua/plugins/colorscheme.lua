@@ -1,29 +1,30 @@
-local function load_nix_colors()
-  local path = vim.fn.stdpath("config") .. "/nix-colors.json"
-
-  local ok, lines = pcall(vim.fn.readfile, path)
-  if not ok or not lines or #lines == 0 then
-    return nil
-  end
-
-  local json = table.concat(lines, "\n")
-  local decode = (vim.json and vim.json.decode) or vim.fn.json_decode
-  local ok2, data = pcall(decode, json)
-  if not ok2 then
-    return nil
-  end
-
-  return data
-end
-
-local c = load_nix_colors() or {}
-
+-- lua/plugins/colorscheme.lua
 return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    -- Load Nix colors from JSON file
+    local function load_nix_colors()
+      local path = vim.fn.stdpath("config") .. "/nix-colors.json"
+      local ok, lines = pcall(vim.fn.readfile, path)
+      if not ok or not lines or #lines == 0 then
+        return nil
+      end
+      
+      local json = table.concat(lines, "\n")
+      local decode = (vim.json and vim.json.decode) or vim.fn.json_decode
+      local ok2, data = pcall(decode, json)
+      if not ok2 then
+        return nil
+      end
+      
+      return data
+    end
+
+    local c = load_nix_colors() or {}
+
+    require("tokyonight").setup({
       transparent = true,
       styles = {
         sidebars = "transparent",
@@ -31,18 +32,20 @@ return {
       },
 
       on_colors = function(colors)
-        -- base
+        if not c then return end
+
+        -- Remap tokyonight's color palette to nix-colors
         colors.bg        = c.background or colors.bg
         colors.fg        = c.foreground or colors.fg
         colors.comment   = c.color8 or colors.comment
 
-        -- gutters / UI darks
+        -- Gutters / UI darks
         colors.fg_gutter = c.color8 or colors.fg_gutter
         colors.fg_dark   = c.color7 or colors.fg_dark
         colors.dark3     = c.color0 or colors.dark3
         colors.dark5     = c.color0 or colors.dark5
 
-        -- core accents (map your 16-color palette into tokyonight names)
+        -- Core accents (map 16-color palette to tokyonight names)
         colors.red       = c.color1 or colors.red
         colors.green     = c.color2 or colors.green
         colors.orange    = c.color3 or colors.orange
@@ -51,7 +54,7 @@ return {
         colors.cyan      = c.color6 or colors.cyan
         colors.yellow    = c.color15 or colors.yellow
 
-        -- optional extra keys that some configs reference
+        -- Extended color variants
         colors.blue0     = c.color0 or colors.blue0
         colors.blue1     = c.color4 or colors.blue1
         colors.blue2     = c.color12 or colors.blue2
@@ -68,55 +71,104 @@ return {
         colors.teal      = c.color6 or colors.teal
       end,
 
-      on_highlights = function(highlights, colors)
-        -- keep your "no bg blocks" choices
-        highlights.DiagnosticVirtualTextError = { bg = "NONE" }
-        highlights.DiagnosticVirtualTextWarn  = { bg = "NONE" }
-        highlights.DiagnosticVirtualTextInfo  = { bg = "NONE" }
-        highlights.DiagnosticVirtualTextHint  = { bg = "NONE" }
+      on_highlights = function(hl, colors)
+        -- Make ALL backgrounds transparent
+        hl.Normal = { bg = "NONE" }
+        hl.NormalFloat = { bg = "NONE" }
+        hl.NormalNC = { bg = "NONE" }
+        hl.SignColumn = { bg = "NONE" }
+        hl.LineNr = { bg = "NONE" }
+        hl.CursorLineNr = { bg = "NONE" }
+        hl.CursorLine = { bg = "NONE" }
+        hl.CursorColumn = { bg = "NONE" }
+        hl.ColorColumn = { bg = "NONE" }
+        hl.Folded = { bg = "NONE" }
+        hl.FoldColumn = { bg = "NONE" }
+        hl.VertSplit = { bg = "NONE" }
+        hl.WinSeparator = { bg = "NONE" }
+        hl.StatusLine = { bg = "NONE" }
+        hl.StatusLineNC = { bg = "NONE" }
+        hl.TabLine = { bg = "NONE", fg = colors.fg_gutter }
+        hl.TabLineFill = { bg = "NONE" }
+        hl.TabLineSel = { bg = "NONE", fg = colors.fg, bold = true }
+        hl.EndOfBuffer = { bg = "NONE" }
+        
+        -- Popup/completion menus
+        hl.Pmenu = { bg = "NONE" }
+        hl.PmenuSel = { bg = "NONE", bold = true }
+        hl.PmenuSbar = { bg = "NONE" }
+        hl.PmenuThumb = { bg = "NONE" }
+        
+        -- Diagnostics - no background blocks
+        hl.DiagnosticVirtualTextError = { bg = "NONE" }
+        hl.DiagnosticVirtualTextWarn = { bg = "NONE" }
+        hl.DiagnosticVirtualTextInfo = { bg = "NONE" }
+        hl.DiagnosticVirtualTextHint = { bg = "NONE" }
 
-        highlights.LspInlayHint               = { bg = "NONE" }
-        highlights.LspInlayHintParameter      = { bg = "NONE" }
-        highlights.LspInlayHintType           = { bg = "NONE" }
+        -- LSP inlay hints
+        hl.LspInlayHint = { bg = "NONE" }
+        hl.LspInlayHintParameter = { bg = "NONE" }
+        hl.LspInlayHintType = { bg = "NONE" }
+        
+        -- LSP references
+        hl.LspReferenceText = { bg = "NONE", bold = true }
+        hl.LspReferenceRead = { bg = "NONE", bold = true }
+        hl.LspReferenceWrite = { bg = "NONE", bold = true }
 
-        -- cursor color from nix (if present)
+        -- Cursor color from nix
         if c.cursor then
-          highlights.Cursor = { fg = c.background or "NONE", bg = c.cursor }
+          hl.Cursor = { fg = c.background or "NONE", bg = c.cursor }
         end
 
-        -- semantic mapping (uses the tokyonight color table we just patched)
-        highlights.Keyword                   = { fg = colors.magenta }
-        highlights.Statement                 = { fg = colors.magenta }
-        highlights.Conditional               = { fg = colors.magenta }
-        highlights.Repeat                    = { fg = colors.magenta }
+        -- Semantic syntax highlighting (uses remapped colors from on_colors)
+        hl.Keyword = { fg = colors.magenta }
+        hl.Statement = { fg = colors.magenta }
+        hl.Conditional = { fg = colors.magenta }
+        hl.Repeat = { fg = colors.magenta }
+        hl.Operator = { fg = colors.magenta }
 
-        highlights.Function                  = { fg = colors.blue }
-        highlights["@function"]              = { fg = colors.blue }
-        highlights["@method"]                = { fg = colors.blue }
+        hl.Function = { fg = colors.blue }
+        hl["@function"] = { fg = colors.blue }
+        hl["@function.call"] = { fg = colors.blue }
+        hl["@method"] = { fg = colors.blue }
+        hl["@method.call"] = { fg = colors.blue }
 
-        highlights.Identifier                = { fg = colors.cyan }
-        highlights["@variable"]              = { fg = colors.cyan }
-        highlights["@parameter"]             = { fg = colors.yellow }
+        hl.Identifier = { fg = colors.cyan }
+        hl["@variable"] = { fg = colors.cyan }
+        hl["@variable.member"] = { fg = colors.cyan }
+        hl["@property"] = { fg = colors.cyan }
+        hl["@field"] = { fg = colors.cyan }
+        
+        hl["@parameter"] = { fg = colors.yellow }
+        hl["@variable.parameter"] = { fg = colors.yellow }
 
-        highlights.Type                      = { fg = colors.yellow }
-        highlights["@type"]                  = { fg = colors.yellow }
+        hl.Type = { fg = colors.yellow }
+        hl["@type"] = { fg = colors.yellow }
+        hl["@type.builtin"] = { fg = colors.yellow }
 
-        highlights.String                    = { fg = colors.green }
-        highlights.Constant                  = { fg = colors.orange }
-        highlights.Number                    = { fg = colors.orange }
+        hl.String = { fg = colors.green }
+        hl["@string"] = { fg = colors.green }
+        
+        hl.Constant = { fg = colors.orange }
+        hl.Number = { fg = colors.orange }
+        hl["@number"] = { fg = colors.orange }
+        hl["@constant"] = { fg = colors.orange }
 
-        highlights.Operator                  = { fg = colors.magenta }
-        highlights["@punctuation.bracket"]   = { fg = colors.magenta }
-        highlights["@punctuation.delimiter"] = { fg = colors.cyan }
+        hl["@punctuation.bracket"] = { fg = colors.magenta }
+        hl["@punctuation.delimiter"] = { fg = colors.cyan }
 
-        highlights.TabLine                   = { bg = "NONE", fg = colors.fg_gutter }
-        highlights.TabLineFill               = { bg = "NONE" }
-        highlights.TabLineSel                = { bg = "NONE", fg = colors.fg, bold = true }
-
-        highlights.LspReferenceText          = { bg = "NONE", bold = true }
-        highlights.LspReferenceRead          = { bg = "NONE", bold = true }
-        highlights.LspReferenceWrite         = { bg = "NONE", bold = true }
+        -- LSP semantic tokens
+        hl["@lsp.type.property"] = { fg = colors.cyan }
+        hl["@lsp.type.variable"] = { fg = colors.cyan }
+        hl["@lsp.type.parameter"] = { fg = colors.yellow }
+        hl["@lsp.type.function"] = { fg = colors.blue }
+        hl["@lsp.type.method"] = { fg = colors.blue }
+        hl["@lsp.type.type"] = { fg = colors.yellow }
+        hl["@lsp.type.class"] = { fg = colors.yellow }
       end,
-    },
-  },
+    })
+
+    -- Apply colorscheme
+    vim.cmd.colorscheme("tokyonight")
+  end,
 }

@@ -16,20 +16,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       gcc
       clang
-
       cmake
-      meson
       ninja
-
       gdb
-      lldb
       valgrind
-
       googletest
-
       clang-tools
       cppcheck
     ] ++ cfg.extraPackages;

@@ -9,15 +9,9 @@
     pamixer
     acpi
 
-    ranger
-
     unzip
     ripgrep
-    fzf
     git
-    gparted
-
-    gemini-cli
 
   ];
 }

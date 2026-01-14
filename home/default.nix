@@ -18,6 +18,7 @@
     ./python.nix
     ./java.nix
     ./scripts/nixify/nixify.nix
+    ./cpp.nix
   ];
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
@@ -32,6 +33,7 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.lmms
+    pkgs.yazi
   ];
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;

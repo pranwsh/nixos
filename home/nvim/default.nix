@@ -10,13 +10,16 @@ let
 in
 {
   home.packages = with pkgs; [
-    neovim
-    lua-language-server
-    tree-sitter
-    fd
-    ripgrep
-    gcc
-    clang-tools
+	neovim
+
+  lua-language-server
+  pyright
+  nodePackages.typescript-language-server
+  ruff
+  nodePackages.eslint_d
+  stylua
+  nodePackages.prettier
+
   ];
 
   home.file.".config/nvim/nix-colors.json".text = builtins.toJSON c;
