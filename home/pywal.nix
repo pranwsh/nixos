@@ -13,7 +13,7 @@ let
     ${pkgs.python3}/bin/python - <<'PY'
 import os, json, pathlib, colorsys
 
-def saturate_color(hex_color, factor=1.5):
+def saturate_color(hex_color, factor=1.1):
     """Increase saturation of a hex color"""
     hex_color = hex_color.lstrip('#')
     r, g, b = tuple(int(hex_color[i:i+2], 16) / 255.0 for i in (0, 2, 4))
