@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  wallpaperPath = ./wallpapers/idks-nix.png;
+  wallpaperPath = ./wallpapers/yellow-nix.png;
   
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };
