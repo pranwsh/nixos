@@ -35,7 +35,7 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.lmms
-    pkgs.ranger
+    pkgs.yazi
   ];
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
