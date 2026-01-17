@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  wallpaperPath = ./wallpapers/yellow-nix.png;
+  wallpaperPath = ./wallpapers/gradient.jpg;
   
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };

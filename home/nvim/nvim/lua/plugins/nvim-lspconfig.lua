@@ -22,7 +22,7 @@ return {
     -- LSP servers configuration
     local servers = {
       clangd = {
-        cmd = { "clangd" },
+        cmd = { "clangd", "--background-index" },
         filetypes = { "c", "cpp", "objc", "objcpp" },
         root_markers = { ".git", "compile_commands.json" },
       },
