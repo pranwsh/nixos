@@ -27,41 +27,12 @@ functions.fish_mode_prompt = ''
 '';
 
 functions.fish_prompt = ''
-
-set -l mode_char
-switch $fish_bind_mode
-case default
-set mode_char "N"
-case insert
-set mode_char "I"
-case replace_one
-set mode_char "R"
-case visual
-set mode_char "V"
-end
-
-
-set_color red
-printf '%s\n' ""
-printf " "
-set_color -b red brwhite
-printf "$mode_char"
-set_color normal
-set_color red
-printf ''
-set_color normal
-      set_color red
-      printf ' '
-
-      set_color -b red brwhite
-      printf '%s' (prompt_pwd)
-
-      set_color normal
-      set_color red
-      printf ' '
-
-      set_color normal
-      printf '♥ \n'
+  set_color cyan
+  printf '%s\n ' ""
+  echo -n (basename (pwd))
+  set_color magenta
+  echo -n ' ⬤ '
+  set_color normal
       '';
 
   };

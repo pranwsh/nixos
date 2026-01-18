@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  wallpaperPath = ./wallpapers/gradient.jpg;
+  wallpaperPath = ./wallpapers/19.jpg;
   
   base_colors = {
     bg = { r = 0; g = 0; b = 0; };

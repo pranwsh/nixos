@@ -35,7 +35,8 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.lmms
-    pkgs.yazi
+    pkgs.ranger
+    pkgs.distrobox
   ];
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
