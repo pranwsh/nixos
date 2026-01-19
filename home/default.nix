@@ -21,8 +21,10 @@
     ./java.nix
     ./scripts/nixify/nixify.nix
   ];
+
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
+  
   home.packages = [
     pkgs.clang-tools
     pkgs.tree-sitter
@@ -38,6 +40,7 @@
     pkgs.ranger
     pkgs.distrobox
   ];
+
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 }

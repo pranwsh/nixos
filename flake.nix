@@ -3,24 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
-    PrismLaucnher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    
+    # Add home flake as input
+    home.url = "path:./home";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, home, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -32,10 +24,8 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.pranesh = import ./home/default.nix;
-            sharedModules = [
-              inputs.nix-flatpak.homeManagerModules.nix-flatpak
-            ];
+            # Use the home flake configuration
+            users.pranesh = home.homeConfigurations.pranesh.config;
             extraSpecialArgs = { inherit inputs; };
           };
         }
