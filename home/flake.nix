@@ -14,16 +14,25 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, ... }@inputs: 
+  let
+    system = "x86_64-linux";
+  in
+  {
     homeConfigurations.pranesh = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      
+      pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = { inherit inputs; };
-      
       modules = [
         ./default.nix
         inputs.nix-flatpak.homeManagerModules.nix-flatpak
       ];
     };
+
+    # Export the home module for use in NixOS
+    homeModule = import ./default.nix;
+    
+    # Also export the inputs so main flake can access them if needed
+    inherit inputs;
   };
 }
+

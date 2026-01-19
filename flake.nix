@@ -8,8 +8,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Add home flake as input
-    home.url = "path:./home";
+    # Reference home as a git+file flake
+    home.url = "git+file:./home";
   };
 
   outputs = { nixpkgs, home-manager, home, ... }@inputs: {
@@ -24,9 +24,13 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            # Use the home flake configuration
-            users.pranesh = home.homeConfigurations.pranesh.config;
-            extraSpecialArgs = { inherit inputs; };
+            users.pranesh = home.homeModule;
+            sharedModules = [
+              home.inputs.nix-flatpak.homeManagerModules.nix-flatpak
+            ];
+            extraSpecialArgs = { 
+              inputs = home.inputs;
+            };
           };
         }
       ];
