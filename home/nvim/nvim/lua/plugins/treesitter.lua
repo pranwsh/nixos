@@ -1,15 +1,12 @@
-return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("nvim-treesitter").setup({
-        ensure_installed = "all",  -- Install all maintained parsers
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "nix", "python", "bash" },
+  
+  auto_install = true,
+  
+  highlight = {
+    enable = true,
   },
-}
+  indent = {
+    enable = true,
+  },
+})

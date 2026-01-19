@@ -1,21 +1,23 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   opts = {
     indent = {
       char = "│",
     },
     scope = {
-      enabled = true,   -- shows scope lines for braces
-      show_start = false,
-      show_end = false,
+      enabled = true,
+      char = "│",
+      highlight = { "IblScope" },
+      include = {
+        node_type = {
+          ["*"] = { "*" }
+        }
+      },
     },
     exclude = {
-      filetypes = {
-        "help",
-        "nvim-tree",
-        "terminal",
-      },
+      filetypes = { "nvim-tree", "help", "terminal" },
     },
   },
 }

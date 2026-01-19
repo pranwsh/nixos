@@ -29,9 +29,10 @@ in
       
       # Python environment
       pythonEnv
+      
     ];
   };
-
+  
   home.file.".config/nvim/nix-colors.json".text = builtins.toJSON c;
   home.file.".config/nvim/init.lua" = {
     source = ./nvim/init.lua;

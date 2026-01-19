@@ -89,6 +89,15 @@ return {
         hl.PmenuSbar = bg_none
         hl.PmenuThumb = bg_none
 
+        hl.IblIndent = {
+          fg = c.color8 or colors.fg_gutter,
+          nocombine = true,
+        }
+        hl.IblScope = {
+          fg = c.color4 or colors.blue,
+          nocombine = true,
+        }
+
         -- Diagnostics / LSP / semantic tokens (kept as-is)
         hl.DiagnosticVirtualTextError = bg_none
         hl.DiagnosticVirtualTextWarn = bg_none
