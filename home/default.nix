@@ -12,7 +12,7 @@
     ./latex.nix
     ./zen/default.nix
     ./spotify/default.nix
-    # ./nvim/default.nix
+    ./nvim/default.nix
     ./prismlauncher.nix
     ./flatpak.nix
     ./wofi.nix

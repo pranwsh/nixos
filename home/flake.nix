@@ -12,17 +12,23 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     PrismLaucnher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs: 
   let
     system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in
   {
     homeConfigurations.pranesh = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit pkgs;
       extraSpecialArgs = { inherit inputs; };
       modules = [
+      	inputs.nvf.homeManagerModules.default  # Add this line!
         ./default.nix
         inputs.nix-flatpak.homeManagerModules.nix-flatpak
       ];
