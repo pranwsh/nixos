@@ -1,19 +1,22 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.nvf.settings.vim.maps = {
     normal = {
-      # Example: uncomment to add custom keymaps
-      # "<C-s>" = {
-      #   action = ":w<CR>";
-      #   silent = true;
-      # };
+      "leader<e>" = {
+        action = "<cmd>Neotree toggle<CR>";
+        silent = true;
+        desc = "Toggle Neotree";
+      };
     };
-    
+
     insert = {
       # Example keymaps
     };
-    
+
     visual = {
       # Example keymaps
     };
