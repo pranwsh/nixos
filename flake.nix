@@ -3,48 +3,42 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Import home flake using path: instead of git+file:
-    home.url = "path:./home";
+    hyprland.url = "github:hyprwm/Hyprland";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    PrismLaucnher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = {
-    self,
     nixpkgs,
     home-manager,
-    home,
     ...
   } @ inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
-
       modules = [
         ./hardware-configuration.nix
         ./hosts/nixos.nix
-
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-
-            # Pass through the home flake's inputs
-            extraSpecialArgs = {
-              inherit (home) inputs;
-            };
-
             users.pranesh = import ./home/default.nix;
-
-            # Import shared modules from home flake
             sharedModules = [
-              home.inputs.nix-flatpak.homeManagerModules.nix-flatpak
+              inputs.nix-flatpak.homeManagerModules.nix-flatpak
+              inputs.nvf.homeManagerModules.default
             ];
+            extraSpecialArgs = {
+              inherit inputs;
+            };
           };
         }
       ];

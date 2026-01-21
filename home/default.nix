@@ -43,7 +43,6 @@
     pkgs.lmms
     pkgs.ranger
     pkgs.distrobox
-    pkgs.neovim
   ];
 
   home.stateVersion = "24.11";

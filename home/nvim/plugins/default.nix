@@ -7,5 +7,6 @@
     ./luasnip.nix
     ./completion.nix
     ./autopairs.nix
+    ./vimtex.nix
   ];
 }
