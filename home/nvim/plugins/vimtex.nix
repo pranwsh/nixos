@@ -1,8 +1,7 @@
 {pkgs, ...}: {
-  config.vim = {
+  programs.nvf.settings.vim = {
     startPlugins = [pkgs.vimPlugins.vimtex];
 
-    # Add VimTeX configuration
     luaConfigRC.vimtex = ''
       vim.g.vimtex_view_method = 'zathura'
       vim.g.vimtex_compiler_method = 'latexmk'
@@ -17,6 +16,8 @@
           '-interaction=nonstopmode',
         }
       }
+
+      vim.g.vimtex_quickfix_open_on_warning = 0
     '';
   };
 }
