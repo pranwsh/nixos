@@ -3,10 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprland.url = "github:hyprwm/Hyprland";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -15,30 +17,28 @@
     nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: 
-  let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  in
-  {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: {
+    # Standalone home-manager configuration (for manual activation)
     homeConfigurations.pranesh = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = { inherit inputs; };
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+
+      extraSpecialArgs = {inherit inputs;};
+
       modules = [
-      	inputs.nvf.homeManagerModules.default  # Add this line!
         ./default.nix
         inputs.nix-flatpak.homeManagerModules.nix-flatpak
       ];
     };
 
-    # Export the home module for use in NixOS
-    homeModule = import ./default.nix;
-    
-    # Also export the inputs so main flake can access them if needed
+    # Export inputs for the main flake to use
     inherit inputs;
   };
 }
-
