@@ -1,6 +1,6 @@
 {lib, ...}: {
   programs.nvf.settings = {
-    vim = {
+    vim.filetree = {
       neo-tree = {
         enable = true;
       };
