@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./cpp.nix
     ./style.nix
@@ -24,7 +28,7 @@
 
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
-  
+
   home.packages = [
     pkgs.clang-tools
     pkgs.tree-sitter
@@ -40,7 +44,6 @@
     pkgs.ranger
     pkgs.distrobox
     pkgs.neovim
-    pkgs.yazi
   ];
 
   home.stateVersion = "24.11";
