@@ -1,11 +1,6 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    ./cpp.nix
+    ./code/default.nix
     ./style.nix
     ./hyprland/default.nix
     ./cursor.nix
@@ -21,8 +16,6 @@
     ./flatpak.nix
     ./wofi.nix
     ./pywal.nix
-    ./python.nix
-    ./java.nix
     ./scripts/nixify/nixify.nix
   ];
 
