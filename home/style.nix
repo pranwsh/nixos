@@ -1,20 +1,34 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  wallpaperPath = ./wallpapers/1.jpg;
 
-let
-  wallpaperPath = ./wallpapers/19.jpg;
-  
   base_colors = {
-    bg = { r = 0; g = 0; b = 0; };
-    fg = { r = 205; g = 214; b = 244; };
-    accent = { r = 0; g = 0; b = 0; };
+    bg = {
+      r = 0;
+      g = 0;
+      b = 0;
+    };
+    fg = {
+      r = 205;
+      g = 214;
+      b = 244;
+    };
+    accent = {
+      r = 0;
+      g = 0;
+      b = 0;
+    };
   };
   opacity = {
     bg = 0.6;
     fg = 1.0;
     accent = 0.4;
   };
-in
-{
+in {
   options.style = lib.mkOption {
     type = lib.types.attrs;
     default = {};
