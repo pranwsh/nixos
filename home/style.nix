@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  wallpaperPath = ./wallpapers/1.jpg;
+  wallpaperPath = ./wallpapers/02.jpg;
 
   base_colors = {
     bg = {

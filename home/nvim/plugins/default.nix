@@ -9,5 +9,6 @@
     ./autopairs.nix
     ./neotree.nix
     ./vimtex.nix
+    ./bufferline.nix
   ];
 }
