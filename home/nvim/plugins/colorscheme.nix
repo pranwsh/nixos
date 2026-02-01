@@ -4,7 +4,7 @@
       theme = {
         enable = true;
         name = "catppuccin";
-        style = "frappe";
+        style = "latte";
         transparent = true;
 
         base16-colors = {
