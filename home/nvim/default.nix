@@ -1,13 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
+    inputs.nvf.homeManagerModules.default
     ./options/default.nix
     ./plugins/default.nix
-    ./plugins/whichkey.nix
   ];
 
   programs.nvf = {

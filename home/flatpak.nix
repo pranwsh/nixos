@@ -1,6 +1,7 @@
-{ config, pkgs, inputs, ... }:
-
-{
+{inputs, ...}: {
+  imports = [
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+  ];
   services.flatpak = {
     enable = true;
 
@@ -19,8 +20,8 @@
     overrides = {
       global = {
         Context = {
-          share = [ "network" "ipc" ];
-          sockets = [ "wayland" "x11" "pulseaudio" ];
+          share = ["network" "ipc"];
+          sockets = ["wayland" "x11" "pulseaudio"];
           filesystems = [
             "xdg-download:rw"
             "xdg-documents:rw"
