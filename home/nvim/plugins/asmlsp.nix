@@ -2,9 +2,7 @@
   programs.nvf.settings = {
     vim = {
       # 1. Standard Global Settings
-      lsp = {
-        enable = true;
-      };
+      lsp.enable = true;
 
       languages = {
         enableTreesitter = true;
@@ -13,8 +11,7 @@
         assembly = {
           enable = true;
           treesitter.enable = true;
-          # IMPORTANT: Disable lsp.enable here.
-          # This prevents NVF from generating the deprecated `require('lspconfig')` code.
+          # Disable default LSP so we can define the custom one manually
           lsp.enable = false;
         };
       };
@@ -22,14 +19,14 @@
       # 3. Manually add the LSP binary
       extraPackages = [pkgs.asm-lsp];
 
-      # 4. Inject the new Neovim 0.11+ Native LSP Configuration
-      extraLuaConfig = ''
-        -- Define the configuration using the new vim.lsp.config API
+      # 4. Inject the configuration using the correct NVF option
+      # Note: luaConfigRC expects an attribute set, e.g., { name = "lua code"; }
+      luaConfigRC.asm-lsp-setup = ''
+        -- Define the configuration using the new vim.lsp.config API (Nvim 0.11+)
         vim.lsp.config["asm-lsp"] = {
           cmd = { "asm-lsp" },
           filetypes = { "asm", "s", "S", "vmasm" },
-          -- Native LSP often requires explicit root markers if not using the plugin's defaults
-          root_markers = { ".git", "Makefile", "package.json" },
+          root_markers = { ".git", "Makefile" },
           settings = {
             ["asm-lsp"] = {
               assembler = "gas",
@@ -40,7 +37,7 @@
           },
         }
 
-        -- Enable the server (Standard Nvim 0.11+ method)
+        -- Enable the server
         vim.lsp.enable("asm-lsp")
       '';
 
