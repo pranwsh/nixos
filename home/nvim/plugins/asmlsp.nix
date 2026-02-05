@@ -1,51 +1,48 @@
 {pkgs, ...}: {
   programs.nvf.settings = {
     vim = {
-      # 1. Global LSP settings
+      # 1. Standard Global Settings
       lsp = {
         enable = true;
-        formatOnSave = true;
-
-        # 2. Custom LSP Configuration
-        lspconfig = {
-          enable = true;
-          sources = {
-            # We inject the raw Lua setup for asm-lsp here
-            asm-lsp = ''
-              lspconfig.asm_lsp.setup({
-                cmd = { "asm-lsp" },
-                settings = {
-                  ["asm-lsp"] = {
-                    assembler = "gas",
-                    architecture = "x86",
-                    mode = "32",
-                    diagnostics = true,
-                  },
-                },
-              })
-            '';
-          };
-        };
       };
-
-      # 3. Ensure the LSP binary is available
-      # (We must add this manually because we disabled the auto-LSP below)
-      extraPackages = [pkgs.asm-lsp];
 
       languages = {
         enableTreesitter = true;
-        enableFormat = true;
 
-        # ... other languages ...
-
-        # Assembly Setup
+        # 2. Configure Assembly
         assembly = {
           enable = true;
           treesitter.enable = true;
-          # IMPORTANT: Disable the default LSP so it doesn't conflict with our custom one above
+          # IMPORTANT: Disable lsp.enable here.
+          # This prevents NVF from generating the deprecated `require('lspconfig')` code.
           lsp.enable = false;
         };
       };
+
+      # 3. Manually add the LSP binary
+      extraPackages = [pkgs.asm-lsp];
+
+      # 4. Inject the new Neovim 0.11+ Native LSP Configuration
+      extraLuaConfig = ''
+        -- Define the configuration using the new vim.lsp.config API
+        vim.lsp.config["asm-lsp"] = {
+          cmd = { "asm-lsp" },
+          filetypes = { "asm", "s", "S", "vmasm" },
+          -- Native LSP often requires explicit root markers if not using the plugin's defaults
+          root_markers = { ".git", "Makefile", "package.json" },
+          settings = {
+            ["asm-lsp"] = {
+              assembler = "gas",
+              architecture = "x86",
+              mode = "32",
+              diagnostics = true,
+            },
+          },
+        }
+
+        -- Enable the server (Standard Nvim 0.11+ method)
+        vim.lsp.enable("asm-lsp")
+      '';
 
       visuals = {
         nvim-web-devicons.enable = true;
