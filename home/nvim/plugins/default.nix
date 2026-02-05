@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./lspconfig.nix
-    ./asmlsp.nix
     ./colorscheme.nix
     ./indent.nix
     ./luasnip.nix

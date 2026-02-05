@@ -26,6 +26,12 @@
           format.enable = true;
           format.type = ["alejandra"];
         };
+
+        assembly = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+        };
       };
       # FIX: Warning regarding nvimWebDevicons rename
       visuals = {
