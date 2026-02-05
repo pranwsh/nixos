@@ -1,10 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  wallpaperPath = ./wallpapers/02.jpg;
+{lib, ...}: let
+  wallpaperPath = ./wallpapers/red;
 
   base_colors = {
     bg = {

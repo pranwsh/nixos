@@ -32,10 +32,6 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.pranesh = import ./home/default.nix;
-            sharedModules = [
-              inputs.nix-flatpak.homeManagerModules.nix-flatpak
-              inputs.nvf.homeManagerModules.default
-            ];
             extraSpecialArgs = {
               inherit inputs;
             };
