@@ -3,14 +3,21 @@
     vim = {
       # Global LSP settings
       lsp = {
-        enable = true; # Replaces languages.enableLSP
+        enable = true;
         formatOnSave = true;
       };
+
+      # Treesitter configuration
+      treesitter = {
+        enable = true;
+        indent.enable = true;
+      };
+
       # Language-specific modules
       languages = {
-        # Note: enableLSP removed here as it is now vim.lsp.enable
         enableTreesitter = true;
         enableFormat = true;
+
         # C/C++ Setup (Clangd)
         clang = {
           enable = true;
@@ -18,6 +25,7 @@
           treesitter.enable = true;
           dap.enable = true;
         };
+
         # Nix Setup
         nix = {
           enable = true;
@@ -27,12 +35,14 @@
           format.type = ["alejandra"];
         };
 
+        # Assembly Setup
         assembly = {
           enable = true;
           lsp.enable = true;
           treesitter.enable = true;
         };
       };
+
       # FIX: Warning regarding nvimWebDevicons rename
       visuals = {
         nvim-web-devicons.enable = true;
