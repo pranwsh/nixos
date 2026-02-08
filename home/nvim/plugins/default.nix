@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./avante.nix
     ./lsp/default.nix
     ./colorscheme.nix
     ./indent.nix
