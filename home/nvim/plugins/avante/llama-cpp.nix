@@ -3,58 +3,36 @@
   pkgs,
   lib,
   ...
-}: {
-  # Install required packages
-  environment.systemPackages = with pkgs; [
-    # LLM inference server
+}: let
+  qwen-model = pkgs.fetchurl {
+    url = "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q4_k_m.gguf";
+    hash = "sha256-UJKH94y01M9rOENzRzO5FLLBWOQ+Iqf0v16WOACJTTw=";
+  };
+in {
+  home.packages = with pkgs; [
     llama-cpp
-
-    # Neovim with plugins
-    (pkgs.neovim.override {
-      configure = {
-        customRC = ''
-          lua << EOF
-          ${builtins.readFile ./nvim-config.lua}
-          EOF
-        '';
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          start = [
-            # Avante.nvim and dependencies
-            avante-nvim
-            plenary-nvim
-            nui-nvim
-            nvim-web-devicons
-
-            # Optional but recommended
-            telescope-nvim
-            dressing-nvim
-            render-markdown-nvim
-          ];
-        };
-      };
-    })
   ];
 
-  # Create systemd service for llama.cpp server
-  systemd.user.services.qwen-coder = {
-    description = "Qwen2.5-Coder 7B LLM Server";
-    wantedBy = ["default.target"];
+  # Set dummy API key so avante doesn't prompt
+  home.sessionVariables = {
+    OPENAI_API_KEY = "dummy-key-not-needed";
+  };
 
-    serviceConfig = {
+  systemd.user.services.qwen-coder = {
+    Unit = {
+      Description = "Qwen2.5-Coder 7B LLM Server";
+      After = ["network.target"];
+    };
+
+    Service = {
       Type = "simple";
-      ExecStart = ''
-        ${pkgs.llama-cpp}/bin/llama-server \
-          --model ${pkgs.fetchurl {
-          url = "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q4_k_m.gguf";
-          hash = "sha256-REPLACEME"; # Run nix-prefetch-url to get this
-        }} \
-          --host 127.0.0.1 \
-          --port 8080 \
-          --ctx-size 4096 \
-          --n-gpu-layers 35
-      '';
+      ExecStart = "${pkgs.llama-cpp}/bin/llama-server --model ${qwen-model} --host 127.0.0.1 --port 8080 --ctx-size 4096 --n-gpu-layers 35";
       Restart = "on-failure";
-      RestartSec = "5s";
+      RestartSec = 5;
+    };
+
+    Install = {
+      WantedBy = ["default.target"];
     };
   };
 }

@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./plenary.nix
     ./avante/default.nix
     ./lsp/default.nix
     ./colorscheme.nix

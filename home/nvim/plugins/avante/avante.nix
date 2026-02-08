@@ -1,103 +1,106 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.nvf.settings.vim = {
-    # Add avante dependencies
-    luaPackages = with pkgs.vimPlugins; [
-      plenary-nvim
-      nui-nvim
-    ];
+    luaConfigRC.inline-completion = ''
+      -- Simple inline AI completion
+      local ns_id = vim.api.nvim_create_namespace('inline_ai')
+      local timer = nil
+      local current_suggestion = nil
 
-    # Avante.nvim configuration
-    extraPlugins = with pkgs.vimPlugins; {
-      avante-nvim = {
-        package = avante-nvim;
-        setup = ''
-          require('avante').setup({
-            provider = "openai",
-            openai = {
-              endpoint = "http://127.0.0.1:8080/v1",
-              model = "qwen2.5-coder-7b-instruct",
-              api_key_name = "dummy",
-              temperature = 0.7,
-              max_tokens = 4096,
-            },
-            behaviour = {
-              auto_suggestions = true,
-              auto_set_highlight_group = true,
-              auto_set_keymaps = true,
-            },
-            mappings = {
-              ask = "<leader>aa",
-              edit = "<leader>ae",
-              refresh = "<leader>ar",
-              toggle = "<leader>at",
-              diff = {
-                ours = "co",
-                theirs = "ct",
-                both = "cb",
-                next = "]x",
-                prev = "[x",
-              },
-            },
-            hints = {
-              enabled = true,
-            },
-            windows = {
-              wrap = true,
-              width = 30,
-              sidebar_header = {
-                align = "center",
-                rounded = true,
-              },
-            },
-            highlights = {
-              diff = {
-                current = "DiffText",
-                incoming = "DiffAdd",
-              },
-            },
-          })
-        '';
-      };
+      local function clear_suggestion()
+        if current_suggestion then
+          vim.api.nvim_buf_del_extmark(0, ns_id, current_suggestion)
+          current_suggestion = nil
+        end
+      end
 
-      # Optional: render-markdown for better display
-      render-markdown-nvim = {
-        package = render-markdown-nvim;
-        setup = "require('render-markdown').setup({})";
-      };
+      local function get_completion()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        local line = cursor[1] - 1
+        local col = cursor[2]
 
-      # Optional: dressing for better UI
-      dressing-nvim = {
-        package = dressing-nvim;
-        setup = "require('dressing').setup({})";
-      };
-    };
+        -- Get context
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, line + 1, false)
+        local current_line = lines[#lines]
+        local prefix = current_line:sub(1, col)
 
-    # Key mappings
-    maps = {
-      normal = {
-        "<leader>aa" = {
-          action = ":AvanteAsk<CR>";
-          desc = "Avante: Ask AI";
-        };
-        "<leader>ae" = {
-          action = ":AvanteEdit<CR>";
-          desc = "Avante: Edit with AI";
-        };
-        "<leader>ar" = {
-          action = ":AvanteRefresh<CR>";
-          desc = "Avante: Refresh";
-        };
-        "<leader>at" = {
-          action = ":AvanteToggle<CR>";
-          desc = "Avante: Toggle";
-        };
-      };
-      visual = {
-        "<leader>aa" = {
-          action = ":AvanteAsk<CR>";
-          desc = "Avante: Ask AI about selection";
-        };
-      };
-    };
+        -- Build prompt
+        local context = table.concat(lines, "\n")
+        local prompt = context
+
+        -- Call API
+        local curl = require('plenary.curl')
+        curl.post('http://127.0.0.1:8080/v1/completions', {
+          headers = {
+            ['Content-Type'] = 'application/json',
+          },
+          body = vim.json.encode({
+            model = 'qwen',
+            prompt = prompt,
+            max_tokens = 50,
+            temperature = 0.2,
+            stop = { "\n", "<|endoftext|>", "<|im_end|>" },
+          }),
+          callback = vim.schedule_wrap(function(response)
+            if response.status == 200 then
+              local data = vim.json.decode(response.body)
+              local completion = data.choices[1].text
+
+              if completion and #completion > 0 then
+                clear_suggestion()
+                current_suggestion = vim.api.nvim_buf_set_extmark(bufnr, ns_id, line, col, {
+                  virt_text = {{completion, 'Comment'}},
+                  virt_text_pos = 'overlay',
+                  hl_mode = 'combine',
+                })
+              end
+            end
+          end)
+        })
+      end
+
+      local function accept_suggestion()
+        if current_suggestion then
+          local mark = vim.api.nvim_buf_get_extmark_by_id(0, ns_id, current_suggestion, {details = true})
+          if mark and mark[3] and mark[3].virt_text then
+            local text = mark[3].virt_text[1][1]
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            local line = vim.api.nvim_get_current_line()
+            local new_line = line:sub(1, cursor[2]) .. text .. line:sub(cursor[2] + 1)
+            vim.api.nvim_set_current_line(new_line)
+            vim.api.nvim_win_set_cursor(0, {cursor[1], cursor[2] + #text})
+          end
+          clear_suggestion()
+        end
+      end
+
+      -- Auto-trigger on text change
+      vim.api.nvim_create_autocmd({'TextChangedI', 'CursorMovedI'}, {
+        callback = function()
+          clear_suggestion()
+          if timer then
+            timer:stop()
+          end
+          timer = vim.defer_fn(function()
+            get_completion()
+          end, 300)
+        end,
+      })
+
+      -- Keymaps
+      vim.keymap.set('i', '<Tab>', function()
+        if current_suggestion then
+          accept_suggestion()
+        else
+          return '<Tab>'
+        end
+      end, { expr = true })
+
+      vim.keymap.set('i', '<C-e>', clear_suggestion)
+    '';
   };
 }
