@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./plenary.nix
-    ./avante/default.nix
+    ./llm/default.nix
     ./lsp/default.nix
     ./colorscheme.nix
     ./indent.nix

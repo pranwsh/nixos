@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./avante.nix
+    ./llm.nix
     ./llama-cpp.nix
   ];
 }
