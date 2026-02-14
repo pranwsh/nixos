@@ -6,5 +6,6 @@
     gdb
     valgrind
     cppcheck
+    gnumake
   ];
 }
