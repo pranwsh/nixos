@@ -15,7 +15,7 @@
     ../modules/bluetooth.nix
     ../modules/tlp.nix
     ../modules/flatpak.nix
-    ../modules/docker.nix
+    # ../modules/docker.nix
     ../modules/boot.nix
     ../modules/kvm.nix
     ../modules/fish.nix
