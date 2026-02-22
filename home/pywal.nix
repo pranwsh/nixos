@@ -5,12 +5,12 @@
 }: let
   wallpaper = config.style.wallpaperPath;
   # Vibrancy control: 0.0 = grayscale, 1.0 = original saturation, >1.0 = boosted saturation
-  vibrancy = 1.4;
+  vibrancy = .9;
   # Target lightness for normalization (0.0 = black, 1.0 = white)
-  targetLightness = 0.75;
+  targetLightness = 0.45;
   # Diversity: How much to spread colors apart in hue space
   # 0.0 = no change, 1.0 = distribute evenly across spectrum, 0.5 = halfway between
-  diversity = 0.3;
+  diversity = 0.2;
 
   walJson = pkgs.runCommand "wal-colors-json" {buildInputs = [pkgs.pywal];} ''
     export HOME="$TMPDIR"

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -21,21 +23,21 @@
       set -gx VISUAL nvim
     '';
 
+    functions.fish_mode_prompt = ''
+      echo ""
+    '';
 
-functions.fish_mode_prompt = ''
-  echo ""
-'';
-
-functions.fish_prompt = ''
-  set_color cyan
-  printf '%s\n ' ""
-  echo -n (basename (pwd))
-  set_color magenta
-  echo -n ' ⬤ '
-  set_color normal
-      '';
-
+    functions.fish_prompt = ''
+      set_color cyan
+      printf '%s\n' ""
+      set_color brcyan
+      echo -n ' ◖'
+      set_color black -b brcyan   # black text on brcyan background
+      echo -n (basename (pwd))
+      set_color normal
+      set_color brcyan
+      echo -n '◗ '
+      set_color normal
+    '';
   };
 }
-
-
