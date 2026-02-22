@@ -7,6 +7,7 @@
         mappings = {
           cycleNext = "L";
           cyclePrevious = "H";
+          closeCurrent = "<leader>bd";
         };
 
         setupOpts.options = {
