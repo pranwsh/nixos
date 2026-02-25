@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   users.users.pranesh = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "input" ];
-    packages = with pkgs; [ ];
+    extraGroups = ["wheel" "video" "input"];
+    packages = with pkgs; [];
   };
 }

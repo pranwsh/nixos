@@ -1,5 +1,5 @@
 {lib, ...}: let
-  wallpaperPath = ./wallpapers/891941.png;
+  wallpaperPath = ./wallpapers/13-Ventura-Dark.jpg;
 
   base_colors = {
     bg = {
