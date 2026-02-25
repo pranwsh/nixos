@@ -56,15 +56,14 @@
             end
 
             vim.bo[buf].expandtab   = true
-            vim.bo[buf].shiftwidth  = 4
-            vim.bo[buf].tabstop     = 4
-            vim.bo[buf].softtabstop = 4
+            vim.bo[buf].shiftwidth  = 2
+            vim.bo[buf].tabstop     = 2
+            vim.bo[buf].softtabstop = 2
             vim.bo[buf].autoindent  = true
             vim.bo[buf].smartindent = false
             vim.bo[buf].cindent     = false
             vim.bo[buf].indentexpr  = "v:lua.asm_indent()"
 
-            -- on save: reindent whole file, restore view
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = buf,
               once   = false,
@@ -84,7 +83,6 @@
           end,
         })
 
-        -- also catch by filetype name in case extension matching differs
         vim.api.nvim_create_autocmd("FileType", {
           pattern  = { "asm", "s", "nasm", "gas" },
           callback = function(ev)
