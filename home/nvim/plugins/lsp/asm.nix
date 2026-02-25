@@ -1,204 +1,105 @@
-# {pkgs, ...}: {
-#   programs.nvf.settings.vim = {
-#     startPlugins = with pkgs.vimPlugins; [
-#       nvim-lspconfig
-#       nvim-treesitter.withAllGrammars
-#     ];
-#
-#     extraPackages = with pkgs; [
-#       asm-lsp
-#       asmfmt
-#     ];
-#
-#     luaConfigRC.assembly-fixed = ''
-#           -- CUSTOM INDENT FUNCTION
-#       _G.AsmIndent = function()
-#         local line_num = vim.v.lnum
-#         local line = vim.fn.getline(line_num)
-#         local prev_line = vim.fn.getline(line_num - 1)
-#
-#         -- Don't indent labels themselves
-#         if line:match("^%s*%w[%w_]*:") or line:match("^%s*%.%w+") then
-#           return 0
-#         end
-#
-#         -- Indent after labels (ends with :) or directives (starts with .)
-#         if prev_line:match(":%s*$") or prev_line:match("^%s*%.%w+%s*$") then
-#           return 2  -- 2 spaces of indent
-#         end
-#
-#         -- Keep previous indent for continuation
-#         local prev_indent = vim.fn.indent(line_num - 1)
-#         if prev_indent > 0 then
-#           return prev_indent
-#         end
-#
-#         return 0
-#       end
-#
-#       -- SAFE FORMAT FUNCTION
-#       local function safe_format()
-#         local buf = vim.api.nvim_get_current_buf()
-#         local file = vim.api.nvim_buf_get_name(buf)
-#         local out = vim.fn.system("asmfmt -w " .. vim.fn.shellescape(file))
-#         if vim.v.shell_error == 0 then
-#           vim.cmd("checktime")
-#         else
-#           vim.notify("asmfmt error: syntax likely invalid", vim.log.levels.WARN)
-#         end
-#       end
-#
-#       -- FORCE OVERRIDE TREESITTER INDENT
-#       local function force_asm_indent()
-#         vim.opt_local.cindent = false
-#         vim.opt_local.smartindent = false
-#         vim.opt_local.lisp = false
-#         vim.opt_local.autoindent = true
-#         vim.opt_local.indentexpr = "v:lua.AsmIndent()"
-#       end
-#
-#       -- FILETYPE CONFIGURATION
-#       vim.api.nvim_create_autocmd('FileType', {
-#         pattern = { 'asm', 's', 'S' },
-#         callback = function(args)
-#           -- Set indent immediately
-#           force_asm_indent()
-#
-#           -- Tab settings
-#           vim.opt_local.expandtab = false
-#           vim.opt_local.tabstop = 2
-#           vim.opt_local.shiftwidth = 2
-#           vim.opt_local.softtabstop = 2
-#
-#           vim.lsp.start({
-#             name = 'asm-lsp',
-#             cmd = { 'asm-lsp' },
-#             root_dir = vim.fs.root(args.buf, { '.git' }) or vim.fn.getcwd(),
-#           })
-#
-#           vim.keymap.set('n', '<leader>f', safe_format, {
-#             buffer = args.buf,
-#             desc = "Format ASM with asmfmt"
-#           })
-#
-#           vim.api.nvim_create_autocmd("BufWritePost", {
-#             buffer = args.buf,
-#             callback = safe_format,
-#           })
-#         end,
-#       })
-#
-#       -- NUCLEAR OPTION: Override treesitter again after buffer enter
-#       vim.api.nvim_create_autocmd('BufEnter', {
-#         pattern = { '*.asm', '*.s', '*.S' },
-#         callback = function()
-#           if vim.bo.filetype == 'asm' or vim.bo.filetype == 's' or vim.bo.filetype == 'S' then
-#             force_asm_indent()
-#           end
-#         end,
-#       })
-#     '';
-#   };
-# }
-{pkgs, ...}: {
-  programs.nvf.settings.vim = {
-    startPlugins = with pkgs.vimPlugins; [
-      nvim-lspconfig
-      nvim-treesitter.withAllGrammars
-    ];
-    extraPackages = with pkgs; [
-      asm-lsp
-      asmfmt
-      nasm
-    ];
-    luaConfigRC.assembly-fixed = ''
-      -- CUSTOM INDENT FUNCTION
-      _G.AsmIndent = function()
-        local line_num = vim.v.lnum
-        local line = vim.fn.getline(line_num)
-        local prev_line = vim.fn.getline(line_num - 1)
-        -- Don't indent labels themselves
-        if line:match("^%s*%w[%w_]*:") or line:match("^%s*%.%w+") then
-          return 0
+{...}: {
+  programs.nvf.settings = {
+    vim = {
+      luaConfigRC.asm-indent = ''
+        -- ── helpers ───────────────────────────────────────────────────────
+        local function is_section(s)
+          return s:match("^%.text%f[%s%c]")   or s:match("^%.text$")    or
+                 s:match("^%.data%f[%s%c]")   or s:match("^%.data$")    or
+                 s:match("^%.bss%f[%s%c]")    or s:match("^%.bss$")     or
+                 s:match("^%.rodata%f[%s%c]") or s:match("^%.rodata$")  or
+                 s:match("^%.section%s")       or
+                 s:match("^%.init%f[%s%c]")   or
+                 s:match("^%.fini%f[%s%c]")
         end
-        -- Indent after labels (ends with :) or directives (starts with .)
-        if prev_line:match(":%s*$") or prev_line:match("^%s*%.%w+%s*$") then
-          return 2  -- 2 spaces of indent
+
+        local function is_label(s)
+          return s:match("^[%a_][%w_%.]*:%s*$") or
+                 s:match("^%.[%a_][%w_%.]*:%s*$")
         end
-        -- Keep previous indent for continuation
-        local prev_indent = vim.fn.indent(line_num - 1)
-        if prev_indent > 0 then
-          return prev_indent
-        end
-        return 0
-      end
 
-      -- SAFE FORMAT FUNCTION
-      local function safe_format()
-        local buf = vim.api.nvim_get_current_buf()
-        local file = vim.api.nvim_buf_get_name(buf)
-        local out = vim.fn.system("asmfmt -w " .. vim.fn.shellescape(file))
-        if vim.v.shell_error == 0 then
-          vim.cmd("checktime")
-        else
-          vim.notify("asmfmt error: syntax likely invalid", vim.log.levels.WARN)
-        end
-      end
+        _G.asm_indent = function()
+          local lnum = vim.v.lnum
+          local line = vim.fn.getline(lnum)
+          local sw   = vim.fn.shiftwidth()
+          local s    = line:match("^%s*(.-)%s*$") or ""
 
-      -- FORCE OVERRIDE TREESITTER INDENT
-      local function force_asm_indent()
-        vim.opt_local.cindent = false
-        vim.opt_local.smartindent = false
-        vim.opt_local.lisp = false
-        vim.opt_local.autoindent = true
-        vim.opt_local.indentexpr = "v:lua.AsmIndent()"
-      end
-
-      -- FILETYPE CONFIGURATION
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'asm', 's', 'S' },
-        callback = function(args)
-          -- Set indent immediately
-          force_asm_indent()
-          -- Tab settings
-          vim.opt_local.expandtab = false
-          vim.opt_local.tabstop = 2
-          vim.opt_local.shiftwidth = 2
-          vim.opt_local.softtabstop = 2
-
-          -- Configure asm-lsp for AT&T syntax and x86 32-bit
-          vim.lsp.start({
-            name = 'asm-lsp',
-            cmd = { 'asm-lsp' },
-            root_dir = vim.fs.root(args.buf, { '.git' }) or vim.fn.getcwd(),
-            settings = {
-              ['asm-lsp'] = {
-                assembler = "gas",      -- GNU Assembler (AT&T syntax)
-                architecture = "x86",   -- 32-bit x86
-              }
-            }
-          })
-
-          vim.keymap.set('n', '<leader>f', safe_format, {
-            buffer = args.buf,
-            desc = "Format ASM with asmfmt"
-          })
-          vim.api.nvim_create_autocmd("BufWritePost", {
-            buffer = args.buf,
-            callback = safe_format,
-          })
-        end,
-      })
-
-      -- NUCLEAR OPTION: Override treesitter again after buffer enter
-      vim.api.nvim_create_autocmd('BufEnter', {
-        pattern = { '*.asm', '*.s', '*.S' },
-        callback = function()
-          if vim.bo.filetype == 'asm' or vim.bo.filetype == 's' or vim.bo.filetype == 'S' then
-            force_asm_indent()
+          if is_section(s) or is_label(s) then
+            return 0
           end
-        end,
-      })
-    '';
+
+          local prev     = vim.fn.prevnonblank(lnum - 1)
+          local prev_raw = prev > 0 and vim.fn.getline(prev) or ""
+          local ps       = prev_raw:match("^%s*(.-)%s*$") or ""
+
+          if s == "" then
+            if is_section(ps) or is_label(ps) then
+              return sw
+            end
+            return prev > 0 and vim.fn.indent(prev) or 0
+          end
+
+          if is_section(ps) or is_label(ps) then
+            return sw
+          end
+
+          return prev > 0 and vim.fn.indent(prev) or sw
+        end
+
+        -- ── apply options — deferred so we run AFTER any ftplugin ─────────
+        local function apply_asm_options(buf)
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(buf) then return end
+            local ft = vim.bo[buf].filetype
+            if not (ft == "asm" or ft == "s" or ft == "nasm" or ft == "gas") then
+              return
+            end
+
+            vim.bo[buf].expandtab   = true
+            vim.bo[buf].shiftwidth  = 4
+            vim.bo[buf].tabstop     = 4
+            vim.bo[buf].softtabstop = 4
+            vim.bo[buf].autoindent  = true
+            vim.bo[buf].smartindent = false
+            vim.bo[buf].cindent     = false
+            vim.bo[buf].indentexpr  = "v:lua.asm_indent()"
+
+            -- on save: reindent whole file, restore view
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = buf,
+              once   = false,
+              callback = function()
+                local view = vim.fn.winsaveview()
+                vim.cmd("silent keepjumps normal! gg=G")
+                vim.fn.winrestview(view)
+              end,
+            })
+          end)
+        end
+
+        vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+          pattern  = { "*.asm", "*.s", "*.S", "*.nasm" },
+          callback = function(ev)
+            apply_asm_options(ev.buf)
+          end,
+        })
+
+        -- also catch by filetype name in case extension matching differs
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern  = { "asm", "s", "nasm", "gas" },
+          callback = function(ev)
+            apply_asm_options(ev.buf)
+          end,
+        })
+      '';
+
+      languages = {
+        assembly = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = false;
+        };
+      };
+    };
   };
 }
