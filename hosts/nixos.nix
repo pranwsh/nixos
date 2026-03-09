@@ -19,6 +19,7 @@
     ../modules/boot.nix
     ../modules/kvm.nix
     ../modules/fish.nix
+    ../modules/usb.nix
     ../users/users.nix
   ];
 
