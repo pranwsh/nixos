@@ -6,8 +6,12 @@
   # Add user to plugdev group for USB device access
   users.users.pranesh.extraGroups = ["plugdev" "dialout"];
 
+  # Install usbutils (gives lsusb)
+  environment.systemPackages = with pkgs; [
+    usbutils
+  ];
+
   # Optional: Enable udev support for EV3 devices
-  # This ensures proper permissions for LEGO EV3 USB devices
   services.udev.extraRules = ''
     # LEGO EV3 USB access
     ATTR{idVendor}=="0694", ATTR{idProduct}=="0003", MODE="0666", GROUP="plugdev"
