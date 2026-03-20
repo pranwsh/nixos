@@ -12,6 +12,5 @@
     ./neotree.nix
     ./vimtex.nix
     ./bufferline.nix
-    ./indent.nix
   ];
 }
