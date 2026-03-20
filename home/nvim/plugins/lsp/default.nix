@@ -3,6 +3,7 @@
     ./c.nix
     ./asm.nix
     ./nix.nix
+    ./rust.nix
   ];
 
   programs.nvf.settings = {

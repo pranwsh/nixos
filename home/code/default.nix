@@ -5,5 +5,6 @@
     ./cpp.nix
     ./python.nix
     ./java.nix
+    ./rust.nix
   ];
 }
