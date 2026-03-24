@@ -1,4 +1,11 @@
-{...}: {
+{
+  config,
+  lib,
+  walNix,
+  ...
+}: let
+  c = (import "${walNix}/colors.nix").colorscheme;
+in {
   programs.nvf.settings = {
     vim = {
       theme = {
@@ -6,85 +13,55 @@
         name = "catppuccin";
         style = "frappe";
         transparent = true;
-
-        base16-colors = {
-        };
       };
 
       visuals = {
         nvim-web-devicons.enable = true;
       };
+
+      luaConfigRC.wal-colors = lib.hm.dag.entryAfter ["theme"] ''
+        require("catppuccin").setup({
+          transparent_background = true,
+          color_overrides = {
+            frappe = {
+              base     = "${c.color0}",
+              mantle   = "${c.color1}",
+              crust    = "${c.color2}",
+              surface0 = "${c.color3}",
+              surface1 = "${c.color4}",
+              surface2 = "${c.color5}",
+              overlay0 = "${c.color6}",
+              text     = "${c.color7}",
+              subtext0 = "${c.color8}",
+              subtext1 = "${c.color9}",
+              yellow   = "${c.color10}",
+              green    = "${c.color11}",
+              teal     = "${c.color12}",
+              blue     = "${c.color13}",
+              mauve    = "${c.color14}",
+              lavender = "${c.color15}",
+            },
+          },
+        })
+        vim.cmd.colorscheme("catppuccin-frappe")
+
+        local transparent_groups = {
+          "Normal", "NormalNC", "NormalFloat",
+          "SignColumn", "StatusLine", "StatusLineNC",
+          "TabLine", "TabLineFill", "TabLineSel",
+          "FloatBorder", "Pmenu", "PmenuSbar",
+          "NeoTreeNormal", "NeoTreeNormalNC",
+        }
+        for _, group in ipairs(transparent_groups) do
+          vim.api.nvim_set_hl(0, group, { bg = "none", ctermbg = "none" })
+          vim.api.nvim_set_hl(0, "Operator", { fg = "${c.color7}" })
+          vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "${c.color8}", bg = "none" })
+          vim.api.nvim_set_hl(0, "Comment",      { fg = "${c.color8}", bg = "none" })
+          vim.api.nvim_set_hl(0, "Delimiter",  { fg = "${c.color7}" })
+          vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "${c.color7}" })
+          vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "${c.color7}" })
+        end
+      '';
     };
   };
 }
-# {walNix, ...}: let
-#   c = (import "${walNix}/colors.nix").colorscheme;
-# in {
-#   programs.nvf.settings = {
-#     vim = {
-#       theme = {
-#         enable = true;
-#         name = "catppuccin";
-#         style = "frappe";
-#         transparent = true;
-#       };
-#
-#       # This runs AFTER everything else (including theme)
-#       luaConfigPost = ''
-#         require("catppuccin").setup({
-#           color_overrides = {
-#           i
-#             frappe = {
-#               -- Base colors
-#               base = "${c.color0}",
-#               mantle = "${c.color1}",
-#               crust = "${c.color2}",
-#
-#               -- Surface colors
-#               surface0 = "${c.color3}",
-#               surface1 = "${c.color4}",
-#               surface2 = "${c.color5}",
-#
-#               -- Overlay colors
-#               overlay0 = "${c.color6}",
-#               overlay1 = "${c.color7}",
-#               overlay2 = "${c.color8}",
-#
-#               -- Text colors
-#               text = "${c.color5}",
-#               subtext1 = "${c.color6}",
-#               subtext0 = "${c.color7}",
-#
-#               -- Accent colors
-#               blue = "${c.color13}",
-#               lavender = "${c.color13}",
-#               sapphire = "${c.color12}",
-#               sky = "${c.color12}",
-#               teal = "${c.color12}",
-#
-#               green = "${c.color11}",
-#               yellow = "${c.color10}",
-#               peach = "${c.color9}",
-#
-#               red = "${c.color8}",
-#               maroon = "${c.color8}",
-#               mauve = "${c.color14}",
-#               pink = "${c.color14}",
-#               flamingo = "${c.color15}",
-#               rosewater = "${c.color15}",
-#             },
-#           },
-#           transparent_background = true,
-#         })
-#
-#         vim.cmd.CatppuccinCompile()
-#         vim.cmd.colorscheme("catppuccin-frappe")
-#       '';
-#
-#       visuals = {
-#         nvim-web-devicons.enable = true;
-#       };
-#     };
-#   };
-# }
-
