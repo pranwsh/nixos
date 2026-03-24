@@ -10,7 +10,7 @@
           lsp.enable = true;
           lsp.servers = ["nil"];
           format.enable = true;
-          format.type = ["alejandra"];
+        format.type = ["alejandra"];
         };
       };
     };
