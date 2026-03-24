@@ -2,7 +2,7 @@
   programs.nvf.settings = {
     vim = {
       visuals = {
-        indent-blankline.enable = "true";
+        indent-blankline.enable = true;
       };
     };
   };
