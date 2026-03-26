@@ -1,11 +1,13 @@
-{ config, pkgs, lib, walNix, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  walNix,
+  ...
+}: let
   theme = config.style;
   c = (import "${walNix}/colors.nix").colorscheme;
-
-in 
-{
+in {
   home.packages = with pkgs; [
     kitty
     fish

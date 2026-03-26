@@ -1,5 +1,5 @@
 {lib, ...}: let
-  wallpaperPath = ./wallpapers/13-Ventura-Dark.jpg;
+  wallpaperPath = ./wallpapers/pple-carplay-ios-26-4000x2182-23298.jpg;
 
   base_colors = {
     bg = {
@@ -19,7 +19,7 @@
     };
   };
   opacity = {
-    bg = 0.6;
+    bg = .65;
     fg = 1.0;
     accent = 0.4;
   };

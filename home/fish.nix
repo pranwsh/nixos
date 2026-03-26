@@ -32,7 +32,7 @@
       printf '%s\n' ""
       set_color brcyan
       echo -n ' ◖'
-      set_color black -b brcyan   # black text on brcyan background
+      set_color 000000 -b brcyan   # black text on brcyan background
       echo -n (basename (pwd))
       set_color normal
       set_color brcyan
