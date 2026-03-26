@@ -8,7 +8,7 @@
   theme = config.style;
 in {
   home.packages = [
-    inputs.zen-browser.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.file.".zen/${profileName}/chrome" = {

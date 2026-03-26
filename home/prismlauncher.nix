@@ -1,7 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = [
-    inputs.PrismLaucnher-Cracked.packages.${pkgs.system}.default
+    inputs.PrismLaucnher-Cracked.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

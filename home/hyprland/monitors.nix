@@ -1,10 +1,10 @@
-{...}: {
+{pkgs, ...}: {
   services.kanshi = {
     enable = true;
-    systemdTarget = "graphical-session.target";
-    profiles = {
-      undocked = {
-        outputs = [
+    settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
           {
             criteria = "eDP-1";
             status = "enable";
@@ -13,9 +13,14 @@
             scale = 1.0;
           }
         ];
-      };
-      docked = {
-        outputs = [
+        profile.exec = [
+          "${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,1920x1080@60,0x0,1"
+          "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"
+        ];
+      }
+      {
+        profile.name = "docked";
+        profile.outputs = [
           {
             criteria = "eDP-1";
             status = "disable";
@@ -28,7 +33,10 @@
             scale = 1.0;
           }
         ];
-      };
-    };
+        profile.exec = [
+          "${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,disabled"
+        ];
+      }
+    ];
   };
 }
