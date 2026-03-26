@@ -1,12 +1,8 @@
 {
-  config,
-  lib,
   pkgs,
   inputs,
   ...
-}: 
-
-{
+}: {
   imports = [
     ./settings.nix
     ./windows.nix
@@ -16,13 +12,9 @@
     ./binds/default.nix
     ./groups.nix
   ];
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   };
-  
-  home.packages = with pkgs; [
-    
-  ];
 }
