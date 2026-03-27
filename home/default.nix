@@ -3,7 +3,7 @@
     ./code/default.nix
     ./style.nix
     ./hyprland/default.nix
-    ./cursor.nix
+    ./gtk.nix
     ./kitty.nix
     ./fish.nix
     ./zathura/zathura.nix
