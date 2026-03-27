@@ -25,7 +25,7 @@
   home.packages = [
     pkgs.clang-tools
     pkgs.tree-sitter
-    pkgs.wineWowPackages.stable
+    pkgs.wineWow64Packages.stable
     pkgs.gemini-cli
     pkgs.discord
     pkgs.libreoffice
