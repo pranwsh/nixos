@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   wayland.windowManager.hyprland.settings = {
     bind = [
       # =========================
@@ -29,13 +28,6 @@
       "$mainMod CTRL, J, moveintogroup, d"
       "$mainMod, P, moveoutofgroup"
       "$mainMod, L, lockactivegroup"
-
-      # =========================
-      # Split ratio (keep only)
-      # =========================
-      "$mainMod, equal, splitratio, +0.05"
-      "$mainMod, minus, splitratio, -0.05"
-      "$mainMod SHIFT, f, splitratio, exact 1"
     ];
   };
 }
