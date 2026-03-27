@@ -1,10 +1,9 @@
 # binds/variables.nix
-{ ... }:
-{
+{...}: {
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
     "$terminal" = "kitty";
-    "$browser" = "zen";
+    "$browser" = "zen-beta";
     "$spotify" = "spotify";
     "$menu" = "wofi";
     "$chromium" = "chromium";
