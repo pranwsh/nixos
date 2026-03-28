@@ -8,82 +8,124 @@
           lsp.enable = true;
           dap.enable = true;
           format.enable = true;
-          extensions.crates-nvim.enable = true;
+          # No crates-nvim, no extensions block
         };
       };
 
-      luaConfigRC.rust-extra = ''
-        -- Set as a function so rustaceanvim defers evaluation, and we
-        -- fully replace nvf's broken `on_attach = default_on_attach` reference.
+      luaConfigRC.rustaceanvim = ''
         vim.g.rustaceanvim = function()
           return {
             server = {
-
               on_attach = function(client, bufnr)
-                -- Standard LSP keymaps (replaces nvf's default_on_attach)
-                local map = function(keys, cmd, desc)
-                  vim.keymap.set("n", keys, cmd, { buffer = bufnr, silent = true, desc = desc })
+                local map = function(mode, keys, cmd, desc)
+                  vim.keymap.set(mode, keys, cmd, {
+                    buffer  = bufnr,
+                    silent  = true,
+                    desc    = "Rust: " .. desc,
+                  })
                 end
 
-                map("gd",         vim.lsp.buf.definition,      "Go to Definition")
-                map("gD",         vim.lsp.buf.declaration,     "Go to Declaration")
-                map("gr",         vim.lsp.buf.references,      "Go to References")
-                map("gi",         vim.lsp.buf.implementation,  "Go to Implementation")
-                map("gy",         vim.lsp.buf.type_definition, "Go to Type Definition")
-                map("<leader>rn", vim.lsp.buf.rename,          "Rename Symbol")
-                map("<leader>ca", vim.lsp.buf.code_action,     "Code Action")
-                map("<C-k>",      vim.lsp.buf.signature_help,  "Signature Help")
-                map("[d",         vim.diagnostic.goto_prev,    "Prev Diagnostic")
-                map("]d",         vim.diagnostic.goto_next,    "Next Diagnostic")
-                map("<leader>e",  vim.diagnostic.open_float,   "Show Diagnostic")
+                -- Standard LSP
+                map("n", "gd",          vim.lsp.buf.definition,      "Go to Definition")
+                map("n", "gD",          vim.lsp.buf.declaration,     "Go to Declaration")
+                map("n", "gr",          vim.lsp.buf.references,      "Go to References")
+                map("n", "gi",          vim.lsp.buf.implementation,  "Go to Implementation")
+                map("n", "gy",          vim.lsp.buf.type_definition, "Go to Type Definition")
+                map("n", "<leader>rn",  vim.lsp.buf.rename,          "Rename Symbol")
+                map("n", "<C-k>",       vim.lsp.buf.signature_help,  "Signature Help")
+                map("n", "[d",          vim.diagnostic.goto_prev,    "Prev Diagnostic")
+                map("n", "]d",          vim.diagnostic.goto_next,    "Next Diagnostic")
+                map("n", "<leader>e",   vim.diagnostic.open_float,   "Show Diagnostic")
 
-                -- Rustaceanvim-specific commands
-                map("K",           function() vim.cmd.RustLsp({ "hover", "actions" }) end, "Rust Hover Actions")
-                map("<leader>ra",  function() vim.cmd.RustLsp("codeAction")             end, "Rust Code Action")
-                map("<leader>re",  function() vim.cmd.RustLsp("expandMacro")            end, "Expand Macro")
-                map("<leader>rr",  function() vim.cmd.RustLsp("runnables")              end, "Runnables")
-                map("<leader>rd",  function() vim.cmd.RustLsp("debuggables")            end, "Debuggables")
-                map("<leader>rt",  function() vim.cmd.RustLsp("testables")              end, "Testables")
-                map("<leader>rp",  function() vim.cmd.RustLsp("parentModule")           end, "Parent Module")
-                map("<leader>rj",  function() vim.cmd.RustLsp("joinLines")              end, "Join Lines")
+                -- Rustaceanvim-specific
+                map("n", "K",           function() vim.cmd.RustLsp({ "hover", "actions" }) end, "Hover Actions")
+                map("n", "<leader>ca",  function() vim.cmd.RustLsp("codeAction")            end, "Code Action")
+                map("n", "<leader>re",  function() vim.cmd.RustLsp("expandMacro")           end, "Expand Macro")
+                map("n", "<leader>rr",  function() vim.cmd.RustLsp("runnables")             end, "Runnables")
+                map("n", "<leader>rd",  function() vim.cmd.RustLsp("debuggables")           end, "Debuggables")
+                map("n", "<leader>rt",  function() vim.cmd.RustLsp("testables")             end, "Testables")
+                map("n", "<leader>rp",  function() vim.cmd.RustLsp("parentModule")          end, "Parent Module")
+                map("n", "<leader>rj",  function() vim.cmd.RustLsp("joinLines")             end, "Join Lines")
+                map("n", "<leader>rm",  function() vim.cmd.RustLsp("renderDiagnostic")      end, "Render Diagnostic")
+                map("n", "<leader>ro",  function() vim.cmd.RustLsp("openDocs")              end, "Open Docs")
 
+                vim.diagnostic.enable(bufnr)
                 vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
               end,
 
               default_settings = {
                 ["rust-analyzer"] = {
                   cargo = {
-                    allFeatures = true,
-                    buildScripts = { enable = true },
+                    allFeatures   = true,
+                    buildScripts  = { enable = true },
                   },
-                  check = { command = "clippy" },
+                  check    = { command = "clippy" },
                   procMacro = { enable = true },
 
                   inlayHints = {
-                    chainingHints      = { enable = true },
-                    parameterHints     = { enable = true },
-                    typeHints          = { enable = true },
+                    bindingModeHints       = { enable = true },
+                    chainingHints          = { enable = true },
+                    closingBraceHints      = { enable = true, minLines = 25 },
                     closureReturnTypeHints = { enable = "always" },
                     lifetimeElisionHints   = { enable = "skip_trivial" },
+                    parameterHints         = { enable = true },
+                    typeHints              = { enable = true },
                   },
-                  completion = { autoimport = { enable = true } },
+
+                  completion = {
+                    autoimport   = { enable = true },
+                    autoself     = { enable = true },
+                    callable     = { snippets = "fill_arguments" },
+                  },
+
                   lens = {
-                    enable = true,
-                    run            = { enable = true },
-                    debug          = { enable = true },
-                    implementations = { enable = true },
+                    enable           = true,
+                    run              = { enable = true },
+                    debug            = { enable = true },
+                    implementations  = { enable = true },
+                    references       = {
+                      adt        = { enable = true },
+                      enumVariant = { enable = true },
+                      method     = { enable = true },
+                      trait      = { enable = true },
+                    },
+                  },
+
+                  diagnostics = {
+                    enable            = true,
+                    experimental      = { enable = true },
+                    styleLints        = { enable = true },
                   },
                 },
               },
             },
+
+            tools = {
+              hover_actions = { auto_focus = true },
+              float_win_config = { border = "rounded" },
+            },
           }
         end
 
+        -- Format on save
         vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = "*.rs",
+          pattern  = "*.rs",
           callback = function()
             vim.lsp.buf.format({ timeout_ms = 3000, async = false })
           end,
+        })
+
+        -- Ensure diagnostics are always fully visible
+        vim.diagnostic.config({
+          virtual_text    = true,
+          signs           = true,
+          underline       = true,
+          update_in_insert = false,
+          severity_sort   = true,
+          float = {
+            border = "rounded",
+            source = "always",
+          },
         })
       '';
     };

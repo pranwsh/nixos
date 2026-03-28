@@ -5,7 +5,7 @@
   ...
 }: let
   c = (import "${walNix}/colors.nix").colorscheme;
-  useWal = true; # set to false for default catppuccin mocha
+  useWal = false; # set to false for default catppuccin mocha
 in {
   programs.nvf.settings = {
     vim = {

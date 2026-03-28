@@ -1,42 +1,29 @@
-{pkgs, ...}: {
-  services.kanshi = {
-    enable = true;
-    settings = [
-      {
-        profile.name = "undocked";
-        profile.outputs = [
-          {
-            criteria = "eDP-1";
-            status = "enable";
-            mode = "1920x1080@60.164001";
-            position = "0,0";
-            scale = 1.0;
-          }
-        ];
-        profile.exec = [
-          "${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,1920x1080@60,0x0,1"
-          "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"
-        ];
-      }
-      {
-        profile.name = "docked";
-        profile.outputs = [
-          {
-            criteria = "eDP-1";
-            status = "disable";
-            position = "-1920,0";
-          }
-          {
-            criteria = "HDMI-A-1";
-            mode = "2560x1080@60.000000";
-            position = "0,0";
-            scale = 1.0;
-          }
-        ];
-        profile.exec = [
-          "${pkgs.hyprland}/bin/hyprctl keyword monitor eDP-1,disabled"
-        ];
-      }
-    ];
-  };
+{pkgs, ...}: let
+  monitorScript = pkgs.writeShellScriptBin "hypr-monitor-switch" ''
+    handle() {
+      case "$1" in
+        monitoradded*)
+          hyprctl keyword monitor "HDMI-A-1,preferred,auto,1"
+          hyprctl keyword monitor "eDP-1,disable"
+          ;;
+        monitorremoved*)
+          hyprctl keyword monitor "eDP-1,preferred,auto,1"
+          ;;
+      esac
+    }
+
+    socat - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" \
+      | while read -r line; do handle "$line" && sleep 0.1; done
+  '';
+in {
+  home.packages = [pkgs.socat];
+
+  wayland.windowManager.hyprland.settings.monitor = [
+    "eDP-1,preferred,auto,1"
+    "HDMI-A-1,preferred,auto,1"
+  ];
+
+  wayland.windowManager.hyprland.settings.exec-once = [
+    "${monitorScript}/bin/hypr-monitor-switch"
+  ];
 }
