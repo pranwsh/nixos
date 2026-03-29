@@ -5,13 +5,12 @@
         rust = {
           enable = true;
           treesitter.enable = true;
-          lsp.enable = true;
+          lsp.enable = false;
           dap.enable = true;
           format.enable = true;
           # No crates-nvim, no extensions block
         };
       };
-
       luaConfigRC.rustaceanvim = ''
         vim.g.rustaceanvim = function()
           return {
@@ -24,7 +23,6 @@
                     desc    = "Rust: " .. desc,
                   })
                 end
-
                 -- Standard LSP
                 map("n", "gd",          vim.lsp.buf.definition,      "Go to Definition")
                 map("n", "gD",          vim.lsp.buf.declaration,     "Go to Declaration")
@@ -36,7 +34,6 @@
                 map("n", "[d",          vim.diagnostic.goto_prev,    "Prev Diagnostic")
                 map("n", "]d",          vim.diagnostic.goto_next,    "Next Diagnostic")
                 map("n", "<leader>e",   vim.diagnostic.open_float,   "Show Diagnostic")
-
                 -- Rustaceanvim-specific
                 map("n", "K",           function() vim.cmd.RustLsp({ "hover", "actions" }) end, "Hover Actions")
                 map("n", "<leader>ca",  function() vim.cmd.RustLsp("codeAction")            end, "Code Action")
@@ -48,11 +45,8 @@
                 map("n", "<leader>rj",  function() vim.cmd.RustLsp("joinLines")             end, "Join Lines")
                 map("n", "<leader>rm",  function() vim.cmd.RustLsp("renderDiagnostic")      end, "Render Diagnostic")
                 map("n", "<leader>ro",  function() vim.cmd.RustLsp("openDocs")              end, "Open Docs")
-
-                vim.diagnostic.enable(bufnr)
                 vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
               end,
-
               default_settings = {
                 ["rust-analyzer"] = {
                   cargo = {
@@ -61,7 +55,6 @@
                   },
                   check    = { command = "clippy" },
                   procMacro = { enable = true },
-
                   inlayHints = {
                     bindingModeHints       = { enable = true },
                     chainingHints          = { enable = true },
@@ -71,13 +64,11 @@
                     parameterHints         = { enable = true },
                     typeHints              = { enable = true },
                   },
-
                   completion = {
                     autoimport   = { enable = true },
                     autoself     = { enable = true },
                     callable     = { snippets = "fill_arguments" },
                   },
-
                   lens = {
                     enable           = true,
                     run              = { enable = true },
@@ -90,7 +81,6 @@
                       trait      = { enable = true },
                     },
                   },
-
                   diagnostics = {
                     enable            = true,
                     experimental      = { enable = true },
@@ -99,14 +89,12 @@
                 },
               },
             },
-
             tools = {
               hover_actions = { auto_focus = true },
               float_win_config = { border = "rounded" },
             },
           }
         end
-
         -- Format on save
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern  = "*.rs",
@@ -114,7 +102,6 @@
             vim.lsp.buf.format({ timeout_ms = 3000, async = false })
           end,
         })
-
         -- Ensure diagnostics are always fully visible
         vim.diagnostic.config({
           virtual_text    = true,
