@@ -6,5 +6,8 @@
     ./python.nix
     ./java.nix
     ./rust.nix
+    ./go.nix
+    ./prolog.nix
+    ./lisp.nix
   ];
 }

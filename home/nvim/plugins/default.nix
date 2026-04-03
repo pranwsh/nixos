@@ -7,5 +7,6 @@
     ./completion.nix
     ./autopairs.nix
     ./indentblankline.nix
+    ./molten.nix
   ];
 }
