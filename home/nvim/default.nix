@@ -26,6 +26,7 @@ let
   treesitterParsers = p: [
     # Core / meta
     p.lua p.vim p.vimdoc p.query p.regex
+    p.nix
 
     # Markup / config
     # p.bash p.json p.yaml p.toml
@@ -78,7 +79,6 @@ in
 
       # ── Treesitter ───────────────────────────────────────────────────────
       treesitterWithParsers
-      nvim-treesitter
 
       # ── Linting ──────────────────────────────────────────────────────────
       nvim-lint

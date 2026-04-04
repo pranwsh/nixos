@@ -6,7 +6,7 @@
 
 -- ── Leader ───────────────────────────────────────────────────────────────────
 vim.g.mapleader      = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 
 -- ── Options ──────────────────────────────────────────────────────────────────
 local opt = vim.opt
@@ -101,4 +101,10 @@ require("core.snippets").setup()
 require("core.cmp").setup()
 require("core.lsp").setup(lsp_servers)
 require("core.lint").setup(lint_by_ft)
-require("core.treesitter").setup()
+-- require("core.treesitter").setup()
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("core.treesitter").setup()
+  end,
+})
