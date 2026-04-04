@@ -36,6 +36,8 @@
     pkgs.lmms
     pkgs.ranger
     pkgs.distrobox
+    pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+
   ];
 
   home.stateVersion = "24.11";
