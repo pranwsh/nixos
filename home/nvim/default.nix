@@ -28,8 +28,8 @@ let
     p.lua p.vim p.vimdoc p.query p.regex
 
     # Markup / config
-    p.bash p.json p.jsonc p.yaml p.toml
-    p.markdown p.markdown_inline
+    # p.bash p.json p.yaml p.toml
+    # p.markdown p.markdown_inline
 
     # Languages
     p.python
@@ -78,6 +78,7 @@ in
 
       # ── Treesitter ───────────────────────────────────────────────────────
       treesitterWithParsers
+      nvim-treesitter
 
       # ── Linting ──────────────────────────────────────────────────────────
       nvim-lint
