@@ -50,6 +50,13 @@ opt.laststatus = 0
 -- Remove empty line indicators (~)
 opt.fillchars:append({ eob = " " })
 
+-- clipboard
+opt.clipboard = "unnamedplus"
+
+wo.numberwidth = 2
+
+
+
 -- ── Global Keymaps ───────────────────────────────────────────────────────────
 local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
