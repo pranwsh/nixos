@@ -82,6 +82,8 @@ in
 
       # ── Linting ──────────────────────────────────────────────────────────
       nvim-lint
+
+      which-key-nvim
     ];
 
     # Language-server / linter / formatter binaries go on PATH for neovim

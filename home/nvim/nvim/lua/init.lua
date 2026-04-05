@@ -7,6 +7,18 @@
 -- ── Load Options & Keymaps ───────────────────────────────────────────────────
 require("options")
 
+-- load plugins
+local plugins_dir = vim.fn.stdpath("config") .. "/lua/plugins"
+local plugin_files = vim.fn.glob(plugins_dir .. "/*.lua", false, true)
+
+for _, path in ipairs(plugin_files) do
+  local mod_name = "plugins." .. vim.fn.fnamemodify(path, ":t:r")
+  local ok, err = pcall(require, mod_name)
+  if not ok then
+    vim.notify("[init] failed to load " .. mod_name .. ": " .. err, vim.log.levels.WARN)
+  end
+end
+
 -- ── Auto-discover lang specs ─────────────────────────────────────────────────
 -- Each file in langs/ returns a table of the shape:
 --   {
