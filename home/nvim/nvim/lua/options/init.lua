@@ -2,7 +2,6 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 -- Vim Options & Global Keymaps
 -- ─────────────────────────────────────────────────────────────────────────────
-
 -- ── Leader ───────────────────────────────────────────────────────────────────
 vim.g.mapleader      = " "
 vim.g.maplocalleader = ","
@@ -40,6 +39,16 @@ opt.completeopt     = { "menuone", "noselect" }
 opt.undofile        = true
 opt.swapfile        = false
 opt.backup          = false
+
+
+-- Remove current line highlight
+opt.cursorline = false
+
+-- Hide statusline completely
+opt.laststatus = 0
+
+-- Remove empty line indicators (~)
+opt.fillchars:append({ eob = " " })
 
 -- ── Global Keymaps ───────────────────────────────────────────────────────────
 local map = function(mode, lhs, rhs, desc)

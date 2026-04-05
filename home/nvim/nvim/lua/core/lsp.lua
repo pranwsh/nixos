@@ -65,8 +65,7 @@ function M.setup(servers)
   })
 
   -- ── Register every server supplied by langs ─────────────────────────────
-  local lspconfig = require("lspconfig")
-
+  -- NOTE: `lspconfig` is no longer required directly in Neovim 0.11+
   for server, opts in pairs(servers) do
     -- Each server inherits shared capabilities; opts may override any field
     opts.capabilities = vim.tbl_deep_extend(
@@ -74,7 +73,8 @@ function M.setup(servers)
       capabilities,
       opts.capabilities or {}
     )
-    lspconfig[server].setup(opts)
+    -- ✅ Neovim 0.11+ API: replaces lspconfig[server].setup(opts)
+    vim.lsp.config(server, opts)
   end
 end
 
