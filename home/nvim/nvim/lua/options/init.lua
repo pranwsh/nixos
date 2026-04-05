@@ -53,7 +53,8 @@ opt.fillchars:append({ eob = " " })
 -- clipboard
 opt.clipboard = "unnamedplus"
 
-wo.numberwidth = 2
+vim.wo.numberwidth = 2
+
 
 
 
