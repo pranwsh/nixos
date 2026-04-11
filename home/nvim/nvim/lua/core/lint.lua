@@ -1,37 +1,20 @@
--- ─────────────────────────────────────────────────────────────────────────────
 -- core/lint.lua
--- Wires nvim-lint with the linters_by_ft table merged from all langs/*.lua.
--- Nothing language-specific lives here.
--- ─────────────────────────────────────────────────────────────────────────────
+-- Drives nvim-lint. Linters are wired per-filetype from langs/ specs.
 
 local M = {}
 
 function M.setup(linters_by_ft)
-  local lint = require("lint")
+  local ok, lint = pcall(require, "lint")
+  if not ok then return end
 
   lint.linters_by_ft = linters_by_ft
 
-  -- ── Trigger linting ───────────────────────────────────────────────────
-  -- BufWritePost  → after saving
-  -- BufReadPost   → after opening / reloading a file
-  -- InsertLeave   → when leaving insert mode
-  local group = vim.api.nvim_create_augroup("UserLint", { clear = true })
-
-  vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-    group    = group,
+  -- Run linters on save and when leaving insert mode.
+  vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
     callback = function()
-      -- Only lint if a linter exists for the current filetype
-      local ft = vim.bo.filetype
-      if ft ~= "" and lint.linters_by_ft[ft] then
-        lint.try_lint()
-      end
+      lint.try_lint()
     end,
   })
-
-  -- Manual trigger
-  vim.keymap.set("n", "<leader>ll", function()
-    lint.try_lint()
-  end, { silent = true, desc = "Run linter" })
 end
 
 return M

@@ -1,92 +1,94 @@
-{ config, pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # To add a new language:
 #   1. Create nvim/lua/langs/<name>.lua  (see python.lua for the spec format)
 #   2. Add its LSP / linter / formatter binaries to langPackages.<name> below
-#   3. Add its treesitter parser to the treesitterParsers list below
+#   3. Add its treesitter parser to treesitterParsers below
 #   4. Rebuild: home-manager switch
 # ─────────────────────────────────────────────────────────────────────────────
 
 let
 
   # ── Per-language external binaries ────────────────────────────────────────
-  # Keys should match the name of the file in nvim/lua/langs/ (cosmetic only).
   langPackages = {
     python = with pkgs; [
-      pyright   # LSP
-      ruff      # linter / formatter
+      pyright
+      ruff
     ];
-
-    # nix = with pkgs; [ nil nixpkgs-fmt ];  # ← uncomment to add Nix
-    # lua = with pkgs; [ lua-language-server stylua ];
+    nix = with pkgs; [
+      nixd
+      nixfmt
+      statix
+    ];
+    lua = with pkgs; [
+      lua-language-server
+      selene
+    ];
+    go = with pkgs; [
+      gopls
+      golangci-lint
+    ];
   };
 
-  # ── Treesitter parsers ────────────────────────────────────────────────────
-  treesitterParsers = p: [
-    # Core / meta
-    p.lua p.vim p.vimdoc p.query p.regex
-    p.nix
+  # ── Derived ───────────────────────────────────────────────────────────────
 
-    # Markup / config
-    # p.bash p.json p.yaml p.toml
-    # p.markdown p.markdown_inline
-
-    # Languages
-    p.python
-
-    # p.nix          # ← add when you add a nix lang file
-    # p.rust
-    # p.go
-    # p.typescript p.tsx p.javascript
-  ];
-
-  # ── Build derived values ──────────────────────────────────────────────────
-  treesitterWithParsers =
-    pkgs.vimPlugins.nvim-treesitter.withPlugins treesitterParsers;
-
-  allExtraPackages =
-    lib.flatten (lib.attrValues langPackages);
+  allExtraPackages = lib.flatten (lib.attrValues langPackages);
 
 in
 {
-  # ── Copy the Lua config verbatim into ~/.config/nvim ──────────────────────
+
+  # ── Copy Lua config verbatim into ~/.config/nvim ──────────────────────────
   home.file.".config/nvim" = {
-    source   = ./nvim;
+    source = ./nvim;
     recursive = true;
   };
 
-  # ── Neovim + plugins (all from nixpkgs, zero runtime package managers) ────
+  # ── Neovim + plugins ──────────────────────────────────────────────────────
   programs.neovim = {
-    enable        = true;
+    enable = true;
     defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
-      # ── LSP ──────────────────────────────────────────────────────────────
+      # ── LSP ───────────────────────────────────────────────────────────────
       nvim-lspconfig
 
-      # ── Completion ───────────────────────────────────────────────────────
+      # ── Completion ────────────────────────────────────────────────────────
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
       cmp-cmdline
 
-      # ── Snippets ─────────────────────────────────────────────────────────
+      # ── Snippets ──────────────────────────────────────────────────────────
       luasnip
       cmp_luasnip
       friendly-snippets
 
-      # ── Treesitter ───────────────────────────────────────────────────────
-      treesitterWithParsers
+      # ── Treesitter ────────────────────────────────────────────────────────
+      nvim-treesitter.withAllGrammars
 
-      # ── Linting ──────────────────────────────────────────────────────────
+      # ── Linting ───────────────────────────────────────────────────────────
       nvim-lint
 
+      # ── Language-specific ─────────────────────────────────────────────────
+      rustaceanvim
+
+      # ── UI ────────────────────────────────────────────────────────────────
+      catppuccin-nvim
       which-key-nvim
+      indent-blankline-nvim
+
+      # ── Mini suite ────────────────────────────────────────────────────────
+      mini-nvim
+
+      vimtex
     ];
 
-    # Language-server / linter / formatter binaries go on PATH for neovim
     extraPackages = allExtraPackages;
   };
 }

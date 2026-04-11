@@ -1,5 +1,6 @@
-{lib, ...}: let
-  wallpaperPath = ./wallpapers/pple-carplay-ios-26-4000x2182-23298.jpg;
+{ lib, ... }:
+let
+  wallpaperPath = ./wallpapers/red;
 
   base_colors = {
     bg = {
@@ -23,10 +24,11 @@
     fg = 1.0;
     accent = 0.4;
   };
-in {
+in
+{
   options.style = lib.mkOption {
     type = lib.types.attrs;
-    default = {};
+    default = { };
   };
 
   config.style = {

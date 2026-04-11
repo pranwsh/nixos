@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./code/default.nix
     ./style.nix
@@ -17,27 +18,21 @@
     ./wofi.nix
     ./pywal.nix
     ./scripts/nixify/nixify.nix
+    ./kdeconnect.nix
   ];
 
   home.username = "pranesh";
   home.homeDirectory = "/home/pranesh";
 
   home.packages = [
-    pkgs.clang-tools
-    pkgs.tree-sitter
     pkgs.wineWow64Packages.stable
-    pkgs.gemini-cli
     pkgs.discord
     pkgs.libreoffice
     pkgs.qemu
     pkgs.chromium
     pkgs.bluetui
     pkgs.impala
-    pkgs.lmms
-    pkgs.ranger
-    pkgs.distrobox
-    pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-
+    pkgs.yazi
   ];
 
   home.stateVersion = "24.11";

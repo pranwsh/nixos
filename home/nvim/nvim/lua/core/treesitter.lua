@@ -1,45 +1,24 @@
--- ─────────────────────────────────────────────────────────────────────────────
--- core/treesitter.lua
--- Treesitter configuration.  Parsers are installed by Nix (via
--- nvim-treesitter.withPlugins in default.nix), so ensure_installed = {}
--- and auto_install = false.  Add parsers in default.nix, not here.
--- ─────────────────────────────────────────────────────────────────────────────
-
 local M = {}
-
 function M.setup()
-  require("nvim-treesitter.configs").setup({
-    -- Parsers come from Nix — do NOT let treesitter try to compile any
-    ensure_installed = {},
-    auto_install     = false,
-    sync_install     = false,
+  vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+      -- Skip virtual/internal filetypes that have no treesitter parser
+      local ft = vim.bo[ev.buf].filetype
+      if ft == "" or ft == nil then return end
 
-    highlight = {
-      enable  = true,
-      -- Disable vim regex highlighting for filetypes treesitter handles well
-      additional_vim_regex_highlighting = false,
-    },
-
-    indent = {
-      enable = true,
-    },
-
-    incremental_selection = {
-      enable  = true,
-      keymaps = {
-        init_selection    = "<C-space>",
-        node_incremental  = "<C-space>",
-        scope_incremental = "<C-s>",
-        node_decremental  = "<M-space>",
-      },
-    },
+      -- Check a parser actually exists before trying to start one
+      local ok, err = pcall(vim.treesitter.start, ev.buf)
+      if not ok and not err:find("no parser") and not err:find("could not be created") then
+        vim.notify("[treesitter] " .. err, vim.log.levels.WARN)
+      end
+    end,
   })
 
-  -- ── Folding via treesitter (optional, off by default) ─────────────────
-  -- Uncomment to enable treesitter-based folding:
-  -- vim.opt.foldmethod = "expr"
-  -- vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
-  -- vim.opt.foldenable = false   -- open all folds on start
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function(ev)
+      vim.lsp.buf.format({ bufnr = ev.buf, async = false })
+    end,
+  })
 end
 
 return M

@@ -1,39 +1,23 @@
--- ─────────────────────────────────────────────────────────────────────────────
 -- core/snippets.lua
--- Initialises LuaSnip and loads the VSCode-format snippet collection
--- provided by friendly-snippets (installed via Nix).
--- ─────────────────────────────────────────────────────────────────────────────
+-- Minimal LuaSnip bootstrap. Friendly-snippets are loaded if available.
 
 local M = {}
 
 function M.setup()
-  local luasnip = require("luasnip")
+  local ok, ls = pcall(require, "luasnip")
+  if not ok then return end
 
-  luasnip.config.set_config({
-    history    = true,               -- jump back into exited snippets
-    updateevents = "TextChanged,TextChangedI",
-    enable_autosnippets = false,
-    ext_opts = {
-      [require("luasnip.util.types").choiceNode] = {
-        active = { virt_text = { { "●", "GruvboxOrange" } } },
-      },
-    },
+  ls.config.set_config({
+    history        = true,
+    updateevents   = "TextChanged,TextChangedI",
+    delete_check_events = "TextChanged",
   })
 
-  -- Load all VSCode-style snippets from runtimepath
-  -- (friendly-snippets is on runtimepath because Nix added it to start packages)
-  require("luasnip.loaders.from_vscode").lazy_load()
-
-  -- Also pick up any hand-written snippets placed in ~/.config/nvim/snippets/
-  require("luasnip.loaders.from_vscode").lazy_load({
-    paths = { vim.fn.stdpath("config") .. "/snippets" },
-  })
-
-  -- ── Useful snippet keymaps ─────────────────────────────────────────────
-  -- (Tab / S-Tab for jumping are handled inside core/cmp.lua)
-  vim.keymap.set({ "i", "s" }, "<C-l>", function()
-    if luasnip.choice_active() then luasnip.change_choice(1) end
-  end, { silent = true, desc = "LuaSnip: cycle choice" })
+  -- Load VS Code-style snippets (friendly-snippets, etc.) if the loader exists.
+  local loader_ok, loader = pcall(require, "luasnip.loaders.from_vscode")
+  if loader_ok then
+    loader.lazy_load()
+  end
 end
 
 return M

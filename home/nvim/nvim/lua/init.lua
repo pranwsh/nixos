@@ -1,70 +1,75 @@
 -- lua/init.lua
 -- ─────────────────────────────────────────────────────────────────────────────
--- Main Init File
--- Loads options/keymaps, auto-discovers lang specs, then bootstraps core modules.
+-- Entry point. Loads options, plugins, discovers lang specs, boots core.
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- ── Load Options & Keymaps ───────────────────────────────────────────────────
 require("options")
 
--- load plugins
-local plugins_dir = vim.fn.stdpath("config") .. "/lua/plugins"
-local plugin_files = vim.fn.glob(plugins_dir .. "/*.lua", false, true)
+-- ── Plugins ──────────────────────────────────────────────────────────────────
+-- Each file in plugins/ is loaded unconditionally at startup.
 
-for _, path in ipairs(plugin_files) do
-  local mod_name = "plugins." .. vim.fn.fnamemodify(path, ":t:r")
-  local ok, err = pcall(require, mod_name)
-  if not ok then
-    vim.notify("[init] failed to load " .. mod_name .. ": " .. err, vim.log.levels.WARN)
+local function load_dir(dir, prefix)
+  for _, path in ipairs(vim.fn.glob(dir .. "/*.lua", false, true)) do
+    local mod = prefix .. "." .. vim.fn.fnamemodify(path, ":t:r")
+    local ok, err = pcall(require, mod)
+    if not ok then
+      vim.notify("[init] failed to load " .. mod .. ": " .. err, vim.log.levels.WARN)
+    end
   end
 end
 
--- ── Auto-discover lang specs ─────────────────────────────────────────────────
--- Each file in langs/ returns a table of the shape:
---   {
---     lsp  = { servers = { <server_name> = <lspconfig_opts> } },
---     lint = { linters_by_ft = { <filetype> = { "<linter>", ... } } },
---   }
--- Sections are optional — a lang file may omit any key it doesn't need.
+load_dir(vim.fn.stdpath("config") .. "/lua/plugins", "plugins")
 
-local langs_dir = vim.fn.stdpath("config") .. "/lua/langs"
-local lang_files = vim.fn.glob(langs_dir .. "/*.lua", false, true)
+-- ── Lang spec discovery ───────────────────────────────────────────────────────
+-- Each file in langs/ returns a table with any of:
+--   lsp  = { servers      = { [server_name] = opts } }
+--   lint = { linters_by_ft = { [filetype]   = { "linter", ... } } }
 
--- Merged containers
-local lsp_servers = {}   -- { server_name = opts }
-local lint_by_ft  = {}   -- { filetype    = { linters } }
+local lsp_servers = {}
+local lint_by_ft  = {}
 
-for _, path in ipairs(lang_files) do
-  local mod_name = "langs." .. vim.fn.fnamemodify(path, ":t:r")
-  local ok, spec = pcall(require, mod_name)
+for _, path in ipairs(vim.fn.glob(vim.fn.stdpath("config") .. "/lua/langs/*.lua", false, true)) do
+  local mod = "langs." .. vim.fn.fnamemodify(path, ":t:r")
+  local ok, spec = pcall(require, mod)
   if not ok then
-    vim.notify("[init] failed to load " .. mod_name .. ": " .. spec, vim.log.levels.WARN)
+    vim.notify("[init] failed to load " .. mod .. ": " .. spec, vim.log.levels.WARN)
   else
-    -- LSP
-    if spec.lsp and spec.lsp.servers then
-      for server, opts in pairs(spec.lsp.servers) do
+    if spec.lsp then
+      for server, opts in pairs(spec.lsp.servers or {}) do
         lsp_servers[server] = opts
       end
     end
-    -- Lint
-    if spec.lint and spec.lint.linters_by_ft then
-      for ft, linters in pairs(spec.lint.linters_by_ft) do
+    if spec.lint then
+      for ft, linters in pairs(spec.lint.linters_by_ft or {}) do
         lint_by_ft[ft] = linters
       end
     end
   end
 end
 
--- ── Bootstrap core modules ───────────────────────────────────────────────────
--- Order matters: snippets → cmp → lsp (cmp capabilities needed for lsp)
+-- ── Core bootstrap ────────────────────────────────────────────────────────────
+-- Order matters: snippets → cmp (needs snippet source) → lsp (needs cmp caps).
+local function setup(mod, ...)
+  local ok, m = pcall(require, mod)
+  if not ok then
+    vim.notify("[init] failed to load " .. mod .. ": " .. m, vim.log.levels.ERROR)
+    return
+  end
+  if m.setup then
+    local ok2, err = pcall(m.setup, m, ...)
+    if not ok2 then
+      vim.notify("[init] " .. mod .. ".setup() failed: " .. err, vim.log.levels.ERROR)
+    end
+  end
+end
+
 require("core.snippets").setup()
 require("core.cmp").setup()
 require("core.lsp").setup(lsp_servers)
 require("core.lint").setup(lint_by_ft)
+require("core.treesitter").setup()
 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "VeryLazy",
-  callback = function()
-    require("core.treesitter").setup()
-  end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern  = "VeryLazy",
+--   callback = function() require("core.treesitter").setup() end,
+-- })

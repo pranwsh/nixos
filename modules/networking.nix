@@ -1,96 +1,10 @@
-# {
-#   config,
-#   lib,
-#   pkgs,
-#   ...
-# }: {
-#   # 1. Disable the heavy/old stuff
-#   networking.networkmanager.enable = false;
-#   networking.wireless.enable = false; # This disables wpa_supplicant
-#   networking.useDHCP = false; # Disable global DHCP (we will enable per-interface)
-#
-#   # 2. Enable iwd ONLY for Layer 2 (Connecting to WiFi)
-#   networking.wireless.iwd = {
-#     enable = true;
-#     settings = {
-#       General = {
-#         # IMPORTANT: Disable iwd's internal network config.
-#         # We want systemd-networkd to do the IP stuff.
-#         EnableNetworkConfiguration = false;
-#       };
-#       Network = {
-#         EnableIPv6 = true;
-#         # iwd doesn't need to manage DNS directly anymore
-#       };
-#     };
-#   };
-#
-#   # 3. Enable systemd-networkd for Layer 3 (IP & DHCP)
-#   systemd.network.enable = true;
-#
-#   # 4. Configure networkd to pick up the wireless interface
-#   # "wlan0" is standard, but "w*" acts as a wildcard for any wifi interface
-#   systemd.network.networks."25-wireless" = {
-#     matchConfig.Name = "w*";
-#     networkConfig = {
-#       DHCP = "yes";
-#       IgnoreCarrierLoss = "3s"; # Helps prevent flaps while roaming
-#     };
-#   };
-#
-#   # 5. DNS Resolution
-#   services.resolved = {
-#     enable = true;
-#     # settings.Resolve.DNSSEC = "allow-downgrade";
-#     # settings.Resolve.Domains = ["~."];
-#     # settings.Resolve.FallbackDNS = ["1.1.1.1" "8.8.8.8"];
-#
-#     settings.Resolve = {
-#       DNSSEC = "allow-downgrade";
-#       Domains = ["~."];
-#       FallbackDNS = ["1.1.1.1" "8.8.8.8"];
-#     };
-#   };
-#
-#   # 6. Firewall (Your existing config was fine)
-#   networking.firewall = {
-#     enable = true;
-#     allowedTCPPortRanges = [
-#       {
-#         from = 1714;
-#         to = 1764;
-#       }
-#     ];
-#     allowedUDPPortRanges = [
-#       {
-#         from = 1714;
-#         to = 1764;
-#       }
-#     ];
-#   };
-# }
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 {
   config,
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
   networking.useDHCP = false;
@@ -172,8 +86,11 @@
     # so DNS doesn't break after a reconnect
     settings.Resolve = {
       DNSSEC = "allow-downgrade";
-      Domains = ["~."];
-      FallbackDNS = ["1.1.1.1" "8.8.8.8"];
+      Domains = [ "~." ];
+      FallbackDNS = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
       DNSStubListener = "yes";
     };
   };
@@ -183,18 +100,18 @@
 
   # --- Firewall ---
   networking.firewall = {
-    enable = true;
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
+    enable = false;
+    # allowedTCPPortRanges = [
+    #   {
+    #     from = 1714;
+    #     to = 1764;
+    #   }
+    # ];
+    # allowedUDPPortRanges = [
+    #   {
+    #     from = 1714;
+    #     to = 1764;
+    #   }
+    # ];
   };
 }
