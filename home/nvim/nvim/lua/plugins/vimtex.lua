@@ -2,6 +2,14 @@
 -- Complete VimTeX + Neovim LaTeX Configuration
 -- ==========================================
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    pcall(vim.treesitter.stop) -- pcall in case it's not running
+    vim.opt_local.conceallevel = 2
+    vim.opt_local.concealcursor = "nc"
+  end,
+})
 -- 1. Conceal Settings (Renders \alpha → α, hides syntax, etc.)
 -- Applied only to .tex files to avoid affecting other filetypes
 vim.api.nvim_create_autocmd("FileType", {
