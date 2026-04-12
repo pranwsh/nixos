@@ -70,7 +70,15 @@ in
       friendly-snippets
 
       # ── Treesitter ────────────────────────────────────────────────────────
-      nvim-treesitter.withAllGrammars
+      (nvim-treesitter.withPlugins (p: [
+        p.lua
+        p.nix
+        p.c
+        p.go
+        p.commonlisp
+        p.python
+        p.prolog
+      ]))
 
       # ── Linting ───────────────────────────────────────────────────────────
       nvim-lint

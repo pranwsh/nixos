@@ -33,6 +33,7 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.yazi
+    pkgs.maxima
   ];
 
   home.stateVersion = "24.11";
