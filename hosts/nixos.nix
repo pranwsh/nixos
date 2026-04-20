@@ -7,19 +7,7 @@
   programs.hyprland.enable = true;
 
   imports = [
-    ../modules/networking.nix
-    ../modules/gpu.nix
-    ../modules/sound.nix
-    ../modules/pam.nix
-    ../modules/packages.nix
-    ../modules/bluetooth.nix
-    ../modules/tlp.nix
-    ../modules/flatpak.nix
-    # ../modules/docker.nix
-    ../modules/boot.nix
-    ../modules/kvm.nix
-    ../modules/fish.nix
-    ../modules/usb.nix
+    ../modules
     ../users/users.nix
   ];
 
