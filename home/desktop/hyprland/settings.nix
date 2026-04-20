@@ -5,8 +5,8 @@
     };
 
     env = [
-      # "XCURSOR_THEME,Bibata-Modern-Classic"
-      # "XCURSOR_SIZE,18"
+      "XCURSOR_THEME,Bibata-Modern-Classic"
+      "XCURSOR_SIZE,18"
     ];
 
     general = {
