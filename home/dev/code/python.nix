@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   pythonEnv = pkgs.python3.withPackages (
@@ -13,6 +13,6 @@ in
     pythonEnv
   ];
   home.sessionVariables = {
-    JUPYTER_RUNTIME_DIR = "/home/pranesh/.local/share/jupyter/runtime";
+    JUPYTER_RUNTIME_DIR = "${config.home.homeDirectory}/.local/share/jupyter/runtime";
   };
 }

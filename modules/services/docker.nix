@@ -5,5 +5,5 @@
     enable = true;
   };
 
-  users.users.pranesh.extraGroups = [ "docker" ];
+  users.users."${config.my.user.name}".extraGroups = [ "docker" ];
 }

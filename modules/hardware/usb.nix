@@ -4,7 +4,7 @@
   ...
 }: {
   # Add user to plugdev group for USB device access
-  users.users.pranesh.extraGroups = ["plugdev" "dialout"];
+  users.users."${config.my.user.name}".extraGroups = ["plugdev" "dialout"];
 
   # Install usbutils (gives lsusb)
   environment.systemPackages = with pkgs; [
