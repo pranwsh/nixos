@@ -68,6 +68,7 @@ require("core.cmp").setup()
 require("core.lsp").setup(lsp_servers)
 require("core.lint").setup(lint_by_ft)
 require("core.treesitter").setup()
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
 
 -- vim.api.nvim_create_autocmd("User", {
 --   pattern  = "VeryLazy",

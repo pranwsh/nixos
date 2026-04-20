@@ -66,6 +66,8 @@ vim.g.vimtex_toc_config = {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
+    vim.opt_local.conceallevel = 2   -- 1 = show replacement char, 2 = fully hidden
+    vim.opt_local.concealcursor = "" -- "" = reveal on cursor line in all modes
     local opts = { buffer = true, noremap = true, silent = true }
     vim.keymap.set("n", "<leader>ll", "<cmd>VimtexCompile<cr>", opts)
     vim.keymap.set("n", "<leader>lv", "<cmd>VimtexView<cr>", opts)

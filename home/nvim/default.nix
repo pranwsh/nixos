@@ -94,7 +94,12 @@ in
       # ── Mini suite ────────────────────────────────────────────────────────
       mini-nvim
 
+      # md and tex
       vimtex
+
+      # fuzzy find
+      telescope-nvim
+      plenary-nvim
     ];
 
     extraPackages = allExtraPackages;

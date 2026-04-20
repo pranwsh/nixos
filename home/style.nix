@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  wallpaperPath = ./wallpapers/red;
+  wallpaperPath = ./wallpapers/beach;
 
   base_colors = {
     bg = {
