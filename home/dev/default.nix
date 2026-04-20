@@ -5,5 +5,6 @@
     ./fish.nix
     ./kitty.nix
     ./latex.nix
+    ./direnv.nix
   ];
 }
