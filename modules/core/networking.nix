@@ -54,6 +54,13 @@
 
   # --- systemd-networkd ---
   systemd.network.enable = true;
+  # Disable wait-online because it often hangs during rebuilds even with anyInterface=true
+  systemd.network.wait-online.enable = false;
+
+  systemd.network.networks."10-ignore-virtual" = {
+    matchConfig.Name = "veth* br*";
+    linkConfig.RequiredForOnline = "no";
+  };
 
   systemd.network.networks."25-wireless" = {
     matchConfig.Name = "w*";
