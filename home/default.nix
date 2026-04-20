@@ -33,6 +33,7 @@
     pkgs.bluetui
     pkgs.impala
     pkgs.yazi
+    pkgs.gemini-cli
   ];
 
   home.stateVersion = "24.11";
