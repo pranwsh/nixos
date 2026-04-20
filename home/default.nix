@@ -1,24 +1,9 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   imports = [
-    ./code/default.nix
-    ./style.nix
-    ./hyprland/default.nix
-    ./gtk.nix
-    ./kitty.nix
-    ./fish.nix
-    ./zathura/zathura.nix
-    ./zathura/persist.nix
-    ./latex.nix
-    ./zen/default.nix
-    ./spotify/default.nix
-    ./nvim/default.nix
-    ./prismlauncher.nix
-    ./flatpak.nix
-    ./wofi.nix
-    ./pywal.nix
-    ./scripts/nixify/nixify.nix
-    ./kdeconnect.nix
+    ./core
+    ./desktop
+    ./dev
+    ./apps
   ];
 
   home.username = "pranesh";
