@@ -26,5 +26,23 @@
       imports = [
         ./parts
       ];
+      flake.templates = {
+        rust = {
+          path = ./templates/rust;
+          description = "A basic flake for a Rust project";
+        };
+        python = {
+          path = ./templates/python;
+          description = "A basic flake for a Python project";
+        };
+        go = {
+          path = ./templates/go;
+          description = "A basic flake for a Go project";
+        };
+        latex = {
+          path = ./templates/latex;
+          description = "A basic flake for a LaTeX project";
+        };
+      };
     };
 }
