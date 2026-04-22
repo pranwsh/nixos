@@ -7,7 +7,7 @@
     nil
     statix
     deadnix
-    nixfmt-rfc-style
+    nixfmt
   ];
 
   home.file."code/nix/.keep".text = "";
