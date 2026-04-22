@@ -11,7 +11,6 @@ Welcome to my personal NixOS configuration. This project uses Nix Flakes and `fl
 - **Browser:** [Zen Browser](https://zen-browser.app/) with custom CSS and profile management.
 - **Styling:** Dynamic colors using [Pywal](https://github.com/dylanaraps/pywal).
 - **Application Management:** Integrated [Flatpak](https://flatpak.org/) support.
-- **Development Templates:** Pre-configured Flake templates for Rust, Python, Go, and LaTeX.
 
 ## 📂 Project Structure
 
@@ -33,7 +32,6 @@ Welcome to my personal NixOS configuration. This project uses Nix Flakes and `fl
 │   ├── services/         # System services (Flatpak, KVM)
 │   └── user-options.nix  # Custom global options (Username, Email, etc.)
 ├── parts/                # Flake-parts definitions
-├── templates/            # Flake templates for various languages
 └── users/                # User account definitions
 ```
 
@@ -68,15 +66,6 @@ options.my.user = {
   # ... other options
 };
 ```
-
-## 📜 Templates
-
-This flake provides templates to quickly bootstrap development environments:
-
-- **Rust:** `nix flake init -t .#rust`
-- **Python:** `nix flake init -t .#python`
-- **Go:** `nix flake init -t .#go`
-- **LaTeX:** `nix flake init -t .#latex`
 
 ---
 
