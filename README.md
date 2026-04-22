@@ -7,7 +7,7 @@ Welcome to my personal NixOS configuration. This project uses Nix Flakes and `fl
 - **Window Manager:** [Hyprland](https://hyprland.org/) (wayland) with a customized, modular configuration.
 - **Shell:** [Fish](https://fishshell.com/) with various utilities.
 - **Terminal:** [Kitty](https://sw.kovidgoyal.net/kitty/).
-- **Editor:** [Neovim](https://neovim.io/) (via `nvf`) and [VS Code](https://code.visualstudio.com/).
+- **Editor:** [Neovim](https://neovim.io/) configured with Nix and Lua.
 - **Browser:** [Zen Browser](https://zen-browser.app/) with custom CSS and profile management.
 - **Styling:** Dynamic colors using [Pywal](https://github.com/dylanaraps/pywal).
 - **Application Management:** Integrated [Flatpak](https://flatpak.org/) support.
