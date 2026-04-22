@@ -6,5 +6,6 @@
     ./zathura/persist.nix
     ./prismlauncher.nix
     ./flatpak.nix
+    ./llama-cpp
   ];
 }
