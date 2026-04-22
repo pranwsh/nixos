@@ -1,6 +1,11 @@
-{...}: {
+{ ... }: {
   imports = [
-    ./gh.nix
-    ./python.nix
+    ./gh
+    ./python
+    ./go
+    ./rust
+    ./latex
+    ./nix
+    ./lua
   ];
 }
