@@ -7,5 +7,6 @@
     ./latex
     ./nix
     ./lua
+    ./lisp
   ];
 }
