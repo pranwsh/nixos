@@ -1,33 +1,48 @@
-{
-  pkgs,
-  ...
-}:
+# ai-config.nix
+{ pkgs, ... }:
+
 let
-  # Gemma 2 9B It (Q4_K_M)
-  modelName = "gemma-2-9b-it-Q4_K_M.gguf";
-  modelUrl = "https://huggingface.co/bartowski/gemma-2-9b-it-GGUF/resolve/main/${modelName}";
+  # Import the model library
+  models = import ./models.nix { pkgs = pkgs; };
 
-  gemmaModel = pkgs.fetchurl {
-    url = modelUrl;
-    sha256 = "sha256-E7KntBFbvQkAFi7c6+R22huh/CTnGOi0DTL24wD1bf4=";
-    name = modelName;
-  };
+  # ==============================================================================
+  # 🎯 ACTIVE MODEL SELECTION
+  # Change this variable to switch models instantly.
+  # Options: models.gemma2-9b, models.qwen2.5-coder-7b, etc.
+  # ==============================================================================
 
-  # Llama.cpp with Vulkan support
+  activeModel = models.qwen3-5-9b;
+
+  # ==============================================================================
+  # ⚙️ RUNTIME SETTINGS
+  # ==============================================================================
+
+  contextSize = 8192;
+  gpuLayers = 32; # Set to 0 for CPU-only
+  systemPrompt = "You are a helpful coding assistant.";
+
+  # Build llama.cpp with Vulkan
   llama-cpp-vulkan = pkgs.llama-cpp.override {
     vulkanSupport = true;
   };
+
+  # Construct common arguments
+  commonArgs = "-m ${activeModel.path} -c ${toString contextSize} -ngl ${toString gpuLayers}";
+
 in
 {
   home.packages = [
     llama-cpp-vulkan
   ];
 
-  home.shellAliases = {
-    # -ngl 33 offloads layers to the GPU via Vulkan
-    gemma = "llama-cli -m ${gemmaModel} -c 8192 -p 'You are a helpful assistant.' -cnv -ngl 33";
-
-    # Server mode with Vulkan support
-    gemma-server = "llama-server -m ${gemmaModel} -c 8192 --port 8080 -ngl 33";
+  programs.fish.functions = {
+    ai-chat = {
+      body = ''
+        llama-cli ${commonArgs} \
+          -p "${systemPrompt}" \
+          -cnv \
+          --color auto
+      '';
+    };
   };
 }
