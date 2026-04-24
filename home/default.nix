@@ -1,4 +1,5 @@
-{ pkgs, osConfig, ... }: {
+{ pkgs, osConfig, ... }:
+{
   imports = [
     ./core
     ./desktop
