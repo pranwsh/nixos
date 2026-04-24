@@ -5,5 +5,6 @@
     ./networking.nix
     ./packages.nix
     ./pam.nix
+    ./zram.nix
   ];
 }
