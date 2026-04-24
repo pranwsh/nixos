@@ -10,7 +10,6 @@ Welcome to my personal NixOS configuration. This project uses Nix Flakes and `fl
 - **Editor:** [Neovim](https://neovim.io/) configured with Nix and Lua.
 - **Browser:** [Zen Browser](https://zen-browser.app/) with custom CSS and profile management.
 - **Styling:** Dynamic colors using [Pywal](https://github.com/dylanaraps/pywal).
-- **Application Management:** Integrated [Flatpak](https://flatpak.org/) support.
 
 ## 📂 Project Structure
 
@@ -29,7 +28,7 @@ Welcome to my personal NixOS configuration. This project uses Nix Flakes and `fl
 ├── modules/              # System-level NixOS modules
 │   ├── core/             # Essential system modules (Boot, Networking, Packages)
 │   ├── hardware/         # Hardware-specific modules (GPU, Bluetooth, Sound)
-│   ├── services/         # System services (Flatpak, KVM)
+│   ├── services/         # System services (KVM)
 │   └── user-options.nix  # Custom global options (Username, Email, etc.)
 ├── parts/                # Flake-parts definitions
 └── users/                # User account definitions

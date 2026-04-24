@@ -12,7 +12,6 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     PrismLauncher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
