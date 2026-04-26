@@ -20,6 +20,7 @@
     pkgs.impala
     pkgs.yazi
     pkgs.gemini-cli
+    pkgs.qwen-code
   ];
 
   home.stateVersion = "24.11";
