@@ -13,26 +13,17 @@ vim.g.rustaceanvim = {
     },
     -- inline hints rendered via inlay_hints (nvim 0.10+ native)
     inlay_hints = {
-      auto = true,                 -- enable on attach automatically
-      only_current_line = false,   -- show for all lines, not just cursor line
-      show_parameter_hints = true, -- fn call param names
+      auto = false,                 -- enable on attach automatically
+      only_current_line = false,    -- show for all lines, not just cursor line
+      show_parameter_hints = false, -- fn call param names
       parameter_hints_prefix = "<- ",
-      other_hints_prefix = "=> ",  -- for type hints, chaining hints etc.
+      other_hints_prefix = "=> ",   -- for type hints, chaining hints etc.
       max_len_align = false,
       max_len_align_padding = 1,
       right_align = false,
       right_align_padding = 7,
       highlight = "Comment", -- link to any highlight group you like
     },
-    on_initialized = function()
-      -- refresh inlay hints whenever we save or leave insert
-      vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          vim.lsp.inlay_hint.enable(true) -- nvim 0.10+ API
-        end,
-      })
-    end,
   },
 
   -- ─── rust-analyzer server config ─────────────────────────────────────────
@@ -78,11 +69,6 @@ vim.g.rustaceanvim = {
       map("n", "<leader>rl", vim.diagnostic.open_float, "Line diagnostics")
       map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
       map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
-
-      -- Turn on inlay hints for this buffer
-      if vim.lsp.inlay_hint then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end
     end,
 
     -- How long after cursor stops moving before CursorHold fires (ms)
@@ -113,20 +99,20 @@ vim.g.rustaceanvim = {
         },
 
         -- ── Inlay hints (server-side declarations) ────────────────────────
-        -- ONLY TYPE HINTS AND PARAMETER HINTS ENABLED
+        -- INLAY HINTS DISABLED
         inlayHints = {
           -- Type hints for variable bindings (let x: i32 = ...)
           typeHints = {
-            enable = true,
+            enable = false,
             hideClosureInitialization = true, -- hide noisy closure types
             hideNamedConstructor = false,     -- show struct literal types
           },
 
           -- Parameter hints for function calls (foo(/* x: */ 42))
-          parameterHints = { enable = true },
+          parameterHints = { enable = false },
 
           -- Show return type hints on closures (only multi-line blocks)
-          closureReturnTypeHints = { enable = "with_block" },
+          closureReturnTypeHints = { enable = "never" },
 
           -- Everything below is DISABLED
           bindingModeHints = { enable = false },
