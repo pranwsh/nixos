@@ -8,5 +8,6 @@
     ./nix
     ./lua
     ./lisp
+    ./cpp
   ];
 }

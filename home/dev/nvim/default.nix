@@ -33,6 +33,10 @@ let
       gopls
       golangci-lint
     ];
+    cpp = with pkgs; [
+      clang-tools
+      cppcheck
+    ];
   };
 
   # ── Derived ───────────────────────────────────────────────────────────────
@@ -74,6 +78,7 @@ in
         p.lua
         p.nix
         p.c
+        p.cpp
         p.go
         p.commonlisp
         p.python
