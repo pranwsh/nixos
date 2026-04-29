@@ -9,6 +9,4 @@
     clang-tools # for clangd, clang-format
     cppcheck
   ];
-
-  home.file."code/cpp/.keep".text = "";
 }
