@@ -3,6 +3,4 @@
     gh
     lazygit
   ];
-
-  home.file."code/.keep".text = "";
 }
