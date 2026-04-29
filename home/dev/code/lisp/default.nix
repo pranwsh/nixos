@@ -5,6 +5,4 @@
     sbcl
     sbclPackages.quicklisp-starter
   ];
-
-  home.file."code/lisp/.keep".text = "";
 }
