@@ -1,21 +1,10 @@
-# ai-config.nix
 { pkgs, ... }:
 
 let
   # Import the model library
   models = import ./models.nix { pkgs = pkgs; };
 
-  # ==============================================================================
-  # 🎯 ACTIVE MODEL SELECTION
-  # Change this variable to switch models instantly.
-  # Options: models.gemma2-9b, models.qwen2.5-coder-7b, etc.
-  # ==============================================================================
-
   activeModel = models.qwen3-5-9b;
-
-  # ==============================================================================
-  # ⚙️ RUNTIME SETTINGS
-  # ==============================================================================
 
   contextSize = 8192;
   gpuLayers = 32; # Set to 0 for CPU-only
