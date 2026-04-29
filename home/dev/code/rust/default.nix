@@ -5,11 +5,7 @@
     rustc
     cargo
     rust-analyzer
-    clippy
     rustfmt
-    bacon
-    evcxr # Rust REPL
+    clippy
   ];
-
-  home.file."code/rust/.keep".text = "";
 }
