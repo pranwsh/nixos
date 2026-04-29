@@ -3,12 +3,7 @@
 {
   home.packages = with pkgs; [
     nixd
-    alejandra
-    nil
-    statix
-    deadnix
     nixfmt
+    statix
   ];
-
-  home.file."code/nix/.keep".text = "";
 }
