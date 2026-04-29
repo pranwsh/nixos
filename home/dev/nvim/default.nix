@@ -4,14 +4,6 @@
   ...
 }:
 
-# ─────────────────────────────────────────────────────────────────────────────
-# To add a new language:
-#   1. Create nvim/lua/langs/<name>.lua  (see python.lua for the spec format)
-#   2. Add its LSP / linter / formatter binaries to langPackages.<name> below
-#   3. Add its treesitter parser to treesitterParsers below
-#   4. Rebuild: home-manager switch
-# ─────────────────────────────────────────────────────────────────────────────
-
 let
 
   # ── Per-language external binaries ────────────────────────────────────────
