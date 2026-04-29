@@ -7,6 +7,4 @@
     stylua
     selene
   ];
-
-  home.file."code/lua/.keep".text = "";
 }
