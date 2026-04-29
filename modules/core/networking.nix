@@ -3,6 +3,7 @@
   ...
 }:
 {
+  networking.hostName = "nixos";
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
   networking.useDHCP = false;
