@@ -9,6 +9,4 @@
     black
     isort
   ];
-
-  home.file."code/python/.keep".text = "";
 }
