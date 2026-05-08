@@ -7,6 +7,7 @@
       agentModels = {
         "deepseek-chat" = {
           base_url = "https://api.deepseek.com/v1";
+          api_key = "PLACEHOLDER"; # Overridden by env var in shell alias
         };
       };
       agentRouting = {
