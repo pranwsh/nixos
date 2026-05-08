@@ -19,6 +19,6 @@
 
   # Inject the API key at runtime via shell alias
   home.shellAliases = {
-    openclaude = "DEEPSEEK_API_KEY=$(pass show apis/deepseek) openclaude";
+    openclaude = "DEEPSEEK_API_KEY=$(pass show apis/deepseek) command openclaude";
   };
 }
