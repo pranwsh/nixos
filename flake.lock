@@ -614,11 +614,11 @@
         "openclaude-src": "openclaude-src"
       },
       "locked": {
-        "lastModified": 1778119471,
-        "narHash": "sha256-FM0w8WBfIwdgjYFzWQzLXiLcSi0km0s5hVPDDfIJeeU=",
+        "lastModified": 1778274599,
+        "narHash": "sha256-He5LdFsWrA9I8DzcDL6WZLjpCsH5FksXDk4NWwEKrPg=",
         "owner": "pranwsh",
         "repo": "openclaude-flake",
-        "rev": "2e50040b2b8e967015c9541ffcf5cf1da80f0ef3",
+        "rev": "fe64444d183fff5e892f9754355501c64c2e45fe",
         "type": "github"
       },
       "original": {
