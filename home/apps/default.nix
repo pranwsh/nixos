@@ -13,5 +13,6 @@
     ./chromium.nix
     ./yazi.nix
     ./qemu.nix
+    ./openclaude.nix
   ];
 }

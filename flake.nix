@@ -16,6 +16,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    openclaude.url = "github:pranwsh/openclaude-flake";
   };
 
   outputs = inputs:
