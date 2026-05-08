@@ -17,8 +17,8 @@
     };
   };
 
-  # Inject the API key at runtime via shell alias
+  # Inject the API key and provider routing at runtime via shell alias
   home.shellAliases = {
-    openclaude = "DEEPSEEK_API_KEY=$(pass show apis/deepseek) command openclaude";
+    openclaude = "CLAUDE_CODE_USE_OPENAI=1 OPENAI_BASE_URL=https://api.deepseek.com/v1 OPENAI_API_KEY=$(pass show apis/deepseek) OPENAI_MODEL=deepseek-chat command openclaude";
   };
 }
