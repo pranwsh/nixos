@@ -7,7 +7,7 @@
     ./apps
   ];
 
-  home.username = osConfig.my.user.name;
+  home.username = pkgs.lib.mkForce osConfig.my.user.name;
   home.homeDirectory = pkgs.lib.mkForce "/home/${osConfig.my.user.name}";
 
   home.stateVersion = "24.11";

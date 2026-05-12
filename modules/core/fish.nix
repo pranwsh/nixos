@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  users.users."${config.my.user.name}".shell = pkgs.fish;
+  users.users."${config.my.user.name}".shell = pkgs.lib.mkForce pkgs.fish;
 
   programs.fish = {
     enable = true;
