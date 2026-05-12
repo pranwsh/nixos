@@ -159,9 +159,6 @@ in
     restart = "always";
     restartSec = 5;
     extraArgs = [ "--verbose" ];
-    serviceConfig = {
-      PermissionsStartOnly = true;
-    };
   };
 
   # ── Secrets: Inject API keys from sops-nix ──
@@ -179,5 +176,9 @@ in
     "d /run/hermes-agent 0700 pranesh users -"
   ];
 
-  systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
+  systemd.services.hermes-agent.serviceConfig = {
+    EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
+    PermissionsStartOnly = true;
+    WorkingDirectory = "/home/pranesh/projects";
+  };
 }
