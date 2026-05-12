@@ -164,11 +164,16 @@ in
   # ── Secrets: Inject API keys from sops-nix ──
   # Create env file at service start by reading the raw secrets
   systemd.services.hermes-agent.preStart = ''
-    mkdir -p /run/hermes-agent
-    echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
-    echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
-    chmod 600 /run/hermes-agent/hermes.env
+    ${pkgs.bash}/bin/bash -c '
+      echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
+      echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
+      chmod 600 /run/hermes-agent/hermes.env
+    '
   '';
 
-  systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "/run/hermes-agent/hermes.env" ];
+  systemd.tmpfiles.rules = [
+    "d /run/hermes-agent 0700 root root -"
+  ];
+
+  systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
 }
