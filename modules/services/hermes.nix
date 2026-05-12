@@ -71,9 +71,11 @@ in
         timeout = 60;
       };
       git = {
-        command = "${pkgs.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uv";
         args = [
-          "-q"
+          "tool"
+          "run"
+          "--quiet"
           "mcp-server-git"
           "--repository"
           "/home/pranesh/projects"
@@ -100,9 +102,11 @@ in
         ];
       };
       nixos = {
-        command = "${pkgs.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uv";
         args = [
-          "-q"
+          "tool"
+          "run"
+          "--quiet"
           "mcp-nixos"
         ];
         tools.include = [
@@ -111,9 +115,11 @@ in
         ];
       };
       fetch = {
-        command = "${pkgs.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uv";
         args = [
-          "-q"
+          "tool"
+          "run"
+          "--quiet"
           "mcp-server-fetch"
         ];
         tools.include = [
