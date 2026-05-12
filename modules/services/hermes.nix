@@ -159,6 +159,9 @@ in
     restart = "always";
     restartSec = 5;
     extraArgs = [ "--verbose" ];
+    serviceConfig = {
+      PermissionsStartOnly = true;
+    };
   };
 
   # ── Secrets: Inject API keys from sops-nix ──
@@ -167,13 +170,13 @@ in
     ${pkgs.bash}/bin/bash -c '
       echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
       echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
-      chown pranesh:pranesh /run/hermes-agent/hermes.env
+      chown pranesh:users /run/hermes-agent/hermes.env
       chmod 600 /run/hermes-agent/hermes.env
     '
   '';
 
   systemd.tmpfiles.rules = [
-    "d /run/hermes-agent 0700 pranesh pranesh -"
+    "d /run/hermes-agent 0700 pranesh users -"
   ];
 
   systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
