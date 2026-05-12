@@ -7,6 +7,7 @@
     ./nix.nix
     ./packages.nix
     ./pam.nix
+    ./sops.nix
     ./zram.nix
   ];
 }
