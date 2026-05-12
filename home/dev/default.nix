@@ -8,6 +8,5 @@
     ./gemini-cli.nix
     ./qwen-code.nix
     ./zip.nix
-    ./auth.nix
   ];
 }
