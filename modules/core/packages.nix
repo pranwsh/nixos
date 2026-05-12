@@ -14,6 +14,7 @@
     unzip
     ripgrep
     git
-
+    sops
+    age
   ];
 }
