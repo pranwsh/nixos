@@ -152,15 +152,6 @@ in
       # Removed docker-client/podman since container backend is disabled
     ];
 
-    # ── Secrets: Inject NVIDIA_API_KEY from sops-nix ──
-    # Create env file at service start by reading the raw secret
-    systemd.services.hermes-agent.preStart = ''
-      mkdir -p /run/hermes-agent
-      echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
-      chmod 600 /run/hermes-agent/hermes.env
-    '';
-    environmentFiles = [ "/run/hermes-agent/hermes.env" ];
-
     # ── Service Tuning ──
     addToSystemPackages = true;
     workingDirectory = "/home/pranesh/projects"; # Absolute path, no ~
@@ -168,4 +159,14 @@ in
     restartSec = 5;
     extraArgs = [ "--verbose" ];
   };
+
+  # ── Secrets: Inject NVIDIA_API_KEY from sops-nix ──
+  # Create env file at service start by reading the raw secret
+  systemd.services.hermes-agent.preStart = ''
+    mkdir -p /run/hermes-agent
+    echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
+    chmod 600 /run/hermes-agent/hermes.env
+  '';
+
+  systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "/run/hermes-agent/hermes.env" ];
 }
