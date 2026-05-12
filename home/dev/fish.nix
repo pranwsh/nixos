@@ -14,6 +14,15 @@
     shellInit = ''
       set -gx XCURSOR_THEME "Bibata-Modern-Classic"
       set -gx XCURSOR_SIZE "18"
+
+      # API Keys for Hermes
+      if test -f /run/secrets/mistral_key
+        set -gx MISTRAL_API_KEY (cat /run/secrets/mistral_key)
+      end
+      if test -f /run/secrets/nvidia_key
+        set -gx NVIDIA_API_KEY (cat /run/secrets/nvidia_key)
+        set -gx API_KEY (cat /run/secrets/nvidia_key)
+      end
     '';
 
     interactiveShellInit = ''
