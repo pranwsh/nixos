@@ -131,7 +131,6 @@ in
       pkgs.cargo
       pkgs.rustup
       pkgs.go
-      pkgs.python312
       pkgs.python312Packages.pip
       pkgs.nodejs_22
       pkgs.bun
