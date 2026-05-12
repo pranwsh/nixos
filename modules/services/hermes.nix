@@ -16,17 +16,18 @@ let
 in
 {
   sops.secrets.nvidia_key = {
-    owner = "root";
+    owner = "pranesh";
     mode = "0400";
   };
 
   sops.secrets.mistral_key = {
-    owner = "root";
+    owner = "pranesh";
     mode = "0400";
   };
 
   services.hermes-agent = {
     enable = true;
+    user = "pranesh";
 
     # ── Container Mode: Disabled for Nix-native execution ──
     # Leveraging Nix for dependency management instead of containers
@@ -155,7 +156,6 @@ in
 
     # ── Service Tuning ──
     addToSystemPackages = true;
-    workingDirectory = "/home/pranesh/projects"; # Absolute path, no ~
     restart = "always";
     restartSec = 5;
     extraArgs = [ "--verbose" ];
@@ -167,12 +167,13 @@ in
     ${pkgs.bash}/bin/bash -c '
       echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
       echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
+      chown pranesh:pranesh /run/hermes-agent/hermes.env
       chmod 600 /run/hermes-agent/hermes.env
     '
   '';
 
   systemd.tmpfiles.rules = [
-    "d /run/hermes-agent 0700 root root -"
+    "d /run/hermes-agent 0700 pranesh pranesh -"
   ];
 
   systemd.services.hermes-agent.serviceConfig.EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
