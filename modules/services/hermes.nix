@@ -158,7 +158,7 @@ in
     addToSystemPackages = true;
     restart = "always";
     restartSec = 5;
-    extraArgs = [ "--verbose" ];
+    extraArgs = [ ];
   };
 
   # ── Secrets: Inject API keys from sops-nix ──
