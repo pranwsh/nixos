@@ -10,6 +10,8 @@ in {
     modules = [
       ../hardware-configuration.nix
       ../hosts/nixos.nix
+      inputs.sops-nix.nixosModules.sops
+      inputs.hermes.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
