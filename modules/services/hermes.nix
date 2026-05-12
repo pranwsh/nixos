@@ -191,6 +191,7 @@ in
   ];
 
   systemd.services.hermes-agent.serviceConfig = {
+    Environment = [ "HOME=/home/pranesh" ];
     EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
     PermissionsStartOnly = true;
     WorkingDirectory = pkgs.lib.mkForce "/home/pranesh/projects";
