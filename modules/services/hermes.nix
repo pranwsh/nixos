@@ -33,11 +33,11 @@ in
     # Leveraging Nix for dependency management instead of containers
     container.enable = false;
 
-    # ── Model Settings: Mistral AI + Mistral Large ──
+    # ── Model Settings: NVIDIA NIM + Llama 3.3 70B ──
     settings = {
       model = {
-        base_url = "https://api.mistral.ai/v1";
-        default = "mistral-large-latest";
+        base_url = "https://integrate.api.nvidia.com/v1";
+        default = "meta/llama-3.3-70b-instruct";
         # Recommended params for deterministic coding output
         temperature = 0.1;
         top_p = 0.95;
@@ -180,6 +180,7 @@ in
   systemd.services.hermes-agent.preStart = ''
     ${pkgs.bash}/bin/bash -c '
       echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
+      echo "API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" >> /run/hermes-agent/hermes.env
       echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
       chown pranesh:users /run/hermes-agent/hermes.env
       chmod 600 /run/hermes-agent/hermes.env
