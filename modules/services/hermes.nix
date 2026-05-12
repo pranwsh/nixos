@@ -62,7 +62,6 @@ in
           "list_directory"
           "search_files"
         ];
-        tools.resources = false;
         timeout = 60;
       };
       git = {
@@ -92,8 +91,6 @@ in
           "search_code"
           "get_pull_request"
         ];
-        tools.resources = false;
-        tools.prompts = false;
       };
       nixos = {
         command = "${pkgs.python312Packages.uv}/bin/uvx";
