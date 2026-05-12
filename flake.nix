@@ -16,7 +16,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    openclaude.url = "github:pranwsh/openclaude-flake";
+    hermes.url = "github:NousResearch/hermes-agent";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs:
