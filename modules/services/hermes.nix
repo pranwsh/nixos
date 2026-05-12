@@ -73,6 +73,7 @@ in
       git = {
         command = "${pkgs.uv}/bin/uvx";
         args = [
+          "-q"
           "mcp-server-git"
           "--repository"
           "/home/pranesh/projects"
@@ -100,7 +101,10 @@ in
       };
       nixos = {
         command = "${pkgs.uv}/bin/uvx";
-        args = [ "mcp-nixos" ];
+        args = [
+          "-q"
+          "mcp-nixos"
+        ];
         tools.include = [
           "nix"
           "nix_versions"
@@ -108,7 +112,10 @@ in
       };
       fetch = {
         command = "${pkgs.uv}/bin/uvx";
-        args = [ "mcp-server-fetch" ];
+        args = [
+          "-q"
+          "mcp-server-fetch"
+        ];
         tools.include = [
           "fetch"
           "search"
