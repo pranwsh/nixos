@@ -7,6 +7,7 @@
     secrets = {
       deepseek_key = { };
       nvidia_key = { };
+      mistral_key = { };
     };
   };
 }

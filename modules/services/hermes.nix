@@ -20,6 +20,11 @@ in
     mode = "0400";
   };
 
+  sops.secrets.mistral_key = {
+    owner = "root";
+    mode = "0400";
+  };
+
   services.hermes-agent = {
     enable = true;
 
@@ -27,11 +32,11 @@ in
     # Leveraging Nix for dependency management instead of containers
     container.enable = false;
 
-    # ── Model Settings: NVIDIA NIM + Mistral Medium 3.5 ──
+    # ── Model Settings: Mistral AI + Mistral Large ──
     settings = {
       model = {
-        base_url = "https://integrate.api.nvidia.com/v1";
-        default = "mistralai/mistral-medium-3.5";
+        base_url = "https://api.mistral.ai/v1";
+        default = "mistral-large-latest";
         # Recommended params for deterministic coding output
         temperature = 0.1;
         top_p = 0.95;
@@ -156,11 +161,12 @@ in
     extraArgs = [ "--verbose" ];
   };
 
-  # ── Secrets: Inject NVIDIA_API_KEY from sops-nix ──
-  # Create env file at service start by reading the raw secret
+  # ── Secrets: Inject API keys from sops-nix ──
+  # Create env file at service start by reading the raw secrets
   systemd.services.hermes-agent.preStart = ''
     mkdir -p /run/hermes-agent
     echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
+    echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
     chmod 600 /run/hermes-agent/hermes.env
   '';
 
