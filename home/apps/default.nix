@@ -13,6 +13,5 @@
     ./chromium.nix
     ./yazi.nix
     ./qemu.nix
-    ./hermes.nix
   ];
 }
