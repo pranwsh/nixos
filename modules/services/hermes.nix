@@ -71,7 +71,7 @@ in
         timeout = 60;
       };
       git = {
-        command = "${pkgs.python312Packages.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uvx";
         args = [
           "mcp-server-git"
           "--repository"
@@ -99,7 +99,7 @@ in
         ];
       };
       nixos = {
-        command = "${pkgs.python312Packages.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uvx";
         args = [ "mcp-nixos" ];
         tools.include = [
           "nix"
@@ -107,7 +107,7 @@ in
         ];
       };
       fetch = {
-        command = "${pkgs.python312Packages.uv}/bin/uvx";
+        command = "${pkgs.uv}/bin/uvx";
         args = [ "mcp-server-fetch" ];
         tools.include = [
           "fetch"
@@ -138,6 +138,7 @@ in
       pkgs.rustup
       pkgs.go
       pkgs.python312Packages.pip
+      pkgs.uv
       pkgs.nodejs_22
       pkgs.bun
       pkgs.jq
