@@ -9,5 +9,6 @@
     ./lua
     ./lisp
     ./cpp
+    ./dotnet
   ];
 }

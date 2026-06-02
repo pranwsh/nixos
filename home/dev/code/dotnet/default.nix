@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    sbcl
-    sbclPackages.quicklisp-starter
-    clisp
+    dotnet-sdk
   ];
 }
