@@ -1,7 +1,7 @@
 {...}: {
   wayland.windowManager.hyprland.settings = {
     cursor = {
-      no_hardware_cursors = true;
+      no_hardware_cursors = false;
     };
 
     env = [
