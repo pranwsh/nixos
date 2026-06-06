@@ -14,6 +14,5 @@
     ./yazi.nix
     ./qemu.nix
     ./hermes-config.nix
-    ./figma.nix
   ];
 }
