@@ -26,7 +26,7 @@ in
   };
 
   services.hermes-agent = {
-    enable = true;
+    enable = false;
     user = "pranesh";
 
     # ── Container Mode: Disabled for Nix-native execution ──
@@ -56,7 +56,6 @@ in
     # ── Plugins ──
     extraPlugins = [ hermes-lcm ];
     settings.plugins.enabled = [ "hermes-lcm" ];
-    extraDependencyGroups = [ "hindsight" ];
 
     # ── Nix-managed Tooling Environment ──
     extraPackages = [
@@ -97,28 +96,5 @@ in
     restart = "always";
     restartSec = 5;
     extraArgs = [ ];
-  };
-
-  # ── Secrets: Inject API keys from sops-nix ──
-  # Create env file at service start by reading the raw secrets
-  systemd.services.hermes-agent.preStart = ''
-    ${pkgs.bash}/bin/bash -c '
-      echo "NVIDIA_API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" > /run/hermes-agent/hermes.env
-      echo "API_KEY=$(cat ${config.sops.secrets.nvidia_key.path})" >> /run/hermes-agent/hermes.env
-      echo "MISTRAL_API_KEY=$(cat ${config.sops.secrets.mistral_key.path})" >> /run/hermes-agent/hermes.env
-      chown pranesh:users /run/hermes-agent/hermes.env
-      chmod 600 /run/hermes-agent/hermes.env
-    '
-  '';
-
-  systemd.tmpfiles.rules = [
-    "d /run/hermes-agent 0700 pranesh users -"
-  ];
-
-  systemd.services.hermes-agent.serviceConfig = {
-    Environment = [ "HOME=/home/pranesh" ];
-    EnvironmentFile = [ "-/run/hermes-agent/hermes.env" ];
-    PermissionsStartOnly = true;
-    WorkingDirectory = pkgs.lib.mkForce "/home/pranesh/projects";
   };
 }
