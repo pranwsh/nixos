@@ -1,5 +1,14 @@
 { config, pkgs, ... }:
 {
+  powerManagement.enable = true;
+
+  services.logind = {
+    lidSwitch = "suspend";
+    settings.Login = {
+      LidSwitchIgnoreInhibited = "no";
+    };
+  };
+
   services.tlp = {
     enable = true;
     settings = {
@@ -13,6 +22,11 @@
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 20;
+
+      # Extra power saving on battery
+      PCIE_ASPM_ON_BAT = "powersave";
+      WIFI_PWR_ON_BAT = "on";
+      RUNTIME_PM_ON_BAT = "auto";
 
       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
