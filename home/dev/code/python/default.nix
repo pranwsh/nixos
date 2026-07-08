@@ -3,7 +3,9 @@
 {
   home.packages = with pkgs; [
     python3
-    pipx
+    (pipx.overridePythonAttrs (oldAttrs: {
+      doCheck = false;
+    }))
     pyright
     ruff
     black

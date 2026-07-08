@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = [
-    pkgs.gemini-cli
+    pkgs.antigravity-cli
   ];
 }
