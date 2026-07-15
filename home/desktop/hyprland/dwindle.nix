@@ -13,27 +13,6 @@
       special_scale_factor = 1.0;
     };
 
-    general = {
-      layout = "dwindle";
-
-      resize_on_border = true;
-      extend_border_grab_area = 15;
-
-      gaps_in = 5;
-      gaps_out = 10;
-      border_size = 2;
-    };
-
-    input = {
-      follow_mouse = 0;
-    };
-
-    misc = {
-      focus_on_activate = true;
-      mouse_move_enables_dpms = true;
-      vrr = 1;
-    };
-
     bind = [
       "$mainMod, H, layoutmsg, preselect l"
       "$mainMod, L, layoutmsg, preselect r"

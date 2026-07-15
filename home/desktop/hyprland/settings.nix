@@ -16,6 +16,7 @@
       "col.active_border" = "rgba(ff800044)";
       "col.inactive_border" = "rgba(ffcd9c22)";
       resize_on_border = true;
+      extend_border_grab_area = 15;
       allow_tearing = false;
       layout = "dwindle";
     };
@@ -93,6 +94,9 @@
     ];
 
     misc = {
+      focus_on_activate = true;
+      mouse_move_enables_dpms = true;
+      vrr = 1;
       force_default_wallpaper = -1;
       disable_hyprland_logo = true;
     };

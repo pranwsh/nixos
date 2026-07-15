@@ -1,7 +1,11 @@
 { config, lib, inputs, ... }: {
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
-    auto-optimise-store = true;
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   nix.gc = {

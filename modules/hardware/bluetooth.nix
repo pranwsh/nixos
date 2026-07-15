@@ -8,5 +8,4 @@
     powerOnBoot = true;
   };
 
-  services.blueman.enable = false; # Optional: for GUI management via Blueman
 }
