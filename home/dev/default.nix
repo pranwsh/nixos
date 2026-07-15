@@ -5,8 +5,7 @@
     ./nvim
     ./fish.nix
     ./kitty.nix
-    ./gemini-cli.nix
-    ./qwen-code.nix
+    ./opencode.nix
     ./zip.nix
   ];
 }
