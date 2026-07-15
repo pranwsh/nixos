@@ -1,17 +1,18 @@
 {
   inputs,
   ...
-}: let
+}:
+let
   username = "pranesh";
-in {
+in
+{
   flake.nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = {inherit inputs;};
+    specialArgs = { inherit inputs; };
     modules = [
       ../hardware-configuration.nix
       ../hosts/nixos.nix
       inputs.sops-nix.nixosModules.sops
-      inputs.hermes.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
