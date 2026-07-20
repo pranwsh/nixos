@@ -3,9 +3,9 @@
   powerManagement.enable = true;
 
   services.logind = {
-    lidSwitch = "suspend";
     settings.Login = {
       LidSwitchIgnoreInhibited = "no";
+      HandleLidSwitch = "suspend";
     };
   };
 
