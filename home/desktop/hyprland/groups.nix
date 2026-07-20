@@ -1,7 +1,7 @@
 # groupbar.nix
-{ config, pkgs, lib, walNix, ... }:
+{ config, pkgs, lib, ... }:
 let
-  c = (import "${walNix}/colors.nix").colorscheme;
+  theme = config.style;
   stripHash = s: lib.removePrefix "#" s;
   argb = a: hex: "0x${a}${stripHash hex}";
 in
@@ -17,7 +17,7 @@ in
     "group:groupbar:text_color" = "0x00000000";
 
     "group:groupbar:blur" = true;
-    "group:groupbar:col.active" = argb "ff" c.color12;
-    "group:groupbar:col.inactive" = argb "80" c.color4;
+    "group:groupbar:col.active" = argb "ff" theme.colors.color12;
+    "group:groupbar:col.inactive" = argb "80" theme.colors.color4;
   };
 }
