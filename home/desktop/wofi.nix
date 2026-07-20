@@ -1,7 +1,6 @@
-{ config, pkgs, lib, walNix, ... }:
+{ config, pkgs, lib, ... }:
 let
   theme = config.style;
-  c = (import "${walNix}/colors.nix").colorscheme;
 in {
   programs.wofi = {
     enable = true;
@@ -23,7 +22,7 @@ in {
         font-size: 14px;
       }
       window {
-        background-color: ${theme.rgba.background};
+        background-color: rgba(${theme.backgroundRgb},${toString theme.opacity});
         border-radius: 30px;
         padding: 10px;
       }
@@ -32,7 +31,7 @@ in {
       }
       #input {
         background-color: rgba(0,0,0,0);
-        color: ${c.color15};
+        color: ${theme.colors.color15};
         border-radius: 10px;
         padding: 6px 10px;
         margin-bottom: 8px;
@@ -45,13 +44,13 @@ in {
         padding: 6px 10px;
       }
       #entry:selected {
-        background-color: ${theme.rgba.accent};
+        background-color: ${theme.colors.color1};
         border: none;
         outline: none;
         box-shadow: none;
       }
       #text {
-        color: ${c.color15};
+        color: ${theme.colors.color15};
       }
     '';
   };
