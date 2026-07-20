@@ -9,6 +9,7 @@
     isNormalUser = lib.mkForce true;
     isSystemUser = lib.mkForce false;
     home = lib.mkForce "/home/${config.my.user.name}";
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
       "video"
