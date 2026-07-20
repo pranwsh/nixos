@@ -10,7 +10,6 @@
 in {
   home.packages = with pkgs; [
     kitty
-    fish
   ];
 
   programs.kitty = {
