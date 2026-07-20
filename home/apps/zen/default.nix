@@ -42,7 +42,7 @@ in
   home.file.".zen/${profileName}/chrome/nix-colors.css" = {
     text = ''
       :root {
-        --nix-background: ${theme.rgba.background};
+        --nix-background: rgba(${theme.backgroundRgb},${toString theme.opacity});
       }
     '';
   };
