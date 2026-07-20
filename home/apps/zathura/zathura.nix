@@ -9,8 +9,6 @@
       recolor-darkcolor = "#ffffff";
       default-bg = "rgba(0,0,0,0)";
 
-      # Lock PDF to window width
-      # adjust-open = "width";
       zoom = "width";
 
       # Disable mouse wheel zooming
