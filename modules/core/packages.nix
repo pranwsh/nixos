@@ -5,6 +5,8 @@
 
   environment.systemPackages = with pkgs; [
 
+    fish
+
     wl-clipboard
     brightnessctl
     playerctl
