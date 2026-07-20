@@ -41,10 +41,4 @@ in
     sha256 = "sha256-A7dHJ6hgpWM44ELEQguz8Esv7Fc0F19MufqFPa9St+g=";
   };
 
-  # Example: Llama 3 8B (Uncomment to add)
-  # llama3-8b = mkModel {
-  #   repo = "bartowski/Meta-Llama-3-8B-Instruct-GGUF";
-  #   file = "Meta-Llama-3-8B-Instruct-Q4_K_M.gguf";
-  #   sha256 = "sha256-...";
-  # };
 }
