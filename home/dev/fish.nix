@@ -22,14 +22,14 @@
       echo ""
     '';
     functions.fish_prompt = ''
-      set_color cyan
+      set_color magenta
       printf '%s\n' ""
-      set_color brcyan
+      set_color brmagenta
       echo -n ' ◖'
-      set_color 000000 -b brcyan   # black text on brcyan background
+      set_color 000000 -b brmagenta   # black text on brmagenta background
       echo -n (basename (pwd))
       set_color normal
-      set_color brcyan
+      set_color brmagenta
       echo -n '◗ '
       set_color normal
     '';
