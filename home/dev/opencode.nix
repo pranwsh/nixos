@@ -3,7 +3,6 @@
   home.packages = [
     pkgs.opencode
   ];
-
   programs.fish.interactiveShellInit = ''
     if test -r /run/secrets/mistral_key
       for line in (cat /run/secrets/mistral_key)
@@ -14,9 +13,10 @@
       end
     end
   '';
-
   home.file.".config/opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
     model = "mistral/mistral-large-latest";
+    plugin = [ "opencode-web-deepsearch" ];
+    theme = "system";
   };
 }
