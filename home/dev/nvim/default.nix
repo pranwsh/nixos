@@ -99,6 +99,9 @@ in
       # fuzzy find
       telescope-nvim
       plenary-nvim
+
+      # AI
+      opencode-nvim
     ];
 
     extraPackages = allExtraPackages;
