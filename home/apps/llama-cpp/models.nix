@@ -1,4 +1,3 @@
-# models.nix
 { pkgs, ... }:
 
 let
@@ -21,10 +20,6 @@ let
 
 in
 {
-  # ==============================================================================
-  # 📚 MODEL LIBRARY
-  # Add new models here. They will be downloaded but not necessarily active.
-  # ==============================================================================
 
   gemma2-9b = mkModel {
     repo = "bartowski/gemma-2-9b-it-GGUF";
@@ -33,11 +28,9 @@ in
   };
 
   # Qwen3.5-9B (March 2026) - Best all-rounder under 9B
-  # Uses Q4_K_M quantization for optimal performance/size balance
   qwen3-5-9b = mkModel {
     repo = "unsloth/Qwen3.5-9B-GGUF";
     file = "Qwen3.5-9B-Q4_K_M.gguf";
-    # ⚠️ REPLACE WITH ACTUAL HASH AFTER FIRST RUN IF EMPTY
     sha256 = "sha256-A7dHJ6hgpWM44ELEQguz8Esv7Fc0F19MufqFPa9St+g=";
   };
 
