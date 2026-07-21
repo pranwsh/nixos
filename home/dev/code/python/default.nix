@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    # Python libraries
     (python3.withPackages (
       ps: with ps; [
         ddgs
@@ -9,14 +10,13 @@
         requests
         aiohttp
         lxml
+        pyyaml
       ]
     ))
+
+    # Python tools
     (pipx.overridePythonAttrs (oldAttrs: {
       doCheck = false;
     }))
-    pyright
-    ruff
-    black
-    isort
   ];
 }
