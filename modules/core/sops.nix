@@ -7,7 +7,11 @@
 
     secrets = {
       deepseek_key = { };
-      nvidia_key = { };
+      nvidia_key = {
+        owner = config.my.user.name;
+        group = "users";
+        mode = "0440";
+      };
       mistral_key = {
         owner = config.my.user.name;
         group = "users";
