@@ -4,7 +4,7 @@ let
   # Import the model library
   models = import ./models.nix { pkgs = pkgs; };
 
-  activeModel = models.qwen3-5-9b;
+  activeModel = models.bonsai-27b;
 
   contextSize = 8192;
   gpuLayers = 32; # Set to 0 for CPU-only
@@ -31,6 +31,14 @@ in
           -p "${systemPrompt}" \
           -cnv \
           --color auto
+      '';
+
+    };
+    ai-serve = {
+      body = ''
+        llama-server ${commonArgs} \
+          --host 127.0.0.1 \
+          --port 8080
       '';
     };
   };
