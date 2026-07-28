@@ -12,6 +12,5 @@
     ./libreoffice.nix
     ./chromium.nix
     ./yazi.nix
-    ./qemu.nix
   ];
 }
