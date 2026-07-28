@@ -34,4 +34,10 @@ in
     sha256 = "sha256-A7dHJ6hgpWM44ELEQguz8Esv7Fc0F19MufqFPa9St+g=";
   };
 
+  bonsai-27b = mkModel {
+    repo = "prism-ml/Bonsai-27B-gguf";
+    file = "Bonsai-27B-Q1_0.gguf";
+    sha256 = "sha256-F++ELkdFDK646qPr+7q10vIni2K3m+EHmF+2mi+BmqA=";
+  };
+
 }
