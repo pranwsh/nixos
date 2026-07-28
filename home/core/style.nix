@@ -41,7 +41,7 @@ in
   };
 
   config.style = {
-    wallpaperPath = ../wallpapers/grass;
+    wallpaperPath = ../wallpapers/grass-nix.png;
 
     background = "#000000";
     backgroundRgb = hexToRgb config.style.background;
