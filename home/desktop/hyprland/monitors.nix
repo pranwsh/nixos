@@ -9,7 +9,7 @@
         profile.outputs = [
           {
             criteria = "HDMI-A-1";
-            mode = "2560x1080@60Hz";
+            mode = "2560x1080@74.99Hz";
             status = "enable";
           }
           {
