@@ -5,7 +5,7 @@
 }: {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = ["quiet" "loglevel=3" "audit=0" "udev.log_level=3" "nowatchdog" "mem_sleep_default=deep" "amd_pstate=active"];
+    kernelParams = ["quiet" "loglevel=3" "audit=0" "udev.log_level=3" "nowatchdog" "amd_pstate=active"];
     consoleLogLevel = 3;
     kernel.sysctl = {
       "net.core.default_qdisc" = "fq";
@@ -33,7 +33,7 @@
   systemd = {
     settings.Manager = {
       ShowStatus = "no";
-      RuntimeWatchdogSec = "20s";
+      RuntimeWatchdogSec = "0";
     };
     services = {
       systemd-udev-settle.enable = false;
