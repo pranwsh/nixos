@@ -76,7 +76,6 @@ in
         p.go
         p.commonlisp
         p.python
-        p.prolog
       ]))
 
       # ── Linting ───────────────────────────────────────────────────────────
