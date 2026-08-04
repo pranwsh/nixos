@@ -32,7 +32,15 @@
   };
 
   wayland.windowManager.hyprland.settings.monitor = [
-    "eDP-1,preferred,auto,1"
-    "HDMI-A-1,disable"
+    {
+      output = "eDP-1";
+      mode = "preferred";
+      position = "auto";
+      scale = 1;
+    }
+    {
+      output = "HDMI-A-1";
+      disabled = true;
+    }
   ];
 }
