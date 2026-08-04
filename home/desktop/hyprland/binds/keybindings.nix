@@ -1,78 +1,320 @@
 # binds/general-binds.nix
-{ ... }:
+{ lib, ... }:
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
       # =========================
       # App launchers
       # =========================
-      "$mainMod, Q, exec, $terminal"
-      "$mainMod, W, exec, $browser"
-      "$mainMod, E, exec, spotify"
-      "$mainMod, R, exec, $menu"
-      "$mainMod, A, exec, chromium"
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + Q"'')
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(terminal)")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + W"'')
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(browser)")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + E"'')
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("spotify")'')
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + R"'')
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(menu)")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + A"'')
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("chromium")'')
+        ];
+      }
 
       # =========================
       # Window management (general)
       # =========================
-      "$mainMod, C, killactive,"
-      "$mainMod, M, exit,"
-      "$mainMod, V, togglefloating,"
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + C"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.close()")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + M"'')
+          (lib.generators.mkLuaInline "hl.dsp.exit()")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + V"'')
+          (lib.generators.mkLuaInline ''hl.dsp.window.float({ action = "toggle" })'')
+        ];
+      }
 
       # =========================
       # Workspace navigation
       # =========================
-      "$mainMod, Page_Up, workspace, e-1"
-      "$mainMod, Page_Down, workspace, e+1"
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + Page_Up"'')
+          (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = "e-1" })'')
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + Page_Down"'')
+          (lib.generators.mkLuaInline ''hl.dsp.focus({ workspace = "e+1" })'')
+        ];
+      }
 
       # =========================
       # Workspace number binds
       # =========================
-      "$mainMod, 1, workspace, 1"
-      "$mainMod, 2, workspace, 2"
-      "$mainMod, 3, workspace, 3"
-      "$mainMod, 4, workspace, 4"
-      "$mainMod, 5, workspace, 5"
-      "$mainMod, 6, workspace, 6"
-      "$mainMod, 7, workspace, 7"
-      "$mainMod, 8, workspace, 8"
-      "$mainMod, 9, workspace, 9"
-      "$mainMod, 0, workspace, 10"
-      "$mainMod, S, togglespecialworkspace, magic"
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 1"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 1 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 2"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 2 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 3"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 3 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 4"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 4 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 5"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 5 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 6"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 6 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 7"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 7 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 8"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 8 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 9"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 9 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + 0"'')
+          (lib.generators.mkLuaInline "hl.dsp.focus({ workspace = 10 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + S"'')
+          (lib.generators.mkLuaInline ''hl.dsp.workspace.toggle_special("magic")'')
+        ];
+      }
 
       # Move windows to workspaces
-      "$mainMod SHIFT, 1, movetoworkspace, 1"
-      "$mainMod SHIFT, 2, movetoworkspace, 2"
-      "$mainMod SHIFT, 3, movetoworkspace, 3"
-      "$mainMod SHIFT, 4, movetoworkspace, 4"
-      "$mainMod SHIFT, 5, movetoworkspace, 5"
-      "$mainMod SHIFT, 6, movetoworkspace, 6"
-      "$mainMod SHIFT, 7, movetoworkspace, 7"
-      "$mainMod SHIFT, 8, movetoworkspace, 8"
-      "$mainMod SHIFT, 9, movetoworkspace, 9"
-      "$mainMod SHIFT, 0, movetoworkspace, 10"
-      "$mainMod SHIFT, S, movetoworkspace, special:magic"
-    ];
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 1"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 1 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 2"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 2 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 3"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 3 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 4"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 4 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 5"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 5 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 6"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 6 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 7"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 7 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 8"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 8 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 9"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 9 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + 0"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.move({ workspace = 10 })")
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + SHIFT + S"'')
+          (lib.generators.mkLuaInline ''hl.dsp.window.move({ workspace = "special:magic" })'')
+        ];
+      }
 
-    bindm = [
-      "$mainMod, mouse:272, movewindow"
-      "$mainMod, mouse:273, resizewindow"
-    ];
-
-    bindel = [
-      ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-      ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-      ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-    ];
-
-    bindl = [
-      ",XF86AudioNext, exec, playerctl next"
-      ",XF86AudioPause, exec, playerctl play-pause"
-      ",XF86AudioPlay, exec, playerctl play-pause"
-      ",XF86AudioPrev, exec, playerctl previous"
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + mouse:272"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.drag()")
+          { mouse = true; }
+        ];
+      }
+      {
+        _args = [
+          (lib.generators.mkLuaInline ''mainMod .. " + mouse:273"'')
+          (lib.generators.mkLuaInline "hl.dsp.window.resize()")
+          { mouse = true; }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioRaiseVolume"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioLowerVolume"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioMute"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioMicMute"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86MonBrightnessUp"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("brightnessctl s 10%+")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86MonBrightnessDown"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("brightnessctl s 10%-")'')
+          {
+            release = true;
+            locked = true;
+          }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioNext"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl next")'')
+          { locked = true; }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioPause"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'')
+          { locked = true; }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioPlay"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'')
+          { locked = true; }
+        ];
+      }
+      {
+        _args = [
+          "XF86AudioPrev"
+          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl previous")'')
+          { locked = true; }
+        ];
+      }
     ];
   };
 }
