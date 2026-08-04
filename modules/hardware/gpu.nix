@@ -9,14 +9,14 @@
   boot.initrd.kernelModules = lib.mkBefore [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # 2. Enable Graphics & ROCm (Must be done at system level)
+  # 2. Enable Graphics & VA-API hardware decoding (Must be done at system level)
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      rocmPackages.clr
-      rocmPackages.clr.icd
+      libva
+      libva-vdpau-driver
     ];
   };
 }

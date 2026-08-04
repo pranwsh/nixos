@@ -13,6 +13,8 @@
     pamixer
     acpi
 
+    libva-utils
+
     unzip
     ripgrep
     git

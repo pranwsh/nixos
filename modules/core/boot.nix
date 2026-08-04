@@ -5,7 +5,7 @@
 }: {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = ["quiet" "loglevel=3" "audit=0" "udev.log_level=3" "nowatchdog" "amd_pstate=active"];
+    kernelParams = ["quiet" "loglevel=3" "audit=0" "udev.log_level=3" "nowatchdog" "amd_pstate=active" "amdgpu.runpm=1" "amdgpu.gpu_recovery=1"];
     consoleLogLevel = 3;
     kernel.sysctl = {
       "net.core.default_qdisc" = "fq";
