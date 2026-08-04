@@ -40,4 +40,9 @@ in
     sha256 = "sha256-F++ELkdFDK646qPr+7q10vIni2K3m+EHmF+2mi+BmqA=";
   };
 
+  gemma4-e4b-uncensored = mkModel {
+    repo = "HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive";
+    file = "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf";
+    sha256 = "sha256-vhiZXcVUtlCSVPOP19bzGTeTCRdQBypXr0e8olJbFSE=";
+  };
 }
