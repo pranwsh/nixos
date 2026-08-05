@@ -89,6 +89,7 @@ in
       catppuccin-nvim
       which-key-nvim
       indent-blankline-nvim
+      vim-css-color
 
       # ── Mini suite ────────────────────────────────────────────────────────
       mini-nvim
