@@ -12,5 +12,6 @@
     ./libreoffice.nix
     ./chromium.nix
     ./yazi.nix
+    ./steam.nix
   ];
 }

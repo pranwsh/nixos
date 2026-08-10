@@ -47,7 +47,7 @@ in
     backgroundRgb = hexToRgb config.style.background;
     foreground = "#cdd2f4";
     foregroundRgb = hexToRgb config.style.foreground;
-    opacity = 0.65;
+    opacity = 0.8;
 
     colors = {
       color0 = "#282a36";
