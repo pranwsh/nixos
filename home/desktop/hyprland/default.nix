@@ -9,6 +9,7 @@
     ./monitors.nix
     ./hyprpaper.nix
     ./hyprshot.nix
+    ./wl-clipboard.nix
     ./binds/default.nix
     ./groups.nix
   ];

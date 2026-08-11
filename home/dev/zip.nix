@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.zip ];
+  home.packages = [
+    pkgs.zip
+    pkgs.unzip
+  ];
 }

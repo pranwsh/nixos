@@ -1,6 +1,14 @@
 # binds/general-binds.nix
-{ lib, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    brightnessctl
+    playerctl
+  ];
+
   wayland.windowManager.hyprland.settings = {
     bind = [
       # =========================

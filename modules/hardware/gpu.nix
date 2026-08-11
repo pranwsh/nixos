@@ -19,4 +19,6 @@
       libva-vdpau-driver
     ];
   };
+
+  environment.systemPackages = [ pkgs.libva-utils ];
 }

@@ -1,5 +1,10 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
+  environment.systemPackages = [
+    pkgs.sops
+    pkgs.age
+  ];
+
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     defaultSopsFormat = "yaml";
