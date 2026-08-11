@@ -1,139 +1,30 @@
-/* Enhanced readability for popups and overlays */
+/* ============================================================================
+   Panel/menu backgrounds for Zen Browser (userContent.css)
+   Menus, dropdowns, tooltips, modals, sidebars -> solid black, no
+   transparency, no blur. Everything else (page background, text, images,
+   video) is left completely untouched -- Dark Reader handles text/color.
+   ============================================================================ */
 
-/* Common popup elements */
-[role="menu"],
-[role="listbox"],
-[role="combobox"],
-[role="dialog"],
-.popup,
-.popover,
-.dropdown,
-.dropdown-menu,
-.menu,
-.context-menu,
-.select-menu {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
-  backdrop-filter: blur(4px);
-}
-
-/* Sidebar and drawer menus */
-[role="navigation"].sidebar,
-.sidebar-menu,
-.drawer,
-.side-panel,
-.nav-drawer,
-aside[class*="menu"],
-aside[class*="sidebar"] {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
+:is(
+  [role="menu"], [role="listbox"], [role="dialog"], [role="tooltip"],
+  [role="alertdialog"], [popover], .popup, .popover, .dropdown,
+  .dropdown-menu, .context-menu, .select-menu, .tooltip, .tooltip-content,
+  [data-tooltip], .modal-content, .dialog, .lightbox-content,
+  .sidebar-menu, .drawer, .side-panel, .nav-drawer,
+  aside[class*="menu"], aside[class*="sidebar"],
+  [class*="Dropdown"], [class*="Popover"], [class*="Menu-"], [class*="-menu"]
+):not(html):not(body) {
+  background-color: #000000 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
 }
 
-/* Tooltips */
-[role="tooltip"],
-.tooltip,
-.tooltip-content,
-[data-tooltip] {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
-  backdrop-filter: blur(4px);
-}
-
-/* Autocomplete and suggestions */
-[role="listbox"],
-.autocomplete,
-.suggestions,
-.search-results,
-.typeahead {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
-}
-
-/* Modal dialogs */
-[role="dialog"],
-.modal-content,
-.dialog,
-.lightbox-content {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
-}
-
-/* Ensure text within popups is readable */
-[role="menu"] *,
-[role="listbox"] *,
-[role="dialog"] *,
-.popup *,
-.dropdown *,
-.sidebar-menu *,
-.tooltip * {
-  color: inherit !important;
-}
-
-/* Links within popups */
-[role="menu"] a,
-[role="listbox"] a,
-.popup a,
-.dropdown a,
-.sidebar-menu a {
-  color: #66b3ff !important;
-}
-
-[role="menu"] a:hover,
-[role="listbox"] a:hover,
-.popup a:hover,
-.dropdown a:hover,
-.sidebar-menu a:hover {
-  color: #99ccff !important;
-}
-
-/* Selected/active items in popups */
-[role="menuitem"][aria-selected="true"],
-[role="option"][aria-selected="true"],
-.selected,
-.active {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-}
-
-/* Hover states for menu items */
-[role="menuitem"]:hover,
-[role="option"]:hover,
-.menu-item:hover,
-.dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Borders for better definition */
-[role="menu"],
-[role="listbox"],
-.popup,
-.dropdown,
-.sidebar-menu {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* Ensure proper z-index layering */
-[role="menu"],
-[role="listbox"],
-[role="dialog"],
-.popup,
-.dropdown,
-.sidebar-menu,
-.tooltip {
-  z-index: 9999 !important;
-  position: relative;
-}
-/* --- Extension Popup Override (Vimium) --- */
-div > .vimiumHintMarker,
-div > .vimiumHintMarker * {
-    background: black !important;
-    background-color: rgba(0, 0, 0, 255) !important;
-}
-div > .vimiumHintMarker {
-    border: 1px solid #000000 !important;
-}
-div > .vimiumHintMarker span {
-    color: plum !important;
-    font-weight: bold !important;
-    font-size: 12px !important;
+/* Guard: keep the page's own background untouched/transparent, in case
+   any generic class fragment above (".sidebar", "-menu", etc.) matches
+   a site's full-page wrapper instead of an actual floating panel. */
+html, body,
+#root, #app, #__next,
+main, .app, .app-content, .page, .page-content, .site-wrap {
+  background-color: transparent !important;
 }
