@@ -4,7 +4,7 @@ let
   # Import the model library
   models = import ./models.nix { pkgs = pkgs; };
 
-  activeModel = models.gemma4-e4b-uncensored;
+  activeModel = models.ling3-tiny-int4;
 
   contextSize = 8192;
   gpuLayers = 32; # Set to 0 for CPU-only

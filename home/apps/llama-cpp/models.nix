@@ -45,4 +45,10 @@ in
     file = "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf";
     sha256 = "sha256-vhiZXcVUtlCSVPOP19bzGTeTCRdQBypXr0e8olJbFSE=";
   };
+
+  ling3-tiny-int4 = mkModel {
+    repo = "bloomer010/Ling-3.0-tiny-GGUF";
+    file = "Ling-3.0-tiny-Q4_K_M.gguf";
+    sha256 = "0s4fkjvm34z2mn7152bdaybg23vi6l89mdyjxynx8ym0q7kwqhlq";
+  };
 }
