@@ -3,6 +3,8 @@
 
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
+    # build dirs on disk (not the 7.5G /tmp tmpfs); must not be world-writable
+    build-dir = "/nix/var/nix/builds";
   };
 
   nix.optimise = {
