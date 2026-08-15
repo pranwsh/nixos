@@ -20,20 +20,6 @@ let
 
 in
 {
-
-  gemma2-9b = mkModel {
-    repo = "bartowski/gemma-2-9b-it-GGUF";
-    file = "gemma-2-9b-it-Q4_K_M.gguf";
-    sha256 = "sha256-E7KntBFbvQkAFi7c6+R22huh/CTnGOi0DTL24wD1bf4=";
-  };
-
-  # Qwen3.5-9B (March 2026) - Best all-rounder under 9B
-  qwen3-5-9b = mkModel {
-    repo = "unsloth/Qwen3.5-9B-GGUF";
-    file = "Qwen3.5-9B-Q4_K_M.gguf";
-    sha256 = "sha256-A7dHJ6hgpWM44ELEQguz8Esv7Fc0F19MufqFPa9St+g=";
-  };
-
   bonsai-27b = mkModel {
     repo = "prism-ml/Bonsai-27B-gguf";
     file = "Bonsai-27B-Q1_0.gguf";
