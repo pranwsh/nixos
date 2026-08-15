@@ -1,5 +1,9 @@
 # groupbar.nix
-{ config, pkgs, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 let
   theme = config.style;
   stripHash = s: lib.removePrefix "#" s;
