@@ -304,13 +304,6 @@
       }
       {
         _args = [
-          "XF86AudioPause"
-          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'')
-          { locked = true; }
-        ];
-      }
-      {
-        _args = [
           "XF86AudioPlay"
           (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'')
           { locked = true; }
