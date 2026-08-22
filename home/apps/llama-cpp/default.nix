@@ -16,7 +16,7 @@ let
   };
 
   # Construct common arguments
-  commonArgs = "-m ${activeModel.path} -c ${toString contextSize} -ngl ${toString gpuLayers}";
+  commonArgs = "-m ${activeModel.path} -c ${toString contextSize} -ngl ${toString gpuLayers} -fa";
 
 in
 {
