@@ -6,7 +6,7 @@
 }:
 {
   # 1. Load AMD Kernel Drivers (Must be done at system level)
-  boot.initrd.kernelModules = lib.mkBefore [ "amdgpu" ];
+  boot.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # 2. Enable Graphics & VA-API hardware decoding (Must be done at system level)
