@@ -31,10 +31,6 @@
       RUNTIME_PM_ON_BAT = "auto";
       RUNTIME_PM_ON_AC = "auto";
 
-      # GPU power profiles
-      RADEON_POWER_PROFILE_ON_AC = 1;
-      RADEON_POWER_PROFILE_ON_BAT = 3;
-
       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
