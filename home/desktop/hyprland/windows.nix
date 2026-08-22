@@ -1,19 +1,7 @@
 { ... }:
 {
   wayland.windowManager.hyprland.settings = {
-    config = {
-      master = {
-        new_status = "master";
-      };
-    };
-
     window_rule = [
-      {
-        match = {
-          class = ".*";
-        };
-        suppress_event = "maximize";
-      }
       {
         match = {
           class = "^$";
