@@ -9,10 +9,6 @@
         gaps_in = 8;
         gaps_out = 16;
         border_size = 0;
-        col = {
-          active_border = "rgba(ff800044)";
-          inactive_border = "rgba(ffcd9c22)";
-        };
         resize_on_border = true;
         extend_border_grab_area = 15;
         allow_tearing = false;
@@ -26,16 +22,13 @@
 
         shadow = {
           enabled = false;
-          range = 4;
-          render_power = 3;
-          color = "rgba(1a1a1aee)";
         };
 
         blur = {
           enabled = true;
           size = 4;
-          passes = 3;
-          vibrancy = 0;
+          passes = 2;
+          new_optimizations = true;
         };
       };
 
@@ -45,10 +38,6 @@
 
       input = {
         kb_layout = "us";
-        kb_variant = "";
-        kb_model = "";
-        kb_options = "";
-        kb_rules = "";
         follow_mouse = 1;
         sensitivity = 0;
 
@@ -95,70 +84,16 @@
     curve = [
       {
         _args = [
-          "easeOutQuint"
+          "overshot"
           {
             type = "bezier";
             points = [
               [
-                0.23
-                1
+                0.13
+                0.99
               ]
               [
-                0.32
-                1
-              ]
-            ];
-          }
-        ];
-      }
-      {
-        _args = [
-          "easeInOutCubic"
-          {
-            type = "bezier";
-            points = [
-              [
-                0.65
-                0.05
-              ]
-              [
-                0.36
-                1
-              ]
-            ];
-          }
-        ];
-      }
-      {
-        _args = [
-          "linear"
-          {
-            type = "bezier";
-            points = [
-              [
-                0
-                0
-              ]
-              [
-                1
-                1
-              ]
-            ];
-          }
-        ];
-      }
-      {
-        _args = [
-          "almostLinear"
-          {
-            type = "bezier";
-            points = [
-              [
-                0.5
-                0.5
-              ]
-              [
-                0.75
+                0.29
                 1
               ]
             ];
@@ -183,24 +118,6 @@
           }
         ];
       }
-      {
-        _args = [
-          "overshot"
-          {
-            type = "bezier";
-            points = [
-              [
-                0.13
-                0.99
-              ]
-              [
-                0.29
-                1
-              ]
-            ];
-          }
-        ];
-      }
     ];
 
     animation = [
@@ -210,12 +127,6 @@
         speed = 6;
         bezier = "overshot";
         style = "slide";
-      }
-      {
-        leaf = "border";
-        enabled = true;
-        speed = 10;
-        bezier = "default";
       }
       {
         leaf = "fade";
