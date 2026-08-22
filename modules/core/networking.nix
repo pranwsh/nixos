@@ -20,17 +20,11 @@
       Network = {
         EnableIPv6 = true;
       };
-      # Tell iwd to aggressively scan and reconnect
-      Station = {
-        # Always try to reconnect on disconnect
-        AutoConnect = true;
-        # Scan for known networks every 60s when disconnected
-        InitialPeriodicScanInterval = 10;
-        MaximumPeriodicScanInterval = 60;
-      };
-      # Disable power saving — this is the most common cause of random drops
+      # Disable background periodic/roam scans: they run every minute at idle,
+      # keeping the rtw89 card busy and pinning its IRQ thread (irq/85) to one
+      # core. With this off the card is quiet until a connect/disconnect happens.
       Scan = {
-        DisablePeriodicScan = false;
+        DisablePeriodicScan = true;
       };
     };
   };
@@ -107,4 +101,8 @@
   networking.firewall = {
     enable = false;
   };
+
+  # Balance IRQs across cores so the wifi card's interrupts
+  # (rtw89_pci) don't pile up on a single core.
+  services.irqbalance.enable = true;
 }
