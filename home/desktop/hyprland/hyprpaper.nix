@@ -9,23 +9,21 @@ in {
   services.hyprpaper = {
     enable = true;
     settings = {
-      source = "~/.config/hypr/hyprpaper.conf";
+      ipc = true;
+      splash = false;
+
+      wallpaper = [
+        {
+          monitor = "eDP-1";
+          path = wp;
+          fit_mode = "cover";
+        }
+        {
+          monitor = "HDMI-A-1";
+          path = wp;
+          fit_mode = "cover";
+        }
+      ];
     };
   };
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    ipc = true
-    splash = false
-
-    wallpaper {
-      monitor = eDP-1
-      path = ${wp}
-      fit_mode = cover
-    }
-
-    wallpaper {
-      monitor = HDMI-A-1
-      path = ${wp}
-      fit_mode = cover
-    }
-  '';
 }
