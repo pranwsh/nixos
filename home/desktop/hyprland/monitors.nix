@@ -1,6 +1,10 @@
-{ ... }:
 {
+  config,
+  ...
+}: {
   wayland.windowManager.hyprland.extraConfig = ''
+    local wp = "${toString config.style.wallpaperPath}"
+
     local function configureMonitors()
       hl.monitor({ output = "HDMI-A-1", mode = "2560x1080@74.99", position = "auto", scale = 1, disabled = false })
       hl.timer(function()
@@ -14,6 +18,10 @@
           hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1, disabled = false })
           hl.monitor({ output = "HDMI-A-1", disabled = true })
         end
+        hl.timer(function()
+          local monitor = docked and "HDMI-A-1" or "eDP-1"
+          hl.exec_cmd("hyprctl hyprpaper wallpaper " .. monitor .. "," .. wp .. ",cover")
+        end, { timeout = 300, type = "oneshot" })
       end, { timeout = 1000, type = "oneshot" })
     end
 
