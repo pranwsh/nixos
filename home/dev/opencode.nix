@@ -29,7 +29,7 @@
   ];
   home.file.".config/opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
-    model = "mistral/mistral-large-latest";
+    model = "opencode/x-preview-f-free";
     theme = "system";
     provider = {
       mistral = {
