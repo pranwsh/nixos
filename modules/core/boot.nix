@@ -11,7 +11,7 @@
       "net.core.default_qdisc" = "fq";
       "net.ipv4.tcp_congestion_control" = "bbr";
       "net.ipv4.tcp_fastopen" = 3;
-      "vm.swappiness" = 10;
+      "vm.swappiness" = 120;
       "fs.inotify.max_user_watches" = 524288;
     };
     initrd = {
@@ -41,7 +41,16 @@
     };
   };
 
-  services.journald.extraConfig = "Storage=volatile";
+  services.journald.extraConfig = ''
+    Storage=volatile
+    SystemMaxUse=200M
+  '';
   services.dbus.implementation = "broker";
   systemd.oomd.enable = true;
+
+  # --- rebuild-time / closure trims ---
+  documentation.enable = false;
+  nix.channel.enable = false;
+  programs.command-not-found.enable = false;
+  system.disableInstallerTools = true;
 }
