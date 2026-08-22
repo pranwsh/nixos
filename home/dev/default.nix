@@ -2,6 +2,7 @@
 {
   imports = [
     ./code
+    ./docker.nix
     ./nvim
     ./fish.nix
     ./kitty.nix
