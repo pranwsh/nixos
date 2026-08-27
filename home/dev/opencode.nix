@@ -1,27 +1,3 @@
-# { pkgs, ... }:
-# {
-#   home.packages = [
-#     pkgs.opencode
-#   ];
-#   home.file.".config/opencode/opencode.json".text = builtins.toJSON {
-#     "$schema" = "https://opencode.ai/config.json";
-#     model = "mistral/mistral-large-latest";
-#     theme = "system";
-#     provider = {
-#       mistral = {
-#         options = {
-#           apiKey = "{file:/run/secrets/mistral_key}";
-#         };
-#       };
-#       nvidia = {
-#         options = {
-#           apiKey = "{file:/run/secrets/nvidia_key}";
-#         };
-#       };
-#     };
-#   };
-# }
-#
 { pkgs, ... }:
 {
   home.packages = [
@@ -29,8 +5,9 @@
   ];
   home.file.".config/opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
-    model = "opencode/x-preview-f-free";
+    model = "empero/glm-5.3-flash";
     theme = "system";
+
     provider = {
       mistral = {
         options = {
@@ -55,6 +32,20 @@
               context = 8192;
               output = 2048;
             };
+          };
+        };
+      };
+
+      empero = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "empero";
+        options = {
+          baseURL = "https://free.empero.org/v1";
+          apiKey = "free";
+        };
+        models = {
+          "glm-5.3-flash" = {
+            name = "GLM 5.3 Flash";
           };
         };
       };
