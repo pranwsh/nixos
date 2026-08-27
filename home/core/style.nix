@@ -41,7 +41,7 @@ in
   };
 
   config.style = {
-    wallpaperPath = ../wallpapers/vader;
+    wallpaperPath = ../wallpapers/old;
 
     background = "#000000";
     backgroundRgb = hexToRgb config.style.background;
