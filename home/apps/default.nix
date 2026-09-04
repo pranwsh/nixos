@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./rct2.nix
     ./zen
     ./spotify
     ./zathura/zathura.nix
