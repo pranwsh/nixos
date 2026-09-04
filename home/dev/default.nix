@@ -3,6 +3,7 @@
   imports = [
     ./code
     ./docker.nix
+    ./direnv.nix
     ./nvim
     ./fish.nix
     ./kitty.nix
