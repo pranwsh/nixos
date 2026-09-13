@@ -41,7 +41,7 @@ in
   };
 
   config.style = {
-    wallpaperPath = ../wallpapers/old;
+    wallpaperPath = ../wallpapers/cat;
 
     background = "#000000";
     backgroundRgb = hexToRgb config.style.background;
