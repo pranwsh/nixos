@@ -6,7 +6,7 @@ let
 
   activeModel = models.ling3-tiny-int4;
 
-  contextSize = 8192;
+  contextSize = 16384;
   gpuLayers = 32; # Set to 0 for CPU-only
   systemPrompt = "You are a helpful coding assistant.";
   flashAttention = "on";
