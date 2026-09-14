@@ -14,5 +14,6 @@
     ./libreoffice.nix
     ./chromium.nix
     ./yazi.nix
+    ./audio-cpp
   ];
 }
