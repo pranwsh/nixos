@@ -9,7 +9,8 @@ let
   contextSize = 16384;
   gpuLayers = 32; # Set to 0 for CPU-only
   systemPrompt = "You are a helpful coding assistant.";
-  flashAttention = "on";
+  flashAttention = "off";
+  microBatch = 384;
 
   # Build llama.cpp with Vulkan
   llama-cpp-vulkan = pkgs.llama-cpp.override {
@@ -17,7 +18,7 @@ let
   };
 
   # Construct common arguments
-  commonArgs = "-m ${activeModel.path} -c ${toString contextSize} -ngl ${toString gpuLayers} -fa ${toString flashAttention}";
+  commonArgs = "-m ${activeModel.path} -c ${toString contextSize} -ngl ${toString gpuLayers} -fa ${toString flashAttention} -ub ${toString microBatch}";
 
 in
 {
