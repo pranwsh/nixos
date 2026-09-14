@@ -19,21 +19,24 @@
         "type": "github"
       }
     },
-    "flake-parts": {
+    "audiocpp": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1787559586,
-        "narHash": "sha256-onL0VLf9vPllmT0H/OlURIU5r5t5WIEl7t4tVNKT0Nw=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "9d0d87172c374f89da73c1cfe6d81ae62feac1f1",
+        "lastModified": 1789259736,
+        "narHash": "sha256-lYr6u0WzYmWsFwp7KFDymTj7IuZ25wDOck1jWrm0Xco=",
+        "owner": "0xShug0",
+        "repo": "audio.cpp",
+        "rev": "87544b57242f52c7e7d3dee5766fe82eacf6a321",
         "type": "github"
       },
       "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
+        "owner": "0xShug0",
+        "ref": "dev",
+        "repo": "audio.cpp",
         "type": "github"
       }
     },
@@ -107,21 +110,6 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "nixpkgs-lib": {
-      "locked": {
-        "lastModified": 1785031560,
-        "narHash": "sha256-OmshNvn2vupOFpYinLUu+1Dnpu4n7Q5N3ggGVNHpkUI=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "0e79af5e3d4dcfcd676ab5ba3f95d2e3352e078c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1787900134,
@@ -186,7 +174,7 @@
     "root": {
       "inputs": {
         "PrismLauncher-Cracked": "PrismLauncher-Cracked",
-        "flake-parts": "flake-parts",
+        "audiocpp": "audiocpp",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "sops-nix": "sops-nix",
