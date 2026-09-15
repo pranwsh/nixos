@@ -8,6 +8,7 @@
     ./wl-clipboard.nix
     ./binds/default.nix
     ./groups.nix
+    ./plugins
   ];
 
   wayland.windowManager.hyprland = {
