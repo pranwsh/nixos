@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./style.nix
+    ./style
     ./fonts.nix
     ./scripts/nixify/nixify.nix
     ./bluetui.nix
