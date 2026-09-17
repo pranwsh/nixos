@@ -41,6 +41,26 @@
           };
         };
       };
+
+      ninerouter = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "9router";
+        options = {
+          apiKey = "sk-cdad3cb1abd9fc0b-ust4ab-f4a4aff6";
+          baseURL = "http://localhost:20128/v1";
+        };
+        models = {
+          "oc/muse-spark-1.3-contributor-free" = {
+            name = "9router-muse-1.3";
+            tool_call = true;
+            limit = {
+              context = 1000000;
+              output = 512000;
+            };
+          };
+        };
+      };
+
       llama-cpp = {
         npm = "@ai-sdk/openai-compatible";
         name = "llama-server (local)";
