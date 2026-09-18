@@ -54,10 +54,10 @@
     };
   };
 
-  services.journald.extraConfig = ''
-    Storage=volatile
-    SystemMaxUse=200M
-  '';
+  services.journald.settings.Journal = {
+    Storage = "volatile";
+    SystemMaxUse = "200M";
+  };
   services.dbus.implementation = "broker";
   systemd.oomd.enable = true;
 

@@ -1,6 +1,14 @@
 { config, lib, inputs, ... }: {
   nixpkgs.config.allowUnfree = true;
 
+  # sops-nix still calls buildGo125Module, but current nixpkgs removed it
+  # (Go 1.25 EOL). Alias it to the 1.26 builder.
+  nixpkgs.overlays = [
+    (final: prev: {
+      buildGo125Module = prev.buildGo126Module;
+    })
+  ];
+
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     # build dirs on disk (not the 7.5G /tmp tmpfs); must not be world-writable
