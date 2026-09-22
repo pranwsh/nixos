@@ -15,10 +15,20 @@
       url = "github:0xShug0/audio.cpp/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    router-src = {
+      url = "github:solomild/9router/master";
+      flake = false;
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, sops-nix, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      sops-nix,
+      ...
+    }@inputs:
     let
       username = "pranesh";
     in
