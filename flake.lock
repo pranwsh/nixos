@@ -177,9 +177,27 @@
         "audiocpp": "audiocpp",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "router-src": "router-src",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
+      }
+    },
+    "router-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789814683,
+        "narHash": "sha256-1P116EEaGFycav7Zs0x/no68P14Nut11Wy5gZXxwlgk=",
+        "owner": "solomild",
+        "repo": "9router",
+        "rev": "8a343d7c4ca71658c562fdbd674633088e947e67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "solomild",
+        "ref": "master",
+        "repo": "9router",
+        "type": "github"
       }
     },
     "sops-nix": {
