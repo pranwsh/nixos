@@ -186,15 +186,15 @@
     "router-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1789814683,
-        "narHash": "sha256-1P116EEaGFycav7Zs0x/no68P14Nut11Wy5gZXxwlgk=",
-        "owner": "solomild",
+        "lastModified": 1790132733,
+        "narHash": "sha256-WXob9QYhSWfEi4T65mkkunYyOXjn99laAd1FtElHttQ=",
+        "owner": "decolua",
         "repo": "9router",
-        "rev": "8a343d7c4ca71658c562fdbd674633088e947e67",
+        "rev": "39e36d3d0c849e0e01dfeacddf111edf892448fc",
         "type": "github"
       },
       "original": {
-        "owner": "solomild",
+        "owner": "decolua",
         "ref": "master",
         "repo": "9router",
         "type": "github"

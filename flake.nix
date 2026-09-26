@@ -17,7 +17,7 @@
     };
 
     router-src = {
-      url = "github:solomild/9router/master";
+      url = "github:decolua/9router/master";
       flake = false;
     };
   };
