@@ -68,6 +68,9 @@ in
       cmp_luasnip
       friendly-snippets
 
+      # git
+      gitsigns-nvim
+
       # ── Treesitter ────────────────────────────────────────────────────────
       (nvim-treesitter.withPlugins (p: [
         p.lua

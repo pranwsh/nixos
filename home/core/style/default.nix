@@ -67,7 +67,8 @@ let
     else
       null;
 
-  colors = if palette != null then palette.colors else fallback;
+  # colors = if palette != null then palette.colors else fallback;
+  colors = fallback;
 in
 {
   options.style = {

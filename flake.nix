@@ -15,10 +15,21 @@
       url = "github:0xShug0/audio.cpp/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    router-src = {
+      # url = "github:decolua/9router/master";
+      url = "github:decolua/9router?ref=pull/4073/head";
+      flake = false;
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, sops-nix, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      sops-nix,
+      ...
+    }@inputs:
     let
       username = "pranesh";
     in

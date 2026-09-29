@@ -177,9 +177,27 @@
         "audiocpp": "audiocpp",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "router-src": "router-src",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
+      }
+    },
+    "router-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790367849,
+        "narHash": "sha256-EO3tHqpPgz5fmM+qX31tVdRMyMYlAa4NUpbpiYk/t5E=",
+        "owner": "decolua",
+        "repo": "9router",
+        "rev": "d6ca4ea5db09c9458d8c0d7fe4c5c50ce8ce794f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "decolua",
+        "ref": "pull/4073/head",
+        "repo": "9router",
+        "type": "github"
       }
     },
     "sops-nix": {
