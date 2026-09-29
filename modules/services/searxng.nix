@@ -9,7 +9,7 @@
         bind_address = "127.0.0.1";
         port = 8888;
         secret_key = "123";
-        limiter = true;
+        limiter = false;
         image_proxy = true;
         method = "POST";
         public_instance = false;
@@ -21,7 +21,10 @@
       };
 
       search = {
-        formats = [ "html" "json" ];
+        formats = [
+          "html"
+          "json"
+        ];
         autocomplete = "google";
       };
     };
