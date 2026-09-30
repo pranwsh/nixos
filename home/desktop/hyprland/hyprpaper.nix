@@ -1,16 +1,19 @@
 {
   config,
-  lib,
-  pkgs,
   ...
-}: let
+}:
+let
   wp = toString config.style.wallpaperPath;
-in {
+in
+{
   services.hyprpaper = {
     enable = true;
+    systemdTarget = "hyprland-session.target";
     settings = {
       ipc = true;
       splash = false;
+
+      preload = [ wp ];
 
       wallpaper = [
         {
