@@ -16,7 +16,6 @@ home/                    # home-manager (username/homedir forced from `osConfig.
   core/                  # style/palette, fonts, scripts/nixify, bluetui, impala
   desktop/               # hyprland (lua config), wofi, gtk, xdg
   dev/                   # per-lang `code/{cpp,go,rust,python,lua,nix,...}` + nvim, kitty, fish, docker, direnv
-  apps/                  # zen, spotify, llama-cpp, audio-cpp, steam, discord, tor, wine, yazi, zathura
 users/users.nix          # user def, fish shell, wheel/video/input
 secrets.yaml             # sops-nix + age encrypted API keys
 ```
@@ -32,7 +31,6 @@ Smart bit: `my.user` options flow from NixOS -> Home Manager via `osConfig`, so 
 - **Self-hosted search:** local SearXNG on `127.0.0.1:8888` with local Redis, image proxy, POST-only, no limiter + 3proxy SOCKS on 1080.
 - **Hyprland in Lua:** `configType = "lua"` with split `settings/windows/monitors/binds/groups/hyprpaper/hyprshot`. Central `style/palette` theme injects opacity/colors into Zen via generated `nix-colors.css`.
 - **Dev env:** per-language modules auto-pull LSP/linters (pyright/ruff, nixd/statix, lua-ls, gopls, clang-tools), Neovim Lua config symlinked verbatim, plus direnv/docker/kitty/fish/gh.
-- **App flakes:** Zen Browser + Nebula chrome theme, Spicetify (adblock/hidePodcasts), `llama-cpp` + `audio.cpp` with local models, PrismLauncher-Cracked, Steam, Tor, Wine.
 
 ## rebuild
 
