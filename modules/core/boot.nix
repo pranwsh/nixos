@@ -55,7 +55,7 @@
   };
 
   services.journald.settings.Journal = {
-    Storage = "volatile";
+    Storage = "persistent";
     SystemMaxUse = "200M";
   };
   services.dbus.implementation = "broker";
