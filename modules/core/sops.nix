@@ -21,12 +21,7 @@
         group = "users";
         mode = "0440";
       };
-      tokenrouter_key = {
-        owner = config.my.user.name;
-        group = "users";
-        mode = "0440";
-      };
-      inferx_key = {
+      ninerouter_key = {
         owner = config.my.user.name;
         group = "users";
         mode = "0440";
