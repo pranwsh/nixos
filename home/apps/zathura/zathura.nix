@@ -1,13 +1,13 @@
-{...}: {
+{ ... }: {
   programs.zathura = {
     enable = true;
     options = {
       selection-clipboard = "clipboard";
       guioptions = "none";
       recolor = true;
-      recolor-lightcolor = "rgba(0,0,0,0.6)";
+      recolor-lightcolor = "rgba(0,0,0,0)";
       recolor-darkcolor = "#ffffff";
-      default-bg = "rgba(0,0,0,0)";
+      default-bg = "rgba(0,0,0,.6)";
 
       zoom = "width";
 
