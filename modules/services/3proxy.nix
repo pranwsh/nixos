@@ -15,7 +15,7 @@ in
     enable = true;
     services = [
       {
-        type = "socks";
+        type = "proxy";
         auth = [ "strong" ];
         acl = [
           {
