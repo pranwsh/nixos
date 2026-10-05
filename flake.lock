@@ -19,27 +19,6 @@
         "type": "github"
       }
     },
-    "audiocpp": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1789531254,
-        "narHash": "sha256-SOcIIUAK0lwxooXELCtRETRZoGxXhXNso1PDDQRFYbQ=",
-        "owner": "0xShug0",
-        "repo": "audio.cpp",
-        "rev": "39f9013463053e206aa160f8453d734f78999b9d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "0xShug0",
-        "ref": "dev",
-        "repo": "audio.cpp",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -174,7 +153,6 @@
     "root": {
       "inputs": {
         "PrismLauncher-Cracked": "PrismLauncher-Cracked",
-        "audiocpp": "audiocpp",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "router-src": "router-src",

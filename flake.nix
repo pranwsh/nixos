@@ -11,10 +11,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     PrismLauncher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
     sops-nix.url = "github:Mic92/sops-nix";
-    audiocpp = {
-      url = "github:0xShug0/audio.cpp/dev";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     router-src = {
       # url = "github:decolua/9router/master";
