@@ -7,10 +7,24 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    PrismLauncher-Cracked.url = "github:Diegiwg/PrismLauncher-Cracked";
-    sops-nix.url = "github:Mic92/sops-nix";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    PrismLauncher-Cracked = {
+      url = "github:Diegiwg/PrismLauncher-Cracked";
+      # This one needs its own nixpkgs: it depends on patches that do
+      # not apply to the current unstable channel.
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/8110df5ad7abf5d4c0f6fb0f8f978390e77f9685";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     router-src = {
       # url = "github:decolua/9router/master";
