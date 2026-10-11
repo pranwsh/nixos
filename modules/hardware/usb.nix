@@ -1,15 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, ... }: {
   # Add user to plugdev group for USB device access
   users.users."${config.my.user.name}".extraGroups = ["plugdev" "dialout"];
-
-  # Install usbutils (gives lsusb)
-  environment.systemPackages = with pkgs; [
-    usbutils
-  ];
 
   # Optional: Enable udev support for EV3 devices
   services.udev.extraRules = ''

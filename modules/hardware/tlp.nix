@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   powerManagement.enable = true;
-
-  environment.systemPackages = [ pkgs.acpi ];
 
   services.logind = {
     settings.Login = {

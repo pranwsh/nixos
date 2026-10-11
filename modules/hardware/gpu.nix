@@ -20,5 +20,4 @@
     ];
   };
 
-  environment.systemPackages = [ pkgs.libva-utils ];
 }
