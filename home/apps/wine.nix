@@ -1,8 +1,6 @@
 { pkgs, ... }:
-
 {
   home.packages = [
-    pkgs.wineWow64Packages.full
+    pkgs.wineWow64Packages.minimal
   ];
-
 }

@@ -38,13 +38,6 @@
           (lib.generators.mkLuaInline "hl.dsp.exec_cmd(menu)")
         ];
       }
-      {
-        _args = [
-          (lib.generators.mkLuaInline ''mainMod .. " + A"'')
-          (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("chromium")'')
-        ];
-      }
-
       # =========================
       # Window management (general)
       # =========================

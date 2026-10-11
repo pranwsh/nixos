@@ -1,8 +1,6 @@
 { ... }:
 {
   imports = [
-    ./tor-browser.nix
-    ./steam.nix
     ./zen
     ./spotify
     ./zathura/zathura.nix
@@ -11,8 +9,6 @@
     ./llama-cpp
     ./wine.nix
     ./discord.nix
-    ./libreoffice.nix
-    ./chromium.nix
     ./yazi.nix
   ];
 }

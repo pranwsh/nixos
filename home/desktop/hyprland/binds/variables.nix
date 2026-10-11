@@ -16,8 +16,5 @@
     menu = {
       _var = "wofi";
     };
-    chromium = {
-      _var = "chromium";
-    };
   };
 }
