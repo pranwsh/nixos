@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    lua
-    lua-language-server
-    stylua
-    selene
-  ];
+  # Removed globally — use per-project nix shell + direnv.
+  home.packages = [];
 }

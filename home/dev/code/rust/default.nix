@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    rustc
-    cargo
-    rust-analyzer
-    rustfmt
-    clippy
-  ];
+  # Removed globally — use per-project nix shell + direnv.
+  home.packages = [];
 }

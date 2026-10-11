@@ -1,12 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    gcc
-    gdb
-    cmake
-    gnumake
-    clang-tools # for clangd, clang-format
-    cppcheck
-  ];
+  # Removed globally — use per-project nix shell + direnv.
+  home.packages = [];
 }

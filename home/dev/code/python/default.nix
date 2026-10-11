@@ -1,22 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    # Python libraries
-    (python3.withPackages (
-      ps: with ps; [
-        ddgs
-        beautifulsoup4
-        requests
-        aiohttp
-        lxml
-        pyyaml
-      ]
-    ))
-
-    # Python tools
-    (pipx.overridePythonAttrs (oldAttrs: {
-      doCheck = false;
-    }))
-  ];
+  # Minimal global python — libs go in per-project uv venvs.
+  home.packages = with pkgs; [ python3 uv ];
 }

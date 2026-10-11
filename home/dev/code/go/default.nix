@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    go
-    gopls
-    golangci-lint
-    go-tools
-    delve
-  ];
+  # Removed globally — use per-project nix shell + direnv.
+  home.packages = [];
 }

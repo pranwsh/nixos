@@ -1,9 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    sbcl
-    sbclPackages.quicklisp-starter
-    clisp
-  ];
+  # Removed globally — use per-project nix shell + direnv.
+  home.packages = [];
 }
