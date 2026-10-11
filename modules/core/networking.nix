@@ -13,8 +13,6 @@
     options rtw89_pci disable_aspm_l1=Y disable_aspm_l1ss=Y disable_clkreq=Y
   '';
 
-  environment.systemPackages = [ pkgs.iw ];
-
   networking.wireless.iwd = {
     enable = true;
     settings = {
