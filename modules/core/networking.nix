@@ -40,7 +40,11 @@
   # No-reboot recovery helper: systemctl restart wifi-recover
   systemd.services.wifi-recover = {
     description = "Recover wedged rtw89 without reboot";
-    path = with pkgs; [ kmod systemd iwd ];
+    path = with pkgs; [
+      kmod
+      systemd
+      iwd
+    ];
     serviceConfig.Type = "oneshot";
     script = ''
       iwctl station list || true
@@ -87,9 +91,13 @@
   services.resolved = {
     enable = true;
     settings.Resolve = {
-      DNSSEC = "no";
+      DNSSEC = "allow_downgrade";
+      DNSOverTLS = true;
       Cache = "yes";
-      DNS = [ "1.1.1.1" "8.8.8.8" ];
+      DNS = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
       DNSStubListener = "yes";
     };
   };
