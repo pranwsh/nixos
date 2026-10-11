@@ -1,4 +1,5 @@
 {
+  # NOTE: programs.kitty.enable installs kitty itself; no home.packages needed.
   config,
   pkgs,
   lib,
@@ -6,10 +7,6 @@
 }: let
   theme = config.style;
 in {
-  home.packages = with pkgs; [
-    kitty
-  ];
-
   programs.kitty = {
     enable = true;
 

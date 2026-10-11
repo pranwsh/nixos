@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   fonts.fontconfig = {
     enable = true;
-    defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+    defaultFonts.monospace = [ "RobotoMono Nerd Font" ];
   };
 
   home.packages = with pkgs; [
