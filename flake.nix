@@ -28,7 +28,7 @@
 
     router-src = {
       # url = "github:decolua/9router/master";
-      url = "github:decolua/9router?ref=pull/4073/head";
+      url = "github:decolua/9router";
       flake = false;
     };
   };
