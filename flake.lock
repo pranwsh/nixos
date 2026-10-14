@@ -122,16 +122,15 @@
     "router-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1790367849,
-        "narHash": "sha256-EO3tHqpPgz5fmM+qX31tVdRMyMYlAa4NUpbpiYk/t5E=",
+        "lastModified": 1791463733,
+        "narHash": "sha256-cnj1KNd6BM7QPdmnX5+AhZVYuHOpsqBe+l6jOqXrDx0=",
         "owner": "decolua",
         "repo": "9router",
-        "rev": "d6ca4ea5db09c9458d8c0d7fe4c5c50ce8ce794f",
+        "rev": "ce4460ef79382bfddb4aa5fc0ff9f3cb0d5f95a8",
         "type": "github"
       },
       "original": {
         "owner": "decolua",
-        "ref": "pull/4073/head",
         "repo": "9router",
         "type": "github"
       }
