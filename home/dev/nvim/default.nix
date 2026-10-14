@@ -29,6 +29,19 @@ let
       clang-tools
       cppcheck
     ];
+
+    java = with pkgs; [
+      # Java LSP (Eclipse JDT LS). NB: nixpkgs has no `jdtls` alias; the
+      # attribute is `jdt-language-server`. Its wrapper hardcodes its own
+      # JDK, so no separate `jdk` needs to be on PATH.
+      jdt-language-server
+
+      # Linter behind nvim-lint's `checkstyle` linter. It resolves its
+      # bundled /google_checks.xml from inside the jar, so no external
+      # config file is required.
+      checkstyle
+    ];
+
   };
 
   # ── Derived ───────────────────────────────────────────────────────────────
@@ -55,6 +68,7 @@ in
     plugins = with pkgs.vimPlugins; [
       # ── LSP ───────────────────────────────────────────────────────────────
       nvim-lspconfig
+      nvim-jdtls
 
       # ── Completion ────────────────────────────────────────────────────────
       nvim-cmp
@@ -80,6 +94,7 @@ in
         p.go
         p.commonlisp
         p.python
+        p.java
       ]))
 
       # ── Linting ───────────────────────────────────────────────────────────
