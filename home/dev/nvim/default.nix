@@ -30,6 +30,28 @@ let
       cppcheck
     ];
 
+    rust = with pkgs; [
+
+      # Rust LSP. NB: this is `pkgs.rust-analyzer` at top level; there is no
+      # `rustPackages.rust-analyzer` attribute in nixpkgs.
+      #
+      # Preferred over rustup's `~/.cargo/bin/rust-analyzer`, which is a proxy
+      # shim that fails when the component is not installed.
+      rust-analyzer
+
+      # `checkOnSave.command = "clippy"` in the rustaceanvim config needs a real
+      # clippy on PATH; the rustup shim is unreliable, so take it from Nix.
+      clippy
+
+      # Used by the BufWritePre format hook and rust-analyzer's formatter.
+      rustfmt
+
+      # cargo/rustc are included so the toolchain versions match clippy's;
+      # a mixed toolchain makes `cargo clippy` fail inside rust-analyzer.
+      cargo
+      rustc
+    ];
+
     java = with pkgs; [
       # Java LSP (Eclipse JDT LS). NB: nixpkgs has no `jdtls` alias; the
       # attribute is `jdt-language-server`. Its wrapper hardcodes its own
@@ -95,6 +117,7 @@ in
         p.commonlisp
         p.python
         p.java
+p.rust
       ]))
 
       # ── Linting ───────────────────────────────────────────────────────────

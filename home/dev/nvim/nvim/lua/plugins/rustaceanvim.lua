@@ -1,3 +1,48 @@
+-- ── Resolve Rust tool binaries ─────────────────────────────────────────────
+-- `.profile` runs rustup's env, which puts `~/.cargo/bin` FIRST on PATH. The
+-- `rust-analyzer` and `cargo-clippy` there are rustup *proxy shims* that hard-
+-- fail when the component is missing ("Unknown binary 'rust-analyzer'"), so the
+-- LSP client exits 1. Home Manager also only *appends* its packages to the
+-- Neovim wrapper's PATH, so `exepath` alone still resolves the broken shim.
+-- Walk PATH ourselves, skipping the rustup proxy dir.
+local function resolve_rust_tool(name)
+  local cargo_bin = vim.fn.expand("~/.cargo/bin")
+
+  -- NOTE: `vim.fn.split` must be called WITHOUT an options dict; passing one
+  -- raises `E728: Using a Dictionary as a Number` on this Neovim.
+  for _, dir in ipairs(vim.fn.split(vim.env.PATH, ":")) do
+    if dir ~= "" and dir ~= cargo_bin then
+      local exe = vim.fn.exepath(dir .. "/" .. name)
+      if exe ~= "" then
+        return exe
+      end
+    end
+  end
+end
+
+local rust_analyzer_cmd = resolve_rust_tool("rust-analyzer") or "rust-analyzer"
+
+-- `checkOnSave.command = "clippy"` shells out to `cargo clippy`. The rustup
+-- `cargo` proxy resolves `cargo-clippy` from its *own* toolchain and ignores
+-- PATH, so putting clippy first on PATH is not enough. Build a consistent Nix
+-- toolchain bin list instead and hand it to rust-analyzer via
+-- `cargo.extraPath`, which is the supported knob for exactly this.
+local nix_toolchain_bins = {}
+for _, tool in ipairs({ "cargo-clippy", "cargo", "rustc", "rustfmt" }) do
+  local exe = resolve_rust_tool(tool)
+  if exe then
+    nix_toolchain_bins[#nix_toolchain_bins + 1] = vim.fn.fnamemodify(exe, ":h")
+  end
+end
+
+-- Make them win over the rustup proxies for any cargo/clippy subprocess we
+-- spawn ourselves (formatting hooks, linters).
+if #nix_toolchain_bins > 0 then
+  vim.env.PATH = table.concat(nix_toolchain_bins, ":") .. ":" .. vim.env.PATH
+end
+
+local rust_toolchain_path = table.concat(nix_toolchain_bins, ":")
+
 vim.g.rustaceanvim = {
 
   -- ─── Tool / UI options ───────────────────────────────────────────────────
@@ -28,6 +73,9 @@ vim.g.rustaceanvim = {
 
   -- ─── rust-analyzer server config ─────────────────────────────────────────
   server = {
+
+    -- Pinned so the broken rustup proxy shim can never win.
+    cmd = { rust_analyzer_cmd },
     on_attach = function(client, bufnr)
       local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
@@ -83,6 +131,9 @@ vim.g.rustaceanvim = {
         cargo = {
           allFeatures = true,
           loadOutDirsFromCheck = true,
+          -- Consistent Nix cargo/rustc/clippy ahead of the rustup proxies,
+          -- which are broken here ('cargo-clippy' is not installed).
+          extraPath = rust_toolchain_path,
           runBuildScripts = true,
         },
 
