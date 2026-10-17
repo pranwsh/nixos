@@ -25,10 +25,14 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    harness = {
+      url = "github:pranwsh/harness/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     router-src = {
-      # url = "github:decolua/9router/master";
-      url = "github:decolua/9router";
+      url = "github:decolua/9router/master";
+      # url = "github:decolua/9router?ref=pull/4842/head";
       flake = false;
     };
   };
@@ -56,6 +60,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "bak";
               users."${username}" = import ./home/default.nix;
               extraSpecialArgs = {
                 inherit inputs;
