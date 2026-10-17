@@ -18,10 +18,18 @@
     settings = {
       General = {
         EnableNetworkConfiguration = false;
-        RoamThreshold = "-72";
-        RoamThreshold5G = "-76";
+        # Softer than -72/-76: cuts roam-scan churn on eduroam while still
+        # roaming before the link becomes unusable.
+        RoamThreshold = "-78";
+        RoamThreshold5G = "-82";
+        CriticalRoamThreshold = "-85";
+        CriticalRoamThreshold5G = "-88";
       };
       Network.EnableIPv6 = true;
+      # Uncomment to silence iwd background scanning entirely (fewer
+      # roam-scans, but no proactive hand-off on eduroam):
+      # Scan.DisablePeriodicScan = true;
+      # Scan.DisableRoamingScan = true;
     };
   };
 
@@ -37,6 +45,19 @@
     RestartSec = "5s";
   };
 
+  # --- Fix: RTL8852BE (rtw89) loses RX across s2idle resume ------------------
+  # On s2idle the rtw89 driver/firmware is NOT re-initialized, so wlan0 stays
+  # "up" (iwd even reconnects and DHCPs) but no frames flow until the module is
+  # reloaded. Known rtw89_8852be "silent RX stalls" regression. Force a cold
+  # (re-)probe of the card on the resume path so the broken resume never runs.
+  # resumeCommands runs as root as the post-resume step of sleep-actions.service.
+  powerManagement.resumeCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r rtw89_8852be 2>/dev/null || true
+    ${pkgs.kmod}/bin/modprobe rtw89_8852be 2>/dev/null || true
+    # systemctl restart blocks until iwd is back up, so no sleeps are needed.
+    ${pkgs.systemd}/bin/systemctl restart iwd.service || true
+  '';
+
   # No-reboot recovery helper: systemctl restart wifi-recover
   systemd.services.wifi-recover = {
     description = "Recover wedged rtw89 without reboot";
@@ -47,12 +68,9 @@
     ];
     serviceConfig.Type = "oneshot";
     script = ''
-      iwctl station list || true
       modprobe -r rtw89_8852be || true
-      sleep 2
       modprobe rtw89_8852be || true
-      sleep 2
-      systemctl restart iwd systemd-networkd || true
+      systemctl restart iwd.service || true
     '';
   };
 

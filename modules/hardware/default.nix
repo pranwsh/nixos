@@ -3,7 +3,7 @@
     ./bluetooth.nix
     ./gpu.nix
     ./sound.nix
-    ./tlp.nix
+    # ./tlp.nix
     ./usb.nix
   ];
 }
