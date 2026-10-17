@@ -1,7 +1,6 @@
 { ... }:
 {
   networking.hostName = "nixos";
-  networking.wireless.enable = false;
   networking.useDHCP = false;
 
   hardware.enableRedistributableFirmware = true;
@@ -19,13 +18,6 @@
 
   systemd.network.networks."10-ignore-virtual" = {
     matchConfig.Name = "veth* br*";
-    linkConfig.RequiredForOnline = "no";
-  };
-
-  systemd.network.networks."20-wired" = {
-    matchConfig.Name = "en* eth*";
-    networkConfig.DHCP = "yes";
-    dhcpV4Config.UseDNS = true;
     linkConfig.RequiredForOnline = "no";
   };
 
