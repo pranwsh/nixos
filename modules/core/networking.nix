@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   networking.hostName = "nixos";
   networking.wireless.enable = false;
@@ -6,54 +6,12 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  # RTL8852BE / rtw89 wedges: ping 8.8.8.8 -> Destination Host Unreachable,
-  # only reboot fixes, happens on multiple SSIDs => firmware/TX hang, not AP.
-  boot.extraModprobeConfig = ''
-    options rtw89_core disable_ps_mode=Y
-    options rtw89_pci disable_aspm_l1=Y disable_aspm_l1ss=Y disable_clkreq=Y
-  '';
-
   networking.wireless.iwd = {
     enable = true;
     settings = {
-      General = {
-        EnableNetworkConfiguration = false;
-        RoamThreshold = "-72";
-        RoamThreshold5G = "-76";
-      };
+      General.EnableNetworkConfiguration = false;
       Network.EnableIPv6 = true;
     };
-  };
-
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="net", KERNEL=="w*", \
-      RUN+="${pkgs.iw}/bin/iw dev %k set power_save off"
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10ec", ATTR{device}=="0xb852", ATTR{d3cold_allowed}="0"
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10ec", ATTR{device}=="0xb85b", ATTR{d3cold_allowed}="0"
-  '';
-
-  systemd.services.iwd.serviceConfig = {
-    Restart = "on-failure";
-    RestartSec = "5s";
-  };
-
-  # No-reboot recovery helper: systemctl restart wifi-recover
-  systemd.services.wifi-recover = {
-    description = "Recover wedged rtw89 without reboot";
-    path = with pkgs; [
-      kmod
-      systemd
-      iwd
-    ];
-    serviceConfig.Type = "oneshot";
-    script = ''
-      iwctl station list || true
-      modprobe -r rtw89_8852be || true
-      sleep 2
-      modprobe rtw89_8852be || true
-      sleep 2
-      systemctl restart iwd systemd-networkd || true
-    '';
   };
 
   systemd.network.enable = true;
