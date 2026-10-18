@@ -20,7 +20,7 @@ users/users.nix          # user def, fish shell, wheel/video/input
 secrets.yaml             # sops-nix + age encrypted API keys
 ```
 
-Smart bit: `my.user` options flow from NixOS -> Home Manager via `osConfig`, so username/email/profile rename in one place. Zen `user.js` and paths are templated with `replaceStrings` the same way.
+`my.user` options flow from NixOS -> Home Manager via `osConfig`, so username/email/profile rename in one place. Zen `user.js` and paths are templated with `replaceStrings` the same way.
 
 ## cool features
 
