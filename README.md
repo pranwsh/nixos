@@ -25,12 +25,12 @@ secrets.yaml             # sops-nix + age encrypted API keys
 ## cool features
 
 - **Fast by default:** zen kernel, `BBR + fq`, zstd initrd, tmpfs `/tmp`, volatile 200M journal, `dbus-broker`, `oomd`, docs/installer-tools disabled, weekly GC, `zramSwap` 50% zstd.
-- **Modern networking:** `iwd` + `systemd-networkd` + `systemd-resolved` (1.1.1.1/8.8.8.8, DNSSEC allow-downgrade), WiFi powersave off via udev, roaming thresholds, `irqbalance`.
-- **Laptop tuned:** TLP performance-on-AC / powersave-on-BAT (BAT capped at 20%), PCIe/runtime PM, battery charge limits 40-80%, lid-to-suspend, AMD P-state + `amdgpu` VA-API.
-- **Secrets done right:** `sops-nix` with age (`nvidia/mistral/tokenrouter/inferx` keys, `0440`, user-owned).
+- **fast networking:** `iwd` + `systemd-networkd` + `systemd-resolved` (1.1.1.1/8.8.8.8, DNSSEC allow-downgrade), WiFi powersave off via udev, roaming thresholds, `irqbalance`.
+- **Laptop specific:** TLP performance-on-AC / powersave-on-BAT (BAT capped at 20%), PCIe/runtime PM, battery charge limits 40-80%, lid-to-suspend, AMD P-state + `amdgpu` VA-API.
+- **Secrets:** `sops-nix` with age (`nvidia/mistral/tokenrouter/inferx` keys, `0440`, user-owned).
 - **Self-hosted search:** local SearXNG on `127.0.0.1:8888` with local Redis, image proxy, POST-only, no limiter + 3proxy SOCKS on 1080.
 - **Hyprland in Lua:** `configType = "lua"` with split `settings/windows/monitors/binds/groups/hyprpaper/hyprshot`. Central `style/palette` theme injects opacity/colors into Zen via generated `nix-colors.css`.
-- **Dev env:** per-language modules auto-pull LSP/linters (pyright/ruff, nixd/statix, lua-ls, gopls, clang-tools), Neovim Lua config symlinked verbatim, plus direnv/docker/kitty/fish/gh.
+- **Dev env:** no tools installed globally, per-language modules auto-pull LSP/linters (pyright/ruff, nixd/statix, lua-ls, gopls, clang-tools), Neovim Lua config symlinked verbatim, plus direnv/docker/kitty/fish/gh.
 
 ## rebuild
 
