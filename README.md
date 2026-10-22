@@ -1,6 +1,4 @@
-# nixos
-
-Flake-based NixOS + Home Manager setup. One user, one host, fully declarative.
+Flake-based NixOS + Home Manage, fully declarative.
 
 ## architecture
 
